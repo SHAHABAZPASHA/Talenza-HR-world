@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Jobs - Talenza HR World</title>
+    <meta name="description" content="Find white collar and blue collar jobs across the world. Search jobs and view company details with Talenza HR World.">
+    <meta name="keywords" content="Jobs, White Collar, Blue Collar, Search, Dubai, UAE, Talenza HR World">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="img/favicon.ico" rel="icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .job-type-white { background: #fff; color: #007bff; border: 1px solid #007bff; }
+        .job-type-blue { background: #007bff; color: #fff; border: 1px solid #007bff; }
+        .job-card { margin-bottom: 1.5rem; }
+        .search-bar { margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="mb-4">Find Jobs</h1>
+        <form class="search-bar">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search jobs, titles, or companies..." id="jobSearchInput">
+                <button class="btn btn-primary" type="button" onclick="searchJobs()">Search</button>
+            </div>
+        </form>
+        <div id="jobsList">
+            <div class="card job-card job-type-white">
+                <div class="card-body">
+                    <h5 class="card-title">HR Manager</h5>
+                    <p class="card-text">Company: Global HR Solutions<br>Location: Dubai, UAE<br>Type: White Collar</p>
+                </div>
+            </div>
+            <div class="card job-card job-type-blue">
+                <div class="card-body">
+                    <h5 class="card-title">Warehouse Worker</h5>
+                    <p class="card-text">Company: FastMove Logistics<br>Location: Germany<br>Type: Blue Collar</p>
+                </div>
+            </div>
+            <div class="card job-card job-type-white">
+                <div class="card-body">
+                    <h5 class="card-title">Software Engineer</h5>
+                    <p class="card-text">Company: Tech Innovators<br>Location: USA<br>Type: White Collar</p>
+                </div>
+            </div>
+            <div class="card job-card job-type-blue">
+                <div class="card-body">
+                    <h5 class="card-title">Electrician</h5>
+                    <p class="card-text">Company: PowerPro Services<br>Location: Australia<br>Type: Blue Collar</p>
+                </div>
+            </div>
+            <div class="card job-card job-type-white">
+                <div class="card-body">
+                    <h5 class="card-title">Accountant</h5>
+                    <p class="card-text">Company: FinExpert<br>Location: UK<br>Type: White Collar</p>
+                </div>
+            </div>
+            <div class="card job-card job-type-blue">
+                <div class="card-body">
+                    <h5 class="card-title">Plumber</h5>
+                    <p class="card-text">Company: AquaFix<br>Location: Canada<br>Type: Blue Collar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function searchJobs() {
+            var input = document.getElementById('jobSearchInput').value.toLowerCase();
+            var jobs = document.querySelectorAll('#jobsList .job-card');
+            jobs.forEach(function(job) {
+                var text = job.innerText.toLowerCase();
+                job.style.display = text.includes(input) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
