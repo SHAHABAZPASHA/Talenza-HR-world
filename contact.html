@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SEO Master - SEO Agency Website Template</title>
+    <title>Talenza-contact</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -28,6 +28,16 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6T834E8S3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-J6T834E8S3');
+    </script>
 </head>
 
 <body>
@@ -42,11 +52,35 @@
 
 
         <!-- Navbar & Hero Start -->
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-primary text-light px-4 px-lg-5 py-2">
+            <div class="row gx-0 align-items-center">
+                <div class="col-lg-8 text-start">
+                    <small class="me-3"><i class="fa fa-map-marker-alt me-2"></i>Itihad building 603, Opp. Pullman Hotel, Port Saeed, beside Deira City Center, Dubai</small>
+                    <small class="me-3"><i class="fa fa-phone-alt me-2"></i>+971 58 589 5827</small>
+                    <small><i class="fa fa-envelope me-2"></i><a href="mailto:info@talenzaworld.com" class="text-light">info@talenzaworld.com</a></small>
+                </div>
+                <div class="col-lg-4 text-lg-end text-start mt-2 mt-lg-0">
+                    <a class="text-light ms-2" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="text-light ms-2" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="text-light ms-2" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="text-light ms-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-                <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0"><i class="fa fa-search me-2"></i>SEO<span class="fs-5">Master</span></h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                <a href="index.html" class="navbar-brand p-0">
+                    <h1 class="m-0">
+                        <img src="img/white  logo (2).png" alt="Talenza HR World Logo" class="logo-white" style="height: 70px; margin-right: 10px; vertical-align: middle;">
+                        <img src="img/L3 (2).png" alt="Talenza HR World Logo" class="logo-blue" style="height: 70px; margin-right: 10px; vertical-align: middle;">
+                            <span class="brand-text">
+                                <span>Talenza</span>
+                                <span class="brand-text-ar">تالينزا</span>
+                            </span>
+                    </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -55,14 +89,17 @@
                     <div class="navbar-nav ms-auto py-0">
                         <a href="index.html" class="nav-item nav-link">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="our-team.html" class="nav-item nav-link">Our Team</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="blogs.html" class="nav-item nav-link">Blogs</a>
                         <a href="jobs.html" class="nav-item nav-link">Jobs</a>
-                        <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                        <a href="clients.html" class="nav-item nav-link">Clients</a>
                         <a href="contact.html" class="nav-item nav-link active">Contact</a>
                     </div>
-                    <butaton type="button" class="btn text-secondary ms-3"><i class="fa fa-search"></i></butaton>
-                    <a href="https://htmlcodex.com/downloading/?item=2059" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Buy Pro Version</a>
+                    <form class="d-flex ms-3 ai-search-form" role="search" onsubmit="openTalenzaAssistant(); return false;">
+                        <input class="form-control" type="search" placeholder="Ask about Talenza..." aria-label="Search" id="aiSearchInput">
+                        <button class="btn btn-outline-primary ms-2 ai-search-btn" type="button" onclick="openTalenzaAssistant()">Search</button>
+                    </form>
                 </div>
             </nav>
 
@@ -97,30 +134,53 @@
                             <h2 class="mt-2">Contact For Any Query</h2>
                         </div>
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <h4 class="text-center mb-4">Receive messages instantly with our PHP and Ajax contact form - available in the <a href="https://htmlcodex.com/downloading/?item=2059">Pro Version</a> only.</h4>
-                            <form>
+                            <h4 class="text-center mb-4">Share your requirements with Talenza HR World and our team will get back to you shortly.</h4>
+                            <form action="contact.php" method="post">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
                                             <label for="email">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone / WhatsApp">
+                                            <label for="phone">Phone / WhatsApp (optional)</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="service" name="service" required>
+                                                <option value="" selected disabled>Choose a service</option>
+                                                <option value="Career Advisory">Career Advisory</option>
+                                                <option value="Abroad Education">Abroad Education</option>
+                                                <option value="Government (PRO) Services">Government (PRO) Services</option>
+                                                <option value="Real Estate">Real Estate</option>
+                                                <option value="Visa Services">Visa Services</option>
+                                                <option value="Digital Marketing">Digital Marketing</option>
+                                                <option value="Company Formation">Company Formation</option>
+                                                <option value="Immigration Services">Immigration Services</option>
+                                                <option value="Other">Other / Not Sure</option>
+                                            </select>
+                                            <label for="service">Service you are interested in</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
                                             <label for="subject">Subject</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a message here" id="message" name="message" style="height: 150px" required></textarea>
                                             <label for="message">Message</label>
                                         </div>
                                     </div>
@@ -143,9 +203,10 @@
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Itihad building 603, Opp. Pullman Hotel, Port Saeed, beside Deira City Center, Dubai</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+971 58 589 5827</p>
+                        <p><i class="fa fa-envelope me-3"></i><a href="mailto:info@talenzaworld.com" class="text-light">info@talenzaworld.com</a></p>
+                        <p><i class="fa fa-globe me-3"></i><a href="https://www.talenzaworld.com" class="text-light">www.talenzaworld.com</a></p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
@@ -156,42 +217,49 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Popular Link</h5>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Privacy Policy</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Career</a>
+                        <a class="btn btn-link" href="index.html">Home</a>
+                        <a class="btn btn-link" href="about.html">About</a>
+                        <a class="btn btn-link" href="our-team.html">Our Team</a>
+                        <a class="btn btn-link" href="service.html">Services</a>
+                        <a class="btn btn-link" href="blogs.html">Blogs</a>
+                        <a class="btn btn-link" href="jobs.html">Jobs</a>
+                        <a class="btn btn-link" href="clients.html">Clients</a>
+                        <a class="btn btn-link" href="contact.html">Contact</a>
                     </div>
+
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Project Gallery</h5>
                         <div class="row g-2">
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-1.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/first call.png" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-2.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/bbh.jpeg" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-3.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/Elite-Express-01-1.webp" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-4.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/PCMAA.jpeg" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-5.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/canopy.jpeg" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-6.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/silkum.jpeg" alt="Image">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu</p>
-                        <div class="position-relative w-100 mt-3">
-                            <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="Your Email" style="height: 48px;">
-                            <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
-                        </div>
+                        <h5 class="text-white mb-4">Feedback &amp; Complaints</h5>
+                        <p class="mb-2">
+                            For any complaints, concerns, or reports of misconduct involving our employees,
+                            please contact our Compliance Team at
+                            <a href="mailto:complaints@talenzaworld.com" class="text-light fw-medium">complaints@talenzaworld.com</a>.
+                        </p>
+                        <p class="mb-0">
+                            All escalations are reviewed confidentially, and appropriate action is taken in line with our corporate policies.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -199,10 +267,9 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
-							<!--/*** The author’s attribution link below must remain intact on your website. ***/-->
-                            <!--/*** If you wish to remove this credit link, please purchase the Pro Version from https://htmlcodex.com . ***/-->
-                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                            &copy; <a class="border-bottom" href="https://www.talenzaworld.com">Talenza HR World</a>, All Rights Reserved. 
+						
+                            Designed By <a class="border-bottom" href="">SHAHABAZ PASHA S.N</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
@@ -218,6 +285,11 @@
         </div>
         <!-- Footer End -->
 
+
+        <!-- Floating WhatsApp Button -->
+        <a href="https://wa.me/971585895827" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>

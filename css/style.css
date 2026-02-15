@@ -38,6 +38,16 @@ h3,
     font-weight: 700 !important;
 }
 
+
+/* Blog cards animation & hover */
+.blog-card-animated {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card-animated:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.12);
+}
 h4,
 h5,
 h6,
@@ -83,7 +93,8 @@ h6,
 .navbar-light .navbar-nav .nav-link {
     position: relative;
     margin-left: 25px;
-    padding: 35px 0;
+    padding: 40px 0;
+    font-size: 1.15rem;
     color: var(--light) !important;
     outline: none;
     transition: .5s;
@@ -104,12 +115,47 @@ h6,
 }
 
 .navbar-light .navbar-brand img {
-    max-height: 60px;
+    max-height: 100px;
     transition: .5s;
 }
 
+.navbar-brand .logo-white,
+.navbar-brand .logo-blue {
+    height: 90px;
+}
+
 .sticky-top.navbar-light .navbar-brand img {
-    max-height: 45px;
+    max-height: 85px;
+}
+
+.sticky-top.navbar-light .navbar-brand .logo-white,
+.sticky-top.navbar-light .navbar-brand .logo-blue {
+    height: 80px;
+}
+
+.navbar-brand .brand-text {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.navbar-brand .brand-text-ar {
+    font-size: 0.8em;
+}
+
+/* Swap white and blue logos based on navbar state */
+.navbar-brand .logo-blue {
+    display: none;
+    position: relative;
+    top: 4px; /* nudge blue logo slightly down to center */
+}
+
+.sticky-top.navbar-light .navbar-brand .logo-white {
+    display: none;
+}
+
+.sticky-top.navbar-light .navbar-brand .logo-blue {
+    display: inline-block;
 }
 
 @media (max-width: 991.98px) {
@@ -125,9 +171,10 @@ h6,
 
     .navbar-light .navbar-nav .nav-link,
     .sticky-top.navbar-light .navbar-nav .nav-link {
-        padding: 10px 0;
+        padding: 12px 0;
         margin-left: 0;
         color: var(--dark) !important;
+        font-size: 1.15rem;
     }
 
     .navbar-light .navbar-brand h1 {
@@ -135,7 +182,7 @@ h6,
     }
 
     .navbar-light .navbar-brand img {
-        max-height: 45px;
+        max-height: 60px;
     }
 }
 
@@ -180,6 +227,26 @@ h6,
     }
 }
 
+/* Inner page navbar (Blogs, Jobs, etc.) */
+.inner-page-navbar {
+    position: relative !important;
+    width: 100%;
+    background-color: var(--primary);
+}
+
+.inner-page-navbar .navbar-nav .nav-link,
+.inner-page-navbar .navbar-brand h1 {
+    color: #FFFFFF !important;
+}
+
+.inner-page-navbar .navbar-nav .nav-link.active {
+    color: var(--secondary) !important;
+}
+
+.inner-page-content {
+    margin-top: 0;
+}
+
 
 /*** Hero Header ***/
 .hero-header {
@@ -202,6 +269,141 @@ h6,
         auto,
         auto,
         100% auto;
+}
+
+/* About section image styling */
+.about-img {
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.about-img:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+}
+
+/* Mission / Vision / Values cards */
+.mission-vision-card {
+    border-radius: 20px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.mission-vision-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+/* Team page horizontal cards */
+.team-horizontal-card {
+    border-radius: 18px;
+    background-color: #ffffff;
+    padding: 2rem 2.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.team-horizontal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+.team-photo {
+    flex: 0 0 320px;
+}
+
+.team-photo img {
+    width: 340px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Founder card previously had a larger image; now all cards share the same size. */
+
+.team-card-left,
+.team-card-right {
+    max-width: 1000px;
+}
+
+.team-card-left {
+    margin-right: auto;
+}
+
+.team-card-right {
+    margin-left: auto;
+}
+
+@media (max-width: 767.98px) {
+    .team-horizontal-card {
+        text-align: center;
+        padding: 1.5rem 1.5rem;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .team-photo {
+        margin: 0 auto 1rem auto;
+    }
+
+    .team-photo img {
+        width: 220px;
+        height: 220px;
+    }
+
+    .team-card-left,
+    .team-card-right {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Meet Our Team cards (compact grid) */
+.team-org-chart {
+    max-width: 100%;
+    margin: 0 auto;
+    gap: 1.5rem;
+}
+
+.team-org-node {
+    width: 260px;
+    max-width: 100%;
+    text-align: center;
+    padding: 1.3rem 1.7rem 1.45rem 1.7rem;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    font-weight: 500;
+}
+
+.team-org-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.6rem auto;
+    background-color: #ffffff;
+}
+
+.team-org-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-org-node h5 {
+    font-size: 1rem;
+}
+
+.team-org-node p {
+    font-size: 0.9rem;
+}
+
+.team-org-connector {
+    display: none;
 }
 
 
@@ -256,11 +458,23 @@ h6,
 /*** Service ***/
 .service-item {
     position: relative;
-    height: 350px;
     padding: 30px 25px;
     background: #FFFFFF;
     box-shadow: 0 0 45px rgba(0, 0, 0, .08);
     transition: .5s;
+}
+
+.service-card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform .5s ease;
+}
+
+.service-item:hover .service-card-img {
+    transform: scale(1.02);
 }
 
 .service-item:hover {
@@ -367,6 +581,29 @@ h6,
     transition-delay: .15s;
 }
 
+.portfolio-card {
+    height: 260px;
+}
+
+.portfolio-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-portfolio-card {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35);
+    transform: translateY(-4px);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.featured-portfolio-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+    border-color: var(--secondary);
+}
+
 
 /*** Footer ***/
 .footer {
@@ -388,20 +625,6 @@ h6,
 }
 
 .footer .btn.btn-social:hover {
-    color: var(--primary);
-}
-
-.footer .btn.btn-link {
-    display: block;
-    margin-bottom: 10px;
-    padding: 0;
-    text-align: left;
-    color: var(--light);
-    font-weight: normal;
-    transition: .3s;
-}
-
-.footer .btn.btn-link::before {
     position: relative;
     content: "\f105";
     font-family: "Font Awesome 5 Free";
@@ -409,9 +632,19 @@ h6,
     margin-right: 10px;
 }
 
+.footer .btn.btn-link {
+    color: #ffffff !important;
+    text-decoration: none;
+    padding-left: 0;
+    transition: none;
+    letter-spacing: 0;
+}
+
 .footer .btn.btn-link:hover {
-    letter-spacing: 1px;
-    box-shadow: none;
+        letter-spacing: 0;
+        box-shadow: none;
+        color: #ffffff !important;
+        text-decoration: underline;
 }
 
 .footer .copyright {
@@ -434,4 +667,82 @@ h6,
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+    position: fixed;
+    right: 20px;
+    bottom: 110px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #25D366;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+}
+
+.whatsapp-float:hover {
+    background-color: #1ebe57;
+    color: #ffffff;
+}
+
+/* Navbar AI search styling */
+.ai-search-form .form-control {
+    border-radius: 50px;
+    font-size: 0.85rem;
+    padding-inline: 0.9rem;
+}
+
+.ai-search-btn {
+    border-radius: 50px;
+    font-weight: 500;
+    padding: 0.3rem 1.1rem;
+    font-size: 0.85rem;
+    background-color: #ffffff;
+    color: #0d6efd;
+    border: 1px solid #ffffff;
+}
+
+.ai-search-btn:hover {
+    background-color: #f3f6ff;
+    color: #0b5ed7;
+    border-color: #f3f6ff;
+}
+
+/* Clients (brands) grid */
+.client-card {
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+    padding: 30px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.client-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.client-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.16);
+}
+
+@media (min-width: 992px) {
+    .client-col-5 {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
 }

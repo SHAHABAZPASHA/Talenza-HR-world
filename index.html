@@ -28,6 +28,16 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6T834E8S3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-J6T834E8S3');
+    </script>
 </head>
 
 <body>
@@ -41,13 +51,35 @@
         <!-- Spinner End -->
 
 
-        <!-- Navbar Start -->
+        <!-- Navbar & Hero Start -->
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-primary text-light px-4 px-lg-5 py-2">
+            <div class="row gx-0 align-items-center">
+                <div class="col-lg-8 text-start">
+                    <small class="me-3"><i class="fa fa-map-marker-alt me-2"></i>Itihad building 603, Opp. Pullman Hotel, Port Saeed, beside Deira City Center, Dubai</small>
+                    <small class="me-3"><i class="fa fa-phone-alt me-2"></i>+971 58 589 5827</small>
+                    <small><i class="fa fa-envelope me-2"></i><a href="mailto:info@talenzaworld.com" class="text-light">info@talenzaworld.com</a></small>
+                </div>
+                <div class="col-lg-4 text-lg-end text-start mt-2 mt-lg-0">
+                    <a class="text-light ms-2" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="text-light ms-2" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="text-light ms-2" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="text-light ms-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="index.html" class="navbar-brand p-0">
                     <h1 class="m-0">
-                        <img src="img/white  logo (2).png" alt="Talenza HR World Logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
-                        Talenza <span class="fs-5">HR World</span>
+                        <img src="img/white  logo (2).png" alt="Talenza HR World Logo" class="logo-white" style="height: 70px; margin-right: 10px; vertical-align: middle;">
+                        <img src="img/L3 (2).png" alt="Talenza HR World Logo" class="logo-blue" style="height: 70px; margin-right: 10px; vertical-align: middle;">
+                            <span class="brand-text">
+                                <span>Talenza</span>
+                                <span class="brand-text-ar">تالينزا</span>
+                            </span>
                     </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -57,20 +89,45 @@
                     <div class="navbar-nav ms-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="our-team.html" class="nav-item nav-link">Our Team</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="blogs.html" class="nav-item nav-link">Blogs</a>
                         <a href="jobs.html" class="nav-item nav-link">Jobs</a>
+                        <a href="clients.html" class="nav-item nav-link">Clients</a>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <butaton type="button" class="btn text-secondary ms-3"><i class="fa fa-search"></i></butaton>
-                    <a href="https://htmlcodex.com/downloading/?item=2059" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Buy Pro Version</a>
+                    <form class="d-flex ms-3 ai-search-form" role="search" onsubmit="openTalenzaAssistant(); return false;">
+                        <input class="form-control" type="search" placeholder="Ask about Talenza..." aria-label="Search" id="aiSearchInput">
+                        <button class="btn btn-outline-primary ms-2 ai-search-btn" type="button" onclick="openTalenzaAssistant()">Search</button>
+                    </form>
                 </div>
             </nav>
         </div>
 
         <!-- Big Image Section Start -->
         <div class="container-fluid p-0">
-            <img src="img/services/Gemini_Generated_Image_epa98repa98repa9.png" alt="Talenza HR World Banner" style="width:100%; max-height:420px; object-fit:cover; display:block;">
+            <div id="headerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="img/services/dubai atlantis the palm.webp" class="d-block w-100" alt="Talenza HR World Banner 1" style="max-height:620px; object-fit:cover;">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/services/dubai-marina-panorama-photo.jpg" class="d-block w-100" alt="Talenza HR World Banner 2" style="max-height:620px; object-fit:cover;">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/services/aus.jpg" class="d-block w-100" alt="Talenza HR World Banner 3" style="max-height:620px; object-fit:cover;">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
         <!-- Big Image Section End -->
 
@@ -80,12 +137,13 @@
                 <div class="row g-5 py-5">
                     <div class="col-lg-6 text-center text-lg-start">
                         <h1 class="text-white mb-4 animated zoomIn">Your Gateway to HR, Business & Visa Solutions in Dubai</h1>
-                        <p class="text-white pb-3 animated zoomIn">Talenza HR World provides expert career advisory, education abroad, PRO/government services, real estate, visa (Golden, Green Card), digital marketing, company formation, and immigration solutions. Based in Dubai, we help you achieve your goals with trust and efficiency.</p>
-                        <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Free Quote</a>
-                        <a href="" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+                            <p class="text-white pb-3 animated zoomIn">Talenza HR World provides expert career advisory, education abroad, PRO/government services, real estate, visa (Golden, Green Card), digital marketing, company formation, and immigration solutions. Based in Dubai, we help you achieve your goals with trust and efficiency.<br><br>
+    As a trusted partner for corporations and enterprises, Talenza HR World delivers strategic HR solutions, workforce planning, and compliance management tailored for large-scale operations. Our team leverages deep industry expertise and advanced technology to optimize talent acquisition, streamline business processes, and ensure regulatory excellence. We empower organizations to scale globally, drive innovation, and maintain a competitive edge in today's dynamic business landscape.</p>
+                            <a href="jobs.html" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Apply for Jobs</a>
+                        <a href="contact.html" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                     </div>
                     <div class="col-lg-6 text-center text-lg-start">
-                        <img class="img-fluid" src="img/Untitled design (12).png" alt="">
+                        <img class="img-fluid hero-logo" src="img/Untitled design (12).png" alt="">
                     </div>
                 </div>
             </div>
@@ -97,13 +155,13 @@
         <!-- About Start -->
         <div class="container-fluid py-5">
             <div class="container px-lg-5">
-                <div class="row g-5">
+                <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="section-title position-relative mb-4 pb-2">
-                            <h6 class="position-relative text-primary ps-4">About Us</h6>
-                            <h2 class="mt-2">The best SEO solution with 10 years of experience</h2>
+                    
+                            <h2 class="mt-2">Talenza HR World – Your Strategic People & Business Partner</h2>
                         </div>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
+                        <p class="mb-4">Talenza HR World is a Dubai-based, multi‑service consultancy specializing in HR, PRO/government services, visa and immigration, real estate, education abroad, digital marketing, and company formation. We combine deep regional expertise with global best practices to support both individuals and corporates in building sustainable careers and high‑performing organizations. From workforce planning and talent acquisition to end‑to‑end business setup and compliance, we act as a single, trusted partner to help you operate confidently in the UAE and beyond.</p>
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Award Winning</h6>
@@ -111,11 +169,11 @@
                             </div>
                             <div class="col-sm-6">
                                 <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>24/7 Support</h6>
-                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Fair Prices</h6>
+                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Expert Consultancy</h6>
                             </div>
                         </div>
                         <div class="d-flex align-items-center mt-4">
-                            <a class="btn btn-primary rounded-pill px-4 me-3" href="">Read More</a>
+                            <a class="btn btn-primary rounded-pill px-4 me-3" href="service.html">Explore Our HR & Business Services</a>
                             <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-instagram"></i></a>
@@ -123,7 +181,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/about.jpg">
+                        <img class="img-fluid wow zoomIn about-img" data-wow-delay="0.5s" src="img/services/UAE-Golden-Visa-Benefits.webp" alt="Dubai skyline Burj Khalifa view">
                     </div>
                 </div>
             </div>
@@ -141,6 +199,7 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/career.jpg" alt="Career Advisory">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-user-tie fa-2x"></i>
                             </div>
@@ -150,12 +209,13 @@
                                 data-title="Career Advisory"
                                 data-content="Our expert advisors help you plan your career, find the right job, and succeed in the UAE and abroad. We offer resume building, interview coaching, and job placement support."
                                 data-list="Personalized career planning,Professional resume/CV building,Interview preparation & coaching,Job placement support"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/images.jpeg" alt="Abroad Education">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-graduation-cap fa-2x"></i>
                             </div>
@@ -165,12 +225,13 @@
                                 data-title="Abroad Education"
                                 data-content="Study abroad opportunities and support for students aiming for global education. We guide you through university selection, application, and visa process."
                                 data-list="University selection & counseling,Application & documentation support,Visa guidance,Pre-departure orientation"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/pro.png" alt="Government PRO Services">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-briefcase fa-2x"></i>
                             </div>
@@ -180,12 +241,13 @@
                                 data-title="Government (PRO) Services"
                                 data-content="We offer comprehensive PRO and government liaison services for businesses and individuals in Dubai. Our team ensures all your government paperwork and approvals are handled efficiently."
                                 data-list="Company & employee visa processing,Document attestation & translation,Trade license renewals,Government approvals & NOCs"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/7555.jpg" alt="Real Estate">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-building fa-2x"></i>
                             </div>
@@ -195,12 +257,13 @@
                                 data-title="Real Estate"
                                 data-content="We provide property solutions for buying, selling, and renting in Dubai and the UAE. Our team ensures a smooth and transparent process for all your real estate needs."
                                 data-list="Property buying & selling,Rental services,Investment advisory,Legal & documentation support"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/UAE-Golden-Visa-Benefits.webp" alt="Visa Services">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-passport fa-2x"></i>
                             </div>
@@ -210,12 +273,13 @@
                                 data-title="Visa Services"
                                 data-content="We offer visa solutions including Golden Visa, Green Card, family, tourist, and business visas. Our experts guide you through the process for a hassle-free experience."
                                 data-list="Golden Visa & Green Card,Family, tourist & business visas,Visa renewal & extension,Application & documentation support"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/digital-marketing-services-1662903479-6533750.jpeg" alt="Digital Marketing">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-bullhorn fa-2x"></i>
                             </div>
@@ -225,14 +289,15 @@
                                 data-title="Digital Marketing"
                                 data-content="Our digital marketing team helps you grow your business online with SEO, social media, and branding solutions tailored for Dubai and the UAE."
                                 data-list="SEO & SEM services,Social media marketing,Branding & design,Content creation"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/company formation.png" alt="Company Formation">
                             <div class="service-icon flex-shrink-0">
-                                <i class="fa fa-building-columns fa-2x"></i>
+                                <i class="fa fa-industry fa-2x"></i>
                             </div>
                             <h5 class="mb-3">Company Formation</h5>
                             <p>Business setup and company formation services in Dubai and UAE free zones.</p>
@@ -240,12 +305,13 @@
                                 data-title="Company Formation"
                                 data-content="We provide business setup and company formation services in Dubai and UAE free zones. Our team ensures a smooth and compliant process for your new business."
                                 data-list="Business setup in Dubai & UAE,Free zone & mainland company formation,Legal & compliance support,Bank account opening assistance"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/2149272119.jpg" alt="Immigration Services">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-plane-departure fa-2x"></i>
                             </div>
@@ -255,7 +321,23 @@
                                 data-title="Immigration Services"
                                 data-content="We provide immigration consultancy for UAE and international destinations. Our experts guide you through every step of the process for a successful outcome."
                                 data-list="UAE & international immigration,Visa & residency applications,Legal & documentation support,Personalized immigration advice"
-                                data-contact="+971 58 589 5827 | www.talenzaworld.com"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
+                                >Read More</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                        <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <img class="service-card-img" src="img/services/WEB DESIGN.jpg" alt="Web Design">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-laptop-code fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Web Design</h5>
+                            <p>Corporate websites designed to reflect your brand and support business growth.</p>
+                            <button class="btn px-3 mt-auto mx-auto service-readmore" 
+                                data-title="Web Design"
+                                data-content="At Talenza, we design and build modern, responsive websites that reflect your brand and support your commercial objectives. Our team focuses on clear structure, intuitive user journeys, and polished visual design so your business presents a professional image online."
+                                data-list="Corporate website design,Responsive & mobile-first layouts,Content structure & user journey planning,Basic SEO-ready setup,Ongoing updates & enhancements"
+                                data-contact="+971 58 589 5827 | info@talenzaworld.com"
                                 >Read More</button>
                         </div>
                     </div>
@@ -283,82 +365,286 @@
                 <!-- Dynamic Service Modal End -->
 
 
+        <!-- Blogs Start (copied from blogs.html) -->
+        <div class="container py-5 inner-page-content wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="text-primary text-uppercase mb-1">Our Blogs</h6>
+            <h1 class="mb-3">Dubai Jobs &amp; Career Blog</h1>
+            <p class="mb-4 lead">Practical tips from Talenza HR World to help you find a job in Dubai and across the UAE faster – from CV writing and interviews to visas and recruitment trends.</p>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/emp1.jpg" class="card-img-top" alt="How to get a job in Dubai quickly">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">How to Get a Job in Dubai in 2026</h2>
+                            <p class="card-text">Step‑by‑step guide to finding a job in Dubai – from shortlisting the right companies to working with trusted recruitment agencies like Talenza HR World.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>How to structure a UAE‑friendly CV</li>
+                                <li>Best job portals and LinkedIn strategies</li>
+                                <li>How manpower supply companies can help you get hired</li>
+                            </ul>
+                            <a href="jobs.html" class="mt-auto btn btn-primary">View Latest Dubai Jobs</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/emp2.jpg" class="card-img-top" alt="Interview questions for Dubai jobs">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Top Interview Questions for Dubai Jobs</h2>
+                            <p class="card-text">Prepare for HR and technical interviews in the UAE with questions that hiring managers actually ask for office, retail and hospitality roles.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Common HR questions and how to answer them</li>
+                                <li>Questions to expect for blue‑collar and manpower roles</li>
+                                <li>Body language and interview etiquette in Dubai</li>
+                            </ul>
+                            <a href="contact.html" class="mt-auto btn btn-outline-primary">Get Interview Coaching</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/emp3.jpg" class="card-img-top" alt="CV format for UAE jobs">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Best CV Format for UAE Jobs</h2>
+                            <p class="card-text">Your CV is your first impression. Learn how to write a Dubai‑friendly CV that passes HR screening and ATS systems.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Ideal CV length and sections for UAE hiring</li>
+                                <li>Keywords recruiters search for in your profile</li>
+                                <li>CV mistakes that reduce your chances of getting shortlisted</li>
+                            </ul>
+                            <a href="service.html" class="mt-auto btn btn-outline-primary">Explore Career Advisory Services</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/shutterstock_2476394263 (1).jpg" class="card-img-top" alt="Dubai work visa guide">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Dubai Work Visa &amp; Employment Rules</h2>
+                            <p class="card-text">Understand the basics of Dubai work visas, contract types and what to check before signing an offer letter.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Difference between visit visa and employment visa</li>
+                                <li>Medical test, Emirates ID and residency process</li>
+                                <li>How Talenza HR World supports visa and PRO services</li>
+                            </ul>
+                            <a href="service-visa.html" class="mt-auto btn btn-outline-primary">Learn More About Visa Services</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/emp6.webp" class="card-img-top" alt="Hiring manpower in UAE">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Why Companies Use Manpower Supply in UAE</h2>
+                            <p class="card-text">For employers, partnering with a reliable manpower agency in Dubai reduces hiring time and ensures compliant staffing.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Benefits of outsourced staffing for projects</li>
+                                <li>How to choose the right HR partner in Dubai</li>
+                                <li>Industries where manpower supply is in high demand</li>
+                            </ul>
+                            <a href="contact.html" class="mt-auto btn btn-primary">Hire Staff with Talenza</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/emp5.webp" class="card-img-top" alt="Job trends in UAE 2026">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">UAE Job Market Trends 2026</h2>
+                            <p class="card-text">Find out which sectors are hiring, salary expectations and skills that are most in demand in the UAE job market.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Top roles in hospitality, security, logistics and retail</li>
+                                <li>Skills employers are prioritising in 2026</li>
+                                <li>How to position your profile for better opportunities</li>
+                            </ul>
+                            <a href="jobs.html" class="mt-auto btn btn-outline-primary">See Openings &amp; Apply</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Extra Service-Focused Blogs as Cards -->
+            <div class="row g-4 mb-3">
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/GOLDEN.webp" class="card-img-top" alt="Dubai work visa and Golden Visa guide">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Complete Guide to Dubai Work Visa &amp; Golden Visa</h2>
+                            <p class="card-text">Understand Dubai work visas and Golden Visas so you know your rights before signing any offer or travelling for job search.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Types of visas and who they are for</li>
+                                <li>Key documents and medical requirements</li>
+                                <li>Common mistakes candidates make with visas</li>
+                            </ul>
+                            <a href="service-visa.html" class="mt-auto btn btn-primary">Learn More About Visa Services</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/education-consultants-in-Dubai-840x430.jpg" class="card-img-top" alt="Study abroad from Dubai guide">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Study Abroad from Dubai: Admission &amp; Visa Guide</h2>
+                            <p class="card-text">Plan your abroad education journey from Dubai with the right university selection, documents and visa process.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Shortlisting courses and countries</li>
+                                <li>Strong SOPs, CVs and recommendations</li>
+                                <li>Study visa rules and financial proofs</li>
+                            </ul>
+                            <a href="service-education.html" class="mt-auto btn btn-outline-primary">Explore Abroad Education Services</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/GDMO1-P03-31-01-20.avif" class="card-img-top" alt="PRO services for Dubai businesses">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Why PRO Services Matter for Dubai Businesses</h2>
+                            <p class="card-text">See how professional PRO support saves time and avoids penalties for companies operating in Dubai and UAE.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>Employee visa and labour contract processing</li>
+                                <li>Trade license issuance and renewals</li>
+                                <li>Document attestation and government approvals</li>
+                            </ul>
+                            <a href="service-pro.html" class="mt-auto btn btn-outline-primary">View Our PRO Services</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 wow fadeInUp" data-wow-delay="0.4s">
+                    <article class="card h-100 blog-card-animated">
+                        <img src="img/BLOG/COM.jpg" class="card-img-top" alt="Company formation in Dubai guide">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 card-title">Company Formation in Dubai: Choose the Right Setup</h2>
+                            <p class="card-text">Learn the basics of mainland vs free zone setup so you can launch your Dubai company with the right structure.</p>
+                            <ul class="small ps-3 mb-3">
+                                <li>When to choose mainland or free zone</li>
+                                <li>License costs, office and visa planning</li>
+                                <li>HR and manpower planning from day one</li>
+                            </ul>
+                            <a href="service-company.html" class="mt-auto btn btn-outline-primary">Discover Company Formation Services</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <!-- Blogs End -->
+
+
         <!-- Portfolio Start -->
         <div class="container-fluid py-5">
             <div class="container px-lg-5">
                 <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="position-relative d-inline text-primary ps-4">Our Projects</h6>
-                    <h2 class="mt-2">Recently Launched Projects</h2>
+                    <h2 class="mt-2">Recent Projects</h2>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.1s">
-                        <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/world star.png" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="img/portfolio-1.jpg"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
-                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
-                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">World Star</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.3s">
-                        <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="img/portfolio-2.jpg" alt="">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/a_s_group_dubai_logo.jpeg" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="img/portfolio-2.jpg"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
-                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
-                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">A S Group Dubai</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.6s">
-                        <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="img/portfolio-3.jpg" alt="">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/all khaleej global.jpeg" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="img/portfolio-3.jpg"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
-                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
-                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">All Khaleej Global</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.1s">
-                        <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="img/portfolio-4.jpg" alt="">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/bbh.jpeg" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="img/portfolio-4.jpg"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
-                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
-                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">BBH Groups</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.3s">
-                        <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="img/portfolio-5.jpg" alt="">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/jumboforce_logo.jpeg" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="img/portfolio-5.jpg"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
-                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
-                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">JumboForce</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.6s">
-                        <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="img/portfolio-6.jpg" alt="">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/meethaq_employment_agency_dubai_logo.jpeg" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="img/portfolio-6.jpg"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
-                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
-                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Meethaq Employment Agency Dubai</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.1s">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/first call.png" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="mt-auto">
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">First Call</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.3s">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/gul manpower.png" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="mt-auto">
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Gulf Manpower supply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.6s">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/Elite-Express-01-1.webp" alt="Elite Express">
+                            <div class="portfolio-overlay">
+                                <div class="mt-auto">
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Elite Express</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 portfolio-item wow zoomIn" data-wow-delay="0.1s">
+                        <div class="position-relative rounded overflow-hidden portfolio-card">
+                            <img class="img-fluid w-100" src="img/projects/pact manpower services.png" alt="Pact Manpower Services">
+                            <div class="portfolio-overlay">
+                                <div class="mt-auto">
+                                    <small class="text-white"><i class="fa fa-folder me-2"></i>Man Power Supply</small>
+                                    <a class="h5 d-block text-white mt-1 mb-0" href="">Pact Manpower Services</a>
                                 </div>
                             </div>
                         </div>
@@ -379,30 +665,53 @@
                             <h2 class="mt-2">Contact For Any Query</h2>
                         </div>
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <h4 class="text-center mb-4">Receive messages instantly with our PHP and Ajax contact form - available in the <a href="https://htmlcodex.com/downloading/?item=2059">Pro Version</a> only.</h4>
-                            <form>
+                            <h4 class="text-center mb-4">Share your requirements with Talenza HR World and our team will get back to you shortly.</h4>
+                            <form action="contact.php" method="post">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
                                             <label for="email">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone / WhatsApp">
+                                            <label for="phone">Phone / WhatsApp (optional)</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="service" name="service" required>
+                                                <option value="" selected disabled>Choose a service</option>
+                                                <option value="Career Advisory">Career Advisory</option>
+                                                <option value="Abroad Education">Abroad Education</option>
+                                                <option value="Government (PRO) Services">Government (PRO) Services</option>
+                                                <option value="Real Estate">Real Estate</option>
+                                                <option value="Visa Services">Visa Services</option>
+                                                <option value="Digital Marketing">Digital Marketing</option>
+                                                <option value="Company Formation">Company Formation</option>
+                                                <option value="Immigration Services">Immigration Services</option>
+                                                <option value="Other">Other / Not Sure</option>
+                                            </select>
+                                            <label for="service">Service you are interested in</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
                                             <label for="subject">Subject</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a message here" id="message" name="message" style="height: 150px" required></textarea>
                                             <label for="message">Message</label>
                                         </div>
                                     </div>
@@ -427,6 +736,7 @@
                         <h5 class="text-white mb-4">Get In Touch</h5>
                         <p><i class="fa fa-map-marker-alt me-3"></i>Itihad building 603, Opp. Pullman Hotel, Port Saeed, beside Deira City Center, Dubai</p>
                         <p><i class="fa fa-phone-alt me-3"></i>+971 58 589 5827</p>
+                        <p><i class="fa fa-envelope me-3"></i><a href="mailto:info@talenzaworld.com" class="text-light">info@talenzaworld.com</a></p>
                         <p><i class="fa fa-globe me-3"></i><a href="https://www.talenzaworld.com" class="text-light">www.talenzaworld.com</a></p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
@@ -438,42 +748,48 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Popular Link</h5>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Privacy Policy</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Career</a>
+                        <a class="btn btn-link" href="index.html">Home</a>
+                        <a class="btn btn-link" href="about.html">About</a>
+                        <a class="btn btn-link" href="our-team.html">Our Team</a>
+                        <a class="btn btn-link" href="service.html">Services</a>
+                        <a class="btn btn-link" href="blogs.html">Blogs</a>
+                        <a class="btn btn-link" href="jobs.html">Jobs</a>
+                        <a class="btn btn-link" href="clients.html">Clients</a>
+                        <a class="btn btn-link" href="contact.html">Contact</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Project Gallery</h5>
                         <div class="row g-2">
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-1.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/first call.png" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-2.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/bbh.jpeg" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-3.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/Elite-Express-01-1.webp" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-4.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/PCMAA.jpeg" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-5.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/canopy.jpeg" alt="Image">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-6.jpg" alt="Image">
+                                <img class="img-fluid" src="img/projects/silkum.jpeg" alt="Image">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu</p>
-                        <div class="position-relative w-100 mt-3">
-                            <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="Your Email" style="height: 48px;">
-                            <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
-                        </div>
+                        <h5 class="text-white mb-4">Feedback &amp; Complaints</h5>
+                        <p class="mb-2">
+                            For any complaints, concerns, or reports of misconduct involving our employees,
+                            please contact our Compliance Team at
+                            <a href="mailto:complaints@talenzaworld.com" class="text-light fw-medium">complaints@talenzaworld.com</a>.
+                        </p>
+                        <p class="mb-0">
+                            All escalations are reviewed confidentially, and appropriate action is taken in line with our corporate policies.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -482,9 +798,8 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="https://www.talenzaworld.com">Talenza HR World</a>, All Rights Reserved. 
-							<!--/*** The author’s attribution link below must remain intact on your website. ***/-->
-                            <!--/*** If you wish to remove this credit link, please purchase the Pro Version from https://htmlcodex.com . ***/-->
-                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+							
+                            Designed By <a class="border-bottom" href="">SHAHABAZ PASHA S.N</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
@@ -500,6 +815,24 @@
         </div>
         <!-- Footer End -->
 
+        <!-- Talenza Assistant Modal -->
+        <div class="modal fade" id="assistantModal" tabindex="-1" aria-labelledby="assistantModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="assistantModalLabel">Talenza Assistant</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="assistantModalBody"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Floating WhatsApp Button -->
+        <a href="https://wa.me/971585895827" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>
@@ -532,7 +865,7 @@
                             li.textContent = item.trim();
                             ul.appendChild(li);
                         });
-                        document.getElementById('serviceModalContact').innerHTML = '<strong>Contact us:</strong> ' + btn.getAttribute('data-contact').replace('|', '| <a href="https://www.talenzaworld.com">www.talenzaworld.com</a>');
+                        document.getElementById('serviceModalContact').innerHTML = '<strong>Contact us:</strong> ' + btn.getAttribute('data-contact');
                         modal.show();
                     });
                 });
