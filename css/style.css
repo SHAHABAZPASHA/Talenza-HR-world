@@ -827,13 +827,12 @@ h6,
     display: block;
     width: 32px;
     height: 32px;
-    border: solid var(--primary);
+    border: solid #fff;
     border-width: 0 6px 6px 0;
     padding: 6px;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(135deg);
     background: transparent;
     border-radius: 4px;
 }
