@@ -384,6 +384,12 @@ h6,
         margin-left: 0;
         margin-right: 0;
     }
+
+    /* Ensure all team cards stack vertically, even if flex-row-reverse is present */
+    .team-horizontal-card.team-card-right,
+    .team-horizontal-card.team-card-left {
+        flex-direction: column !important;
+    }
 }
 
 /* Meet Our Team cards (compact grid) */
