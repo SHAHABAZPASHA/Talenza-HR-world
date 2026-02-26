@@ -741,15 +741,15 @@ h6,
     position: fixed;
     right: 20px;
     bottom: 110px;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: #25D366;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: 40px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     z-index: 1000;
 }
