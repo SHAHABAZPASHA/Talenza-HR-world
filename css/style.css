@@ -216,6 +216,14 @@ h6,
     }
 }
 
+@media (max-width: 600px) {
+    .navbar-brand .logo-white,
+    .navbar-brand .logo-blue {
+        height: 80px !important;
+        max-height: 80px !important;
+    }
+}
+
 @media (min-width: 992px) {
     .navbar-light {
         position: absolute;
