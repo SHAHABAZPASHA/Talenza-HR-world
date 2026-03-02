@@ -136,22 +136,22 @@ h6,
 }
 
 .navbar-light .navbar-brand img {
-    max-height: 100px;
+    max-height: 150px;
     transition: .5s;
 }
 
 .navbar-brand .logo-white,
 .navbar-brand .logo-blue {
-    height: 90px;
+    height: 130px;
 }
 
 .sticky-top.navbar-light .navbar-brand img {
-    max-height: 85px;
+    max-height: 120px;
 }
 
 .sticky-top.navbar-light .navbar-brand .logo-white,
 .sticky-top.navbar-light .navbar-brand .logo-blue {
-    height: 80px;
+    height: 110px;
 }
 
 .navbar-brand .brand-text {
