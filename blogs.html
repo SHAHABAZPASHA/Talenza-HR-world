@@ -65,13 +65,17 @@
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light inner-page-navbar px-4 px-lg-5 py-3 py-lg-0">
             <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0">
+                <h1 class="m-0 d-flex align-items-center">
                     <img src="img/white  logo (2).png" alt="Talenza HR World Logo" class="logo-white" style="height: 70px; margin-right: 10px; vertical-align: middle;">
                     <img src="img/L3 (2).png" alt="Talenza HR World Logo" class="logo-blue" style="height: 70px; margin-right: 10px; vertical-align: middle;">
-                        <span class="brand-text">
-                            <span>Talenza</span>
-                            <span class="brand-text-ar">تالينزا</span>
-                        </span>
+                    <span class="brand-text">
+                        <span>Talenza</span>
+                        <span class="brand-text-ar">تالينزا</span>
+                    </span>
+                    <button type="button" class="btn btn-warning btn-lg d-flex align-items-center gap-2 ms-3" data-bs-toggle="modal" data-bs-target="#manpowerRequestModal" style="border-radius: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); font-weight: bold; padding: 10px 24px 10px 16px;">
+                        <i class="fas fa-user-plus" style="font-size: 1.2em;"></i>
+                        Request Manpower
+                    </button>
                 </h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -94,6 +98,93 @@
                 </form>
             </div>
         </nav>
+                <!-- Request Manpower Modal (copied from index.html, ensure only one instance per page) -->
+                <div class="modal fade" id="manpowerRequestModal" tabindex="-1" aria-labelledby="manpowerRequestModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="manpowerRequestModalLabel">Request Manpower</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="manpowerRequestForm">
+                                    <div class="mb-3">
+                                        <label for="companyName" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="companyName" name="companyName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="sector" class="form-label">Sector</label>
+                                        <select class="form-select" id="sector" name="sector" required>
+                                            <option value="">Select sector</option>
+                                            <option>Construction</option>
+                                            <option>Hospitality</option>
+                                            <option>Healthcare</option>
+                                            <option>Retail</option>
+                                            <option>IT/Technology</option>
+                                            <option>Education</option>
+                                            <option>Logistics</option>
+                                            <option>Manufacturing</option>
+                                            <option>Finance</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numberOfEmployees" class="form-label">Number of Employees Needed</label>
+                                        <input type="number" class="form-control" id="numberOfEmployees" name="numberOfEmployees" min="1" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="contactPerson" class="form-label">Contact Person</label>
+                                        <input type="text" class="form-control" id="contactPerson" name="contactPerson" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="contactEmail" class="form-label">Contact Email</label>
+                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="contactPhone" class="form-label">Contact Phone</label>
+                                        <input type="tel" class="form-control" id="contactPhone" name="contactPhone" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="requirements" class="form-label">Additional Requirements</label>
+                                        <textarea class="form-control" id="requirements" name="requirements" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                                    <div id="manpowerRequestStatus" class="mt-3"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var form = document.getElementById('manpowerRequestForm');
+                    if (form) {
+                        form.addEventListener('submit', function (e) {
+                            e.preventDefault();
+                            var statusDiv = document.getElementById('manpowerRequestStatus');
+                            statusDiv.innerHTML = '<span class="text-info">Sending...</span>';
+                            var formData = new FormData(form);
+                            fetch('manpower-request.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    statusDiv.innerHTML = '<span class="text-success">Request sent successfully!</span>';
+                                    form.reset();
+                                } else {
+                                    statusDiv.innerHTML = '<span class="text-danger">' + (data.message || 'Failed to send request.') + '</span>';
+                                }
+                            })
+                            .catch(() => {
+                                statusDiv.innerHTML = '<span class="text-danger">Failed to send request.</span>';
+                            });
+                        });
+                    }
+                });
+                </script>
 
         <div class="container-fluid py-5 bg-primary hero-header mb-5">
             <div class="container my-5 py-5 px-lg-5">
@@ -362,6 +453,160 @@
 
 
     <!-- Floating WhatsApp Button -->
+            <!-- Request Manpower Button and Modal -->
+            <button type="button" class="btn btn-warning btn-lg d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#manpowerRequestModal" style="position: fixed; bottom: 240px; right: 30px; z-index: 1050; border-radius: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); font-weight: bold; padding: 12px 28px 12px 20px;">
+                <i class="fas fa-user-plus" style="font-size: 1.3em;"></i>
+                    Request Manpower
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="manpowerRequestModal" tabindex="-1" aria-labelledby="manpowerRequestModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="manpowerRequestModalLabel">Request Manpower</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="manpowerRequestForm" method="POST" action="manpower-request.php">
+                                <div class="mb-3">
+                                    <label for="companyName" class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" id="companyName" name="companyName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sector" class="form-label">Sector</label>
+                                    <select class="form-select" id="sector" name="sector" required>
+                                        <option value="">Select Sector</option>
+                                        <option>Construction & Engineering</option>
+                                        <option>Manufacturing</option>
+                                        <option>Hospitality & Tourism</option>
+                                        <option>Healthcare & Medical</option>
+                                        <option>Retail & FMCG</option>
+                                        <option>Logistics & Transportation</option>
+                                        <option>Oil & Gas</option>
+                                        <option>Facilities Management</option>
+                                        <option>Cleaning & Maintenance</option>
+                                        <option>Security Services</option>
+                                        <option>IT & Technology</option>
+                                        <option>Banking & Finance</option>
+                                        <option>Insurance</option>
+                                        <option>Education & Training</option>
+                                        <option>Real Estate</option>
+                                        <option>Legal & Compliance</option>
+                                        <option>Human Resources</option>
+                                        <option>Sales & Marketing</option>
+                                        <option>Administration</option>
+                                        <option>Customer Service</option>
+                                        <option>Procurement & Supply Chain</option>
+                                        <option>Automotive</option>
+                                        <option>Telecommunications</option>
+                                        <option>Media & Advertising</option>
+                                        <option>Government & Public Sector</option>
+                                        <option>NGO & Non-Profit</option>
+                                        <option>Blue Collar - General Labor</option>
+                                        <option>Blue Collar - Drivers</option>
+                                        <option>Blue Collar - Cleaners</option>
+                                        <option>Blue Collar - Security Guards</option>
+                                        <option>Blue Collar - Technicians</option>
+                                        <option>White Collar - Managers</option>
+                                        <option>White Collar - Executives</option>
+                                        <option>White Collar - Accountants</option>
+                                        <option>White Collar - Engineers</option>
+                                        <option>White Collar - IT Professionals</option>
+                                        <option>White Collar - HR Professionals</option>
+                                        <option>White Collar - Sales/Marketing</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numEmployees" class="form-label">Number of Employees Needed</label>
+                                    <input type="number" class="form-control" id="numEmployees" name="numEmployees" min="1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactPerson" class="form-label">Contact Person</label>
+                                    <input type="text" class="form-control" id="contactPerson" name="contactPerson" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Contact Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="additionalInfo" class="form-label">Additional Information</label>
+                                    <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="2"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                                <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#advancedOptions" aria-expanded="false" aria-controls="advancedOptions">Advanced Options</button>
+                                <div class="collapse mt-3" id="advancedOptions">
+                                    <div class="card card-body">
+                                        <div class="mb-3">
+                                            <label for="jobTitles" class="form-label">Job Titles / Roles Needed</label>
+                                            <input type="text" class="form-control" id="jobTitles" name="jobTitles" placeholder="e.g. Electrician, Accountant, Driver">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="experienceLevel" class="form-label">Experience Level</label>
+                                            <select class="form-select" id="experienceLevel" name="experienceLevel">
+                                                <option value="">Select</option>
+                                                <option>Entry Level</option>
+                                                <option>Mid Level</option>
+                                                <option>Senior Level</option>
+                                                <option>Supervisor</option>
+                                                <option>Manager</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nationalityPreference" class="form-label">Nationality Preference</label>
+                                            <input type="text" class="form-control" id="nationalityPreference" name="nationalityPreference" placeholder="Optional">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="genderPreference" class="form-label">Gender Preference</label>
+                                            <select class="form-select" id="genderPreference" name="genderPreference">
+                                                <option value="">No Preference</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="joiningDate" class="form-label">Expected Joining Date</label>
+                                            <input type="date" class="form-control" id="joiningDate" name="joiningDate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div id="manpowerRequestSuccess" class="alert alert-success mt-3 d-none" role="alert">
+                                Thank you! Your manpower request has been submitted.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var form = document.getElementById('manpowerRequestForm');
+                    if(form) {
+                        form.addEventListener('submit', function(event) {
+                            event.preventDefault();
+                            var formData = new FormData(form);
+                            fetch('manpower-request.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    form.classList.add('d-none');
+                                    document.getElementById('manpowerRequestSuccess').classList.remove('d-none');
+                                } else {
+                                    alert('There was an error sending your request. Please try again later.');
+                                }
+                            })
+                            .catch(() => {
+                                alert('There was an error sending your request. Please try again later.');
+                            });
+                        });
+                    }
+                });
+            </script>
     <a href="https://wa.me/971585895827" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>

@@ -1,3 +1,4 @@
+        <!-- Top Navbar Request Manpower Button -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,6 +88,10 @@
                             </span>
                     </h1>
                 </a>
+                <button type="button" class="btn btn-warning btn-lg d-flex align-items-center gap-2 ms-3" data-bs-toggle="modal" data-bs-target="#manpowerRequestModal" style="border-radius: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); font-weight: bold; padding: 10px 24px 10px 16px;">
+                    <i class="fas fa-user-plus" style="font-size: 1.2em;"></i>
+                    Request Manpower
+                </button>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
@@ -858,6 +863,160 @@
 
 
         <!-- Floating WhatsApp Button -->
+                <!-- Request Manpower Button and Modal -->
+                <button type="button" class="btn btn-warning btn-lg d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#manpowerRequestModal" style="position: fixed; bottom: 240px; right: 30px; z-index: 1050; border-radius: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); font-weight: bold; padding: 12px 28px 12px 20px;">
+                    <i class="fas fa-user-plus" style="font-size: 1.3em;"></i>
+                        Request Manpower
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="manpowerRequestModal" tabindex="-1" aria-labelledby="manpowerRequestModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="manpowerRequestModalLabel">Request Manpower</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="manpowerRequestForm" method="POST" action="manpower-request.php">
+                                    <div class="mb-3">
+                                        <label for="companyName" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="companyName" name="companyName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="sector" class="form-label">Sector</label>
+                                        <select class="form-select" id="sector" name="sector" required>
+                                            <option value="">Select Sector</option>
+                                            <option>Construction & Engineering</option>
+                                            <option>Manufacturing</option>
+                                            <option>Hospitality & Tourism</option>
+                                            <option>Healthcare & Medical</option>
+                                            <option>Retail & FMCG</option>
+                                            <option>Logistics & Transportation</option>
+                                            <option>Oil & Gas</option>
+                                            <option>Facilities Management</option>
+                                            <option>Cleaning & Maintenance</option>
+                                            <option>Security Services</option>
+                                            <option>IT & Technology</option>
+                                            <option>Banking & Finance</option>
+                                            <option>Insurance</option>
+                                            <option>Education & Training</option>
+                                            <option>Real Estate</option>
+                                            <option>Legal & Compliance</option>
+                                            <option>Human Resources</option>
+                                            <option>Sales & Marketing</option>
+                                            <option>Administration</option>
+                                            <option>Customer Service</option>
+                                            <option>Procurement & Supply Chain</option>
+                                            <option>Automotive</option>
+                                            <option>Telecommunications</option>
+                                            <option>Media & Advertising</option>
+                                            <option>Government & Public Sector</option>
+                                            <option>NGO & Non-Profit</option>
+                                            <option>Blue Collar - General Labor</option>
+                                            <option>Blue Collar - Drivers</option>
+                                            <option>Blue Collar - Cleaners</option>
+                                            <option>Blue Collar - Security Guards</option>
+                                            <option>Blue Collar - Technicians</option>
+                                            <option>White Collar - Managers</option>
+                                            <option>White Collar - Executives</option>
+                                            <option>White Collar - Accountants</option>
+                                            <option>White Collar - Engineers</option>
+                                            <option>White Collar - IT Professionals</option>
+                                            <option>White Collar - HR Professionals</option>
+                                            <option>White Collar - Sales/Marketing</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numEmployees" class="form-label">Number of Employees Needed</label>
+                                        <input type="number" class="form-control" id="numEmployees" name="numEmployees" min="1" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="contactPerson" class="form-label">Contact Person</label>
+                                        <input type="text" class="form-control" id="contactPerson" name="contactPerson" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="contactEmail" class="form-label">Contact Email</label>
+                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="additionalInfo" class="form-label">Additional Information</label>
+                                        <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="2"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                                                            <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#advancedOptions" aria-expanded="false" aria-controls="advancedOptions">Advanced Options</button>
+                                                            <div class="collapse mt-3" id="advancedOptions">
+                                                                <div class="card card-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="jobTitles" class="form-label">Job Titles / Roles Needed</label>
+                                                                        <input type="text" class="form-control" id="jobTitles" name="jobTitles" placeholder="e.g. Electrician, Accountant, Driver">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="experienceLevel" class="form-label">Experience Level</label>
+                                                                        <select class="form-select" id="experienceLevel" name="experienceLevel">
+                                                                            <option value="">Select</option>
+                                                                            <option>Entry Level</option>
+                                                                            <option>Mid Level</option>
+                                                                            <option>Senior Level</option>
+                                                                            <option>Supervisor</option>
+                                                                            <option>Manager</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="nationalityPreference" class="form-label">Nationality Preference</label>
+                                                                        <input type="text" class="form-control" id="nationalityPreference" name="nationalityPreference" placeholder="Optional">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="genderPreference" class="form-label">Gender Preference</label>
+                                                                        <select class="form-select" id="genderPreference" name="genderPreference">
+                                                                            <option value="">No Preference</option>
+                                                                            <option>Male</option>
+                                                                            <option>Female</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="joiningDate" class="form-label">Expected Joining Date</label>
+                                                                        <input type="date" class="form-control" id="joiningDate" name="joiningDate">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                </form>
+                                <div id="manpowerRequestSuccess" class="alert alert-success mt-3 d-none" role="alert">
+                                    Thank you! Your manpower request has been submitted.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var form = document.getElementById('manpowerRequestForm');
+                        if(form) {
+                            form.addEventListener('submit', function(event) {
+                                event.preventDefault();
+                                var formData = new FormData(form);
+                                fetch('manpower-request.php', {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        form.classList.add('d-none');
+                                        document.getElementById('manpowerRequestSuccess').classList.remove('d-none');
+                                    } else {
+                                        alert('There was an error sending your request. Please try again later.');
+                                    }
+                                })
+                                .catch(() => {
+                                    alert('There was an error sending your request. Please try again later.');
+                                });
+                            });
+                        }
+                    });
+                </script>
         <a href="https://wa.me/971585895827" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
