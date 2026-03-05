@@ -15,10 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         'Contact Person' => $_POST['contactPerson'] ?? '',
         'Contact Email' => $_POST['contactEmail'] ?? '',
         'Additional Information' => $_POST['additionalInfo'] ?? '',
-            'Company Profile' => $_FILES['companyProfile'] ?? '',
-            'VAT Certificate' => $_FILES['vatCertificate'] ?? '',
-            'Trade Licence' => $_FILES['tradeLicence'] ?? '',
-            'Emirates ID' => $_FILES['emiratesId'] ?? '',
         'Job Titles / Roles Needed' => $_POST['jobTitles'] ?? '',
         'Experience Level' => $_POST['experienceLevel'] ?? '',
         'Nationality Preference' => $_POST['nationalityPreference'] ?? '',
@@ -29,19 +25,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     foreach ($fields as $label => $value) {
         $body .= "$label: " . htmlspecialchars($value) . "\n";
     }
-        // Handle file uploads
-        if (isset($_FILES['companyProfile'])) {
-            // Process the company profile file
+
+    // Handle file uploads and prepare attachments
+    $attachments = [];
+    $uploadFields = [
+        'companyProfile' => 'Company Profile',
+        'vatCertificate' => 'VAT Certificate',
+        'tradeLicence' => 'Trade Licence',
+        'emiratesId' => 'Emirates ID'
+    ];
+    foreach ($uploadFields as $field => $label) {
+        if (isset($_FILES[$field]) && $_FILES[$field]['error'] === UPLOAD_ERR_OK && $_FILES[$field]['size'] > 0) {
+            $fileName = $_FILES[$field]['name'];
+            $fileTmp  = $_FILES[$field]['tmp_name'];
+            $fileType = $_FILES[$field]['type'];
+            $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+            if (in_array($ext, ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg', 'webp'])) {
+                $attachments[] = [
+                    'path' => $fileTmp,
+                    'name' => $label . ' - ' . $fileName,
+                    'type' => $fileType
+                ];
+            }
         }
-        if (isset($_FILES['vatCertificate'])) {
-            // Process the VAT certificate file
-        }
-        if (isset($_FILES['tradeLicence'])) {
-            // Process the trade licence file
-        }
-        if (isset($_FILES['emiratesId'])) {
-            // Process the Emirates ID file
-        }
+    }
 
     $mail = new PHPMailer(true);
     try {
@@ -61,6 +68,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         $mail->Subject = 'New Manpower Request from ' . $fields['Company Name'];
         $mail->Body    = $body;
+
+        // Attach uploaded files (max 5)
+        $maxFiles = 5;
+        $count = 0;
+        foreach ($attachments as $file) {
+            if ($count >= $maxFiles) break;
+            $mail->addAttachment($file['path'], $file['name']);
+            $count++;
+        }
 
         $mail->send();
         echo json_encode(["success" => true]);
