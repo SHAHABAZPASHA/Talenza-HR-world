@@ -1,8 +1,5 @@
 <?php
-// Simple contact form handler for Talenza HR World
-
-
-// PHPMailer SMTP integration
+// PHPMailer SMTP contact form handler for Talenza HR World
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
