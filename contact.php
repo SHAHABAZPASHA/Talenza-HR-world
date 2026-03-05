@@ -55,7 +55,31 @@ $lines[] = 'Message:';
 $lines[] = $message;
 $body = implode("\r\n", $lines);
 
+
 $mail = new PHPMailer(true);
+
+// Handle file uploads
+$attachments = [];
+if (isset($_FILES['documents']) && is_array($_FILES['documents']['name'])) {
+    for ($i = 0; $i < count($_FILES['documents']['name']); $i++) {
+        $fileName = $_FILES['documents']['name'][$i];
+        $fileTmp  = $_FILES['documents']['tmp_name'][$i];
+        $fileType = $_FILES['documents']['type'][$i];
+        $fileError= $_FILES['documents']['error'][$i];
+        $fileSize = $_FILES['documents']['size'][$i];
+        if ($fileError === UPLOAD_ERR_OK && $fileSize > 0) {
+            // Only allow PDF, PNG, JPG, JPEG
+            $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+            if (in_array($ext, ['pdf', 'png', 'jpg', 'jpeg'])) {
+                $attachments[] = [
+                    'path' => $fileTmp,
+                    'name' => $fileName,
+                    'type' => $fileType
+                ];
+            }
+        }
+    }
+}
 
 try {
     // SMTP settings
@@ -72,6 +96,15 @@ try {
     $mail->addReplyTo($email_safe, $name);
     $mail->Subject = $email_subject;
     $mail->Body    = $body;
+
+    // Attach uploaded files (max 5)
+    $maxFiles = 5;
+    $count = 0;
+    foreach ($attachments as $file) {
+        if ($count >= $maxFiles) break;
+        $mail->addAttachment($file['path'], $file['name']);
+        $count++;
+    }
 
     $mail->send();
     $sent = true;
