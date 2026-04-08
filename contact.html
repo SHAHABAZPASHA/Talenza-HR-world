@@ -83,7 +83,6 @@
                         <img src="img/TALENZA_logo_v2.png" alt="Talenza HR World Logo" class="logo-blue" style="height: 150px; margin-right: 10px; vertical-align: middle;">
                         <span class="brand-text">
                             <span>Talenza</span>
-                            <span class="brand-text-ar">تالينزا</span>
                         </span>
                     </h1>
                 </a>
@@ -98,13 +97,21 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="index.html" class="nav-item nav-link">Home</a>
+                            <div class="arabic-text" dir="rtl">الرئيسية</div>
                         <a href="about.html" class="nav-item nav-link">About</a>
+                            <div class="arabic-text" dir="rtl">من نحن</div>
                         <a href="our-team.html" class="nav-item nav-link">Our Team</a>
+                            <div class="arabic-text" dir="rtl">فريقنا</div>
                         <a href="service.html" class="nav-item nav-link">Services</a>
+                            <div class="arabic-text" dir="rtl">خدماتنا</div>
                         <a href="blogs.html" class="nav-item nav-link">Blogs</a>
+                            <div class="arabic-text" dir="rtl">المدونة</div>
                         <a href="jobs.html" class="nav-item nav-link">Jobs</a>
+                            <div class="arabic-text" dir="rtl">الوظائف</div>
                         <a href="clients.html" class="nav-item nav-link">Clients</a>
+                            <div class="arabic-text" dir="rtl">عملاؤنا</div>
                         <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                            <div class="arabic-text" dir="rtl">اتصل بنا</div>
                     </div>
                     <form class="d-flex ms-3 ai-search-form" role="search" onsubmit="openTalenzaAssistant(); return false;">
                         <input class="form-control" type="search" placeholder="Ask about Talenza..." aria-label="Search" id="aiSearchInput">
@@ -284,12 +291,16 @@
                     <div class="row g-5 py-5">
                         <div class="col-12 text-center">
                             <h1 class="text-white animated zoomIn">Contact Us</h1>
+                            <div class="arabic-text text-white animated zoomIn mt-2" dir="rtl">اتصل بنا</div>
                             <hr class="bg-white mx-auto mt-0" style="width: 90px;">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                                        <div class="arabic-text d-inline text-white" dir="rtl">الرئيسية</div>
                                     <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                                        <div class="arabic-text d-inline text-white" dir="rtl">الصفحات</div>
                                     <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+                                        <div class="arabic-text d-inline text-white" dir="rtl">اتصل بنا</div>
                                 </ol>
                             </nav>
                         </div>
@@ -303,57 +314,65 @@
         <!-- Contact Start -->
         <div class="container-fluid py-5">
             <div class="container px-lg-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7">
+                <div class="row justify-content-center align-items-center" style="min-height:600px;">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
                         <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
                             <h6 class="position-relative d-inline text-primary ps-4">Contact Us</h6>
+                            <div class="arabic-text d-block text-primary ps-4" dir="rtl">اتصل بنا</div>
                             <h2 class="mt-2">Contact For Any Query</h2>
+                            <div class="arabic-text mt-2" dir="rtl">تواصل معنا لأي استفسار</div>
                         </div>
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
                             <h4 class="text-center mb-4">Share your requirements with Talenza HR World and our team will get back to you shortly.</h4>
+                            <div class="arabic-text text-center mb-4" dir="rtl">شارك متطلباتك مع تالينزا HR وورلد وسيتواصل معك فريقنا قريبًا.</div>
                             <form action="contact.php" method="post" enctype="multipart/form-data">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
                                             <label for="name">Your Name</label>
+                                            <div class="arabic-text mt-1" dir="rtl">اسمك</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
                                             <label for="email">Your Email</label>
+                                            <div class="arabic-text mt-1" dir="rtl">بريدك الإلكتروني</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone / WhatsApp">
                                             <label for="phone">Phone / WhatsApp (optional)</label>
+                                            <div class="arabic-text mt-1" dir="rtl">الهاتف / واتساب (اختياري)</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <select class="form-select" id="service" name="service" required>
                                                 <option value="" selected disabled>Choose a service</option>
-                                                <option value="Career Advisory">Career Advisory</option>
-                                                <option value="Abroad Education">Abroad Education</option>
-                                                <option value="Government (PRO) Services">Government (PRO) Services</option>
-                                                <option value="Real Estate">Real Estate</option>
-                                                <option value="Visa Services">Visa Services</option>
-                                                <option value="Jobs">Jobs</option>
-                                                <option value="Manpower/Staffing">Manpower / Staffing</option>
-                                                <option value="Digital Marketing">Digital Marketing</option>
-                                                <option value="Company Formation">Company Formation</option>
-                                                <option value="Immigration Services">Immigration Services</option>
-                                                <option value="Other">Other / Not Sure</option>
+                                                <option value="Career Advisory">Career Advisory / الاستشارات المهنية</option>
+                                                <option value="Abroad Education">Abroad Education / التعليم في الخارج</option>
+                                                <option value="Government (PRO) Services">Government (PRO) Services / خدمات PRO الحكومية</option>
+                                                <option value="Real Estate">Real Estate / العقارات</option>
+                                                <option value="Visa Services">Visa Services / خدمات التأشيرات</option>
+                                                <option value="Jobs">Jobs / الوظائف</option>
+                                                <option value="Manpower/Staffing">Manpower / Staffing / التوظيف والموارد البشرية</option>
+                                                <option value="Digital Marketing">Digital Marketing / التسويق الرقمي</option>
+                                                <option value="Company Formation">Company Formation / تأسيس الشركات</option>
+                                                <option value="Immigration Services">Immigration Services / خدمات الهجرة</option>
+                                                <option value="Other">Other / Not Sure / أخرى / غير متأكد</option>
                                             </select>
                                             <label for="service">Service you are interested in</label>
+                                            <div class="arabic-text mt-1" dir="rtl">الخدمة التي تهتم بها</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
                                                 <label for="subject">Subject</label>
+                                                <div class="arabic-text mt-1" dir="rtl">الموضوع</div>
                                             </div>
                                         </div>
                                         <!-- How did you get to know about us section -->
@@ -361,38 +380,56 @@
                                             <div class="form-floating">
                                                 <select class="form-select" id="referral" name="referral" required>
                                                     <option value="" selected disabled>How did you get to know about us?</option>
-                                                    <option value="Instagram">Instagram</option>
-                                                    <option value="Facebook">Facebook</option>
-                                                    <option value="Google Ads">Google Ads</option>
-                                                    <option value="LinkedIn">LinkedIn</option>
-                                                    <option value="Twitter/X">Twitter/X</option>
-                                                    <option value="YouTube">YouTube</option>
-                                                    <option value="TikTok">TikTok</option>
-                                                    <option value="WhatsApp">WhatsApp</option>
-                                                    <option value="Friend/Family">Friend/Family</option>
-                                                    <option value="Event/Seminar">Event/Seminar</option>
-                                                    <option value="Newspaper/Magazine">Newspaper/Magazine</option>
-                                                    <option value="Other">Other</option>
+                                                    <option value="Instagram">Instagram / انستغرام</option>
+                                                    <option value="Facebook">Facebook / فيسبوك</option>
+                                                    <option value="Google Ads">Google Ads / إعلانات جوجل</option>
+                                                    <option value="LinkedIn">LinkedIn / لينكدإن</option>
+                                                    <option value="Twitter/X">Twitter/X / تويتر</option>
+                                                    <option value="YouTube">YouTube / يوتيوب</option>
+                                                    <option value="TikTok">TikTok / تيك توك</option>
+                                                    <option value="WhatsApp">WhatsApp / واتساب</option>
+                                                    <option value="Friend/Family">Friend/Family / صديق أو عائلة</option>
+                                                    <option value="Event/Seminar">Event/Seminar / فعالية أو ندوة</option>
+                                                    <option value="Newspaper/Magazine">Newspaper/Magazine / صحيفة أو مجلة</option>
+                                                    <option value="Other">Other / أخرى</option>
                                                 </select>
                                                 <label for="referral">How did you get to know about us? <span style="color:red">*</span></label>
+                                                <div class="arabic-text mt-1" dir="rtl">كيف عرفت عنا؟</div>
                                             </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a message here" id="message" name="message" style="height: 150px" required></textarea>
                                             <label for="message">Message</label>
+                                            <div class="arabic-text mt-1" dir="rtl">رسالتك</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label for="documents" class="form-label">Upload documents (PDF, PNG, JPG, up to 5 files):</label>
+                                            <div class="arabic-text mt-1" dir="rtl">تحميل المستندات (PDF، PNG، JPG، حتى 5 ملفات):</div>
                                             <input class="form-control" type="file" id="documents" name="documents[]" accept=".pdf,.png,.jpg,.jpeg" multiple required>
                                             <small class="text-muted">For better understanding, please merge all documents into one PDF before uploading.</small>
+                                            <div class="arabic-text text-muted" dir="rtl">لضمان وضوح الطلب، يرجى دمج جميع المستندات في ملف PDF واحد قبل التحميل.</div>
                                         </div>
                                         <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                        <div class="arabic-text text-center mt-2" dir="rtl">إرسال الرسالة</div>
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center justify-content-center" style="min-height:600px;">
+                        <div class="w-100" style="max-width:500px;">
+                            <div class="card shadow-lg border-0" style="border-radius:18px; overflow:hidden; transition: box-shadow 0.3s;">
+                                <div class="card-body p-3 bg-white">
+                                    <h5 class="card-title text-center mb-3" style="font-weight:600; color:#0d6efd; letter-spacing:1px;">Our Location</h5>
+                                    <div class="arabic-text text-center mb-3" dir="rtl" style="color:#0d6efd; font-weight:600;">موقعنا</div>
+                                    <div class="map-responsive" style="border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(13,110,253,0.10);">
+                                        <iframe src="https://www.google.com/maps?q=Itihad+building+603,+Opp.+Pullman+Hotel,+Port+Saeed,+beside+Deira+City+Center,+Dubai&output=embed" width="100%" height="350" style="border:0; border-radius:12px; min-height:350px; display:block; margin:auto; transition: box-shadow 0.3s;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Talenza HR World Location"></iframe>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -407,6 +444,7 @@
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Get In Touch</h5>
+                        <div class="arabic-text text-white mb-4" dir="rtl">تواصل معنا</div>
                         <p><i class="fa fa-map-marker-alt me-3"></i>Itihad building 603, Opp. Pullman Hotel, Port Saeed, beside Deira City Center, Dubai</p>
                         <p><i class="fa fa-phone-alt me-3"></i>+971 58 589 5827</p>
                         <p><i class="fa fa-envelope me-3"></i><a href="mailto:info@talenzaworld.com" class="text-light">info@talenzaworld.com</a></p>
@@ -422,6 +460,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Popular Link</h5>
+                        <div class="arabic-text text-white mb-4" dir="rtl">روابط شائعة</div>
                         <a class="btn btn-link" href="index.html">Home</a>
                         <a class="btn btn-link" href="about.html">About</a>
                         <a class="btn btn-link" href="our-team.html">Our Team</a>
@@ -431,9 +470,9 @@
                         <a class="btn btn-link" href="clients.html">Clients</a>
                         <a class="btn btn-link" href="contact.html">Contact</a>
                     </div>
-
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Project Gallery</h5>
+                        <div class="arabic-text text-white mb-4" dir="rtl">معرض المشاريع</div>
                         <div class="row g-2">
                             <div class="col-4">
                                 <img class="img-fluid" src="img/projects/first call.png" alt="Image">
@@ -457,12 +496,15 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Feedback &amp; Complaints</h5>
+                        <div class="arabic-text text-white mb-4" dir="rtl">الملاحظات والشكاوى</div>
                         <p class="mb-2">
+                            <div class="arabic-text mb-2" dir="rtl">لأي شكاوى أو ملاحظات أو تقارير عن سوء سلوك من موظفينا، يرجى التواصل مع فريق الامتثال لدينا على</div>
                             For any complaints, concerns, or reports of misconduct involving our employees,
                             please contact our Compliance Team at
                             <a href="mailto:complaints@talenzaworld.com" class="text-light fw-medium">complaints@talenzaworld.com</a>.
                         </p>
                         <p class="mb-0">
+                            <div class="arabic-text mb-0" dir="rtl">جميع التصعيدات تتم مراجعتها بسرية وتتخذ الإجراءات المناسبة وفق سياسات الشركة.</div>
                             All escalations are reviewed confidentially, and appropriate action is taken in line with our corporate policies.
                         </p>
                     </div>
@@ -689,6 +731,15 @@
 
     <!-- Template Javascript -->
     <script src="js/main.min.js"></script>
+<style>
+    .card.shadow-lg:hover .map-responsive iframe {
+        box-shadow: 0 8px 32px rgba(13,110,253,0.18);
+        transform: scale(1.01);
+    }
+    .map-responsive {
+        transition: box-shadow 0.3s, transform 0.3s;
+    }
+</style>
 </body>
 
 </html>
