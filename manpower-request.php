@@ -56,13 +56,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->isSMTP();
         $mail->Host       = 'smtp.zoho.in';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'info@talenzaworld.com';
+        $mail->Username   = 'info@silvoratalenzaworld.com';
         $mail->Password   = 'Info@talentra2025';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
-        $mail->setFrom('info@talenzaworld.com', 'Talenza Website');
-        $mail->addAddress('info@talenzaworld.com');
+        $mail->setFrom('info@silvoratalenzaworld.com', 'Silvora Talenza World Website');
+        $mail->addAddress('info@silvoratalenzaworld.com');
         if (!empty($fields['Contact Email'])) {
             $mail->addReplyTo($fields['Contact Email'], $fields['Contact Person']);
         }

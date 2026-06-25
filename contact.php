@@ -1,5 +1,5 @@
 <?php
-// Simple contact form handler for Talenza HR World
+// Simple contact form handler for Silvora Talenza World
 
 
 // PHPMailer SMTP integration
@@ -39,10 +39,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 $email_safe   = str_replace(["\r", "\n"], '', $email);
 $subject_safe = str_replace(["\r", "\n"], '', $subject);
-$email_subject = 'New enquiry from Talenza website: ' . $subject_safe;
+$email_subject = 'New enquiry from Silvora Talenza World website: ' . $subject_safe;
 
 $lines = [];
-$lines[] = 'You have received a new enquiry from the Talenza HR World website.';
+$lines[] = 'You have received a new enquiry from the Silvora Talenza World website.';
 $lines[] = '';
 $lines[] = 'Name: ' . $name;
 $lines[] = 'Email: ' . $email_safe;
@@ -86,13 +86,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.zoho.in';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'info@talenzaworld.com';
+    $mail->Username   = 'info@silvoratalenzaworld.com';
     $mail->Password   = 'Info@talentra2025';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
-    $mail->setFrom('info@talenzaworld.com', 'Talenza Website');
-    $mail->addAddress('info@talenzaworld.com');
+    $mail->setFrom('info@silvoratalenzaworld.com', 'Silvora Talenza World Website');
+    $mail->addAddress('info@silvoratalenzaworld.com');
     $mail->addReplyTo($email_safe, $name);
     $mail->Subject = $email_subject;
     $mail->Body    = $body;
@@ -116,7 +116,7 @@ try {
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Thank You - Talenza HR World</title>
+    <title>Thank You - Silvora Talenza World</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -129,10 +129,10 @@ try {
                     <div class="card-body p-4 text-center">
                         <?php if ($sent): ?>
                             <h3 class="mb-3 text-success">Thank you, <?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?>!</h3>
-                            <p class="mb-4">Your message has been sent to Talenza HR World. Our team will contact you shortly.</p>
+                            <p class="mb-4">Your message has been sent to Silvora Talenza World. Our team will contact you shortly.</p>
                         <?php else: ?>
                             <h3 class="mb-3 text-danger">Oops, something went wrong.</h3>
-                            <p class="mb-4">We could not send your message right now. Please try again later or email us directly at <a href="mailto:info@talenzaworld.com">info@talenzaworld.com</a>.</p>
+                            <p class="mb-4">We could not send your message right now. Please try again later or email us directly at <a href="mailto:info@silvoratalenzaworld.com">info@silvoratalenzaworld.com</a>.</p>
                         <?php endif; ?>
                         <a href="index.html" class="btn btn-primary rounded-pill px-4">Back to Home</a>
                     </div>

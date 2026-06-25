@@ -15,13 +15,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.zoho.in';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'info@talenzaworld.com';
+    $mail->Username   = 'info@silvoratalenzaworld.com';
     $mail->Password   = 'Info@talentra2025';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
-    $mail->setFrom('info@talenzaworld.com', 'Talenza Test');
-    $mail->addAddress('info@talenzaworld.com');
+    $mail->setFrom('info@silvoratalenzaworld.com', 'Silvora Talenza World Test');
+    $mail->addAddress('info@silvoratalenzaworld.com');
     $mail->Subject = 'SMTP Test';
     $mail->Body    = 'This is a test email from PHPMailer SMTP.';
 
