@@ -195,6 +195,12 @@ h6,
     font-size: 0.8em;
 }
 
+.navbar {
+    position: relative;
+    z-index: 1050;
+    background-color: rgba(255, 255, 255, 0.98);
+}
+
 .navbar-nav .nav-item {
     display: inline-flex;
     flex-direction: column;
@@ -202,7 +208,7 @@ h6,
     text-align: center;
 }
 
-.navbar-nav .nav-item .arabic-text {
+.navbar-nav .arabic-text {
     color: #000 !important;
     font-size: 0.82rem;
     line-height: 1.1;
@@ -210,8 +216,12 @@ h6,
     display: block;
 }
 
-.inner-page-navbar .navbar-nav .nav-item .arabic-text {
+.inner-page-navbar .navbar-nav .arabic-text {
     color: #fff !important;
+}
+
+.sticky-top.navbar-light .navbar-nav .arabic-text {
+    color: var(--dark) !important;
 }
 
 @media (max-width: 991.98px) {
@@ -219,8 +229,12 @@ h6,
         display: block;
     }
 
-    .navbar-nav .nav-item .arabic-text {
+    .navbar-nav .arabic-text {
         margin-top: 0;
+    }
+
+    .inner-page-navbar .navbar-nav .arabic-text {
+        color: var(--dark) !important;
     }
 }
 
@@ -286,14 +300,20 @@ h6,
 
 @media (min-width: 992px) {
     .navbar-light {
-        position: absolute;
+        position: relative;
         width: 100%;
         top: 0;
         left: 0;
         border-bottom: 1px solid rgba(256, 256, 256, .1);
         z-index: 999;
+        background: rgba(255, 255, 255, 0.96);
     }
     
+    .navbar-light .navbar-brand h1,
+    .navbar-light .navbar-nav .nav-link {
+        color: var(--dark) !important;
+    }
+
     .sticky-top.navbar-light {
         position: fixed;
         background: #FFFFFF;
