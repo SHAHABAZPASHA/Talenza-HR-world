@@ -67,75 +67,87 @@
         return false;
     });
     
-    // Simple Talenza search assistant (front-end only)
-    window.openTalenzaAssistant = function () {
-        var input = document.getElementById('aiSearchInput');
-        var query = input ? input.value.trim().toLowerCase() : '';
-
-        var title = 'Talenza Assistant';
-        var greeting = 'Hello! I\'m your Talenza HR World assistant. I can share information about our services and our company.';
-        var answer = '';
-
-        if (!query) {
-            answer = 'You can ask things like "career advisory", "visa services", "company formation", or "about Talenza".';
-        } else if (query.includes('career') || query.includes('job') || query.includes('cv')) {
-            answer = 'Talenza HR World offers Career Advisory services including CV refinement, interview preparation, and job search support across Dubai and the wider UAE.';
-        } else if (query.includes('visa') || query.includes('golden') || query.includes('green card')) {
-            answer = 'Our Visa Services team supports Golden Visa, Green Card, employment, family, and visit visas, along with end-to-end PRO assistance for documentation and approvals.';
-        } else if (query.includes('education') || query.includes('abroad')) {
-            answer = 'Through our Abroad Education services, we help you shortlist universities, prepare applications, and manage study visa processes from Dubai to international destinations.';
-        } else if (query.includes('pro') || query.includes('government')) {
-            answer = 'Our PRO & Government Services cover trade license support, labour and immigration formalities, document attestation, and ongoing corporate compliance.';
-        } else if (query.includes('real estate') || query.includes('property')) {
-            answer = 'Talenza HR World provides Real Estate support for buying, selling, and renting properties in Dubai and the UAE with a focus on transparent, compliant transactions.';
-        } else if (query.includes('digital') || query.includes('marketing') || query.includes('web')) {
-            answer = 'We offer Digital Marketing and Web Design services to help businesses build a strong online presence through SEO, social media, and corporate websites.';
-        } else if (query.includes('company formation') || query.includes('business setup') || query.includes('free zone') || query.includes('mainland')) {
-            answer = 'Our Company Formation services guide you through choosing the right structure (mainland or free zone), obtaining licenses, and handling documentation so you can start operations smoothly.';
-        } else if (query.includes('immigration')) {
-            answer = 'With our Immigration Services, we support UAE and international relocation, handling documentation, eligibility guidance, and process coordination.';
-        } else if (query.includes('about') || query.includes('talenza') || query.includes('hr world') || query.includes('company')) {
-            answer = 'Talenza HR World is a Dubai-based consultancy offering HR, PRO, visa, education, real estate, and company formation services, focused on transparent, long-term partnerships.';
-        } else {
-            answer = 'I could not match your question to a specific service, but Talenza HR World covers Career Advisory, Visa & PRO, Real Estate, Education Abroad, Digital Marketing, Company Formation, and Immigration. Try searching with one of these keywords.';
-        }
-
-        var modalTitle = document.getElementById('assistantModalLabel');
-        var modalBody = document.getElementById('assistantModalBody');
-        if (modalTitle && modalBody && window.bootstrap) {
-            modalTitle.textContent = title;
-            modalBody.innerHTML = '<p>' + greeting + '</p><p class="mb-0">' + answer + '</p>';
-            var modalEl = document.getElementById('assistantModal');
-            var modal = new window.bootstrap.Modal(modalEl);
-            modal.show();
-        } else {
-            alert(greeting + '\n\n' + answer);
-        }
-    };
-    
 })(jQuery);
 
 document.addEventListener('DOMContentLoaded', function () {
+    function addFormFeedback(form) {
+        var feedback = form.querySelector('.form-feedback');
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.className = 'form-feedback';
+            feedback.setAttribute('aria-live', 'polite');
+            form.appendChild(feedback);
+        }
+        return feedback;
+    }
+
+    function validatePhoneField(phoneInput) {
+        if (!phoneInput) {
+            return true;
+        }
+
+        var value = phoneInput.value.trim();
+        if (value === '') {
+            phoneInput.setCustomValidity('');
+            return true;
+        }
+
+        var phonePattern = /^[+0-9()\-\s]{7,20}$/;
+        var isValid = phonePattern.test(value);
+        phoneInput.setCustomValidity(isValid ? '' : 'Please enter a valid phone or WhatsApp number.');
+        return isValid;
+    }
+
+    function validateDocumentsField(documentsInput) {
+        if (!documentsInput) {
+            return true;
+        }
+
+        var maxFiles = 5;
+        var allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+        var files = Array.from(documentsInput.files || []);
+        var invalidExtension = files.some(function (file) {
+            var ext = file.name.split('.').pop().toLowerCase();
+            return allowedExtensions.indexOf(ext) === -1;
+        });
+
+        if (files.length > maxFiles) {
+            documentsInput.setCustomValidity('Please upload up to 5 files only.');
+            return false;
+        }
+
+        if (invalidExtension) {
+            documentsInput.setCustomValidity('Please upload PDF, PNG, JPG, or JPEG files only.');
+            return false;
+        }
+
+        documentsInput.setCustomValidity('');
+        return true;
+    }
+
+    function getSectionByHeadingText(text) {
+        var headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+        var match = headings.find(function (heading) {
+            return heading.textContent.trim() === text;
+        });
+
+        if (!match) {
+            return null;
+        }
+
+        return match.closest('section') || match.closest('.container-fluid') || match.closest('.container');
+    }
+
     var navbars = document.querySelectorAll('.navbar');
 
     navbars.forEach(function (navbar) {
-        // Remove request CTA buttons from navbar area.
-        navbar.querySelectorAll('button[data-bs-target="#manpowerRequestModal"]').forEach(function (button) {
-            button.remove();
-        });
-
-        // Remove AI search form from navbar.
-        navbar.querySelectorAll('.ai-search-form').forEach(function (form) {
-            form.remove();
-        });
-
         // Ensure language switcher is present on right side.
         var collapse = navbar.querySelector('.navbar-collapse');
-        var existingLang = navbar.querySelector('.language-switcher');
+        var existingLang = navbar.querySelector('.language-switcher, .nav-language');
         if (collapse && !existingLang) {
             var navUtils = document.createElement('div');
-            navUtils.className = 'nav-utilities d-flex align-items-center ms-3';
-            navUtils.innerHTML = '<div class="language-switcher nav-lang" aria-label="Language switcher">EN / <a href="#" lang="ar" dir="rtl">العربية</a></div>';
+            navUtils.className = 'nav-utilities d-flex align-items-center ms-lg-4';
+            navUtils.innerHTML = '<div class="language-switcher nav-language" aria-label="Language switcher"><a href="#" lang="en">EN</a> / <a href="#" lang="ar" dir="rtl">العربية</a></div>';
             collapse.appendChild(navUtils);
         }
 
@@ -145,17 +157,58 @@ document.addEventListener('DOMContentLoaded', function () {
                 link.setAttribute('aria-label', 'Go to ' + link.textContent.trim());
             }
         });
+
+        navbar.querySelectorAll('.nav-language a[href="#"], .language-switcher a[href="#"]').forEach(function (link) {
+            link.setAttribute('aria-disabled', 'true');
+            link.setAttribute('tabindex', '-1');
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+            });
+        });
     });
 
-    // Hide floating request manpower buttons globally.
-    document.querySelectorAll('button[data-bs-target="#manpowerRequestModal"]').forEach(function (button) {
-        button.remove();
+    document.querySelectorAll('form[action="contact.php"], form[data-contact-form]').forEach(function (form) {
+        var phoneInput = form.querySelector('input[name="phone"]');
+        var documentsInput = form.querySelector('input[name="documents[]"]');
+        var feedback = addFormFeedback(form);
+
+        if (phoneInput) {
+            phoneInput.setAttribute('inputmode', 'tel');
+            phoneInput.setAttribute('pattern', '[+0-9()\\-\\s]{7,20}');
+            phoneInput.setAttribute('autocomplete', 'tel');
+            phoneInput.addEventListener('input', function () {
+                validatePhoneField(phoneInput);
+            });
+        }
+
+        if (documentsInput) {
+            documentsInput.addEventListener('change', function () {
+                validateDocumentsField(documentsInput);
+            });
+        }
+
+        form.addEventListener('submit', function (event) {
+            var phoneValid = validatePhoneField(phoneInput);
+            var documentsValid = validateDocumentsField(documentsInput);
+
+            if (!form.checkValidity() || !phoneValid || !documentsValid) {
+                event.preventDefault();
+                feedback.textContent = 'Please complete all required fields and correct any invalid email, phone, or file inputs before submitting.';
+                feedback.classList.add('is-error');
+                feedback.classList.remove('is-success');
+                return;
+            }
+
+            feedback.textContent = 'Submitting your enquiry...';
+            feedback.classList.add('is-success');
+            feedback.classList.remove('is-error');
+        });
     });
 
     // Improve image loading defaults for better performance.
     document.querySelectorAll('img').forEach(function (img, index) {
         if (!img.hasAttribute('loading')) {
-            img.setAttribute('loading', index < 2 ? 'eager' : 'lazy');
+            img.setAttribute('loading', index < 3 ? 'eager' : 'lazy');
         }
         if (!img.hasAttribute('decoding')) {
             img.setAttribute('decoding', 'async');
@@ -165,7 +218,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Mobile menu state, scroll lock, and auto-close after navigation.
     var navbarCollapse = document.getElementById('navbarCollapse');
     if (navbarCollapse && window.bootstrap) {
-        var collapseApi = window.bootstrap.Collapse.getOrCreateInstance(navbarCollapse, { toggle: false });
+        var collapseApi = window.bootstrap.Collapse.getInstance(navbarCollapse);
+        if (!collapseApi) {
+            collapseApi = new window.bootstrap.Collapse(navbarCollapse, { toggle: false });
+        }
 
         navbarCollapse.addEventListener('show.bs.collapse', function () {
             document.body.classList.add('no-scroll', 'mobile-nav-open');
@@ -189,5 +245,123 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // Animate KPI counters when they enter viewport.
+    var counters = document.querySelectorAll('[data-counter-target]');
+    if ('IntersectionObserver' in window && counters.length > 0) {
+        var counterObserver = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                var el = entry.target;
+                var target = parseInt(el.getAttribute('data-counter-target'), 10) || 0;
+                var suffix = el.getAttribute('data-counter-suffix') || '';
+                var duration = 1200;
+                var start = performance.now();
+
+                function tick(now) {
+                    var progress = Math.min((now - start) / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 3);
+                    var value = Math.floor(target * eased);
+                    el.textContent = value.toLocaleString() + suffix;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(tick);
+                    }
+                }
+
+                window.requestAnimationFrame(tick);
+                observer.unobserve(el);
+            });
+        }, { threshold: 0.35 });
+
+        counters.forEach(function (counter) {
+            counterObserver.observe(counter);
+        });
+    }
+
+    // Auto-scrolling content tracks with pause on hover.
+    document.querySelectorAll('[data-auto-track], [data-logo-track]').forEach(function (track) {
+        var paused = false;
+        var speed = parseFloat(track.getAttribute('data-track-speed') || track.getAttribute('data-logo-speed') || '0.55');
+
+        track.addEventListener('mouseenter', function () {
+            paused = true;
+        });
+        track.addEventListener('mouseleave', function () {
+            paused = false;
+        });
+
+        function animate() {
+            if (!paused) {
+                track.scrollLeft += speed;
+                if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) {
+                    track.scrollLeft = 0;
+                }
+            }
+            window.requestAnimationFrame(animate);
+        }
+
+        window.requestAnimationFrame(animate);
+    });
+
+    // Homepage ordering and legacy section cleanup.
+    if (/index\.html$/i.test(window.location.pathname) || /\/$/i.test(window.location.pathname)) {
+        var orderedSections = [
+            document.querySelector('.home-services-section'),
+            document.querySelector('.trusted-by-section'),
+            document.querySelector('.testimonials-section'),
+            document.querySelector('.latest-jobs-section'),
+            document.querySelector('.home-blogs-section'),
+            document.querySelector('.home-contact-section'),
+            document.querySelector('.final-cta-section')
+        ].filter(Boolean);
+
+        var footer = document.querySelector('.footer');
+        var projectsSection = getSectionByHeadingText('Recent Projects');
+
+        if (projectsSection) {
+            projectsSection.remove();
+        }
+
+        if (footer && orderedSections.length > 0) {
+            var footerParent = footer.parentNode;
+
+            orderedSections.forEach(function (section) {
+                if (section && footerParent && section !== footer) {
+                    footerParent.insertBefore(section, footer);
+                }
+            });
+        }
+    }
+
+    // Add production-ready business information to each footer.
+    document.querySelectorAll('.footer').forEach(function (footer) {
+        var footerRow = footer.querySelector('.container.py-5 .row.g-5');
+        if (!footerRow) {
+            return;
+        }
+
+        footer.querySelectorAll('.col-md-6.col-lg-3').forEach(function (column) {
+            var heading = column.querySelector('h5');
+            if (!heading || heading.textContent.trim() !== 'Get In Touch' || column.querySelector('[data-office-hours]')) {
+                return;
+            }
+
+            var officeHours = document.createElement('div');
+            officeHours.className = 'footer-office-hours';
+            officeHours.setAttribute('data-office-hours', 'true');
+            officeHours.innerHTML = '<p class="mb-2"><i class="fa fa-clock me-3"></i><strong>Office Hours</strong></p><p class="mb-1 ps-4">Monday - Saturday</p><p class="mb-1 ps-4">10:00 AM - 8:00 PM</p><p class="mb-0 ps-4">Sunday: Closed</p>';
+            column.appendChild(officeHours);
+        });
+
+        if (!footer.querySelector('[data-company-info-panel]')) {
+            var companyPanelCol = document.createElement('div');
+            companyPanelCol.className = 'col-12';
+            companyPanelCol.innerHTML = '<div class="company-info-panel" data-company-info-panel="true"><div class="company-info-panel__head"><h5 class="text-white mb-2">Company Information</h5><div class="arabic-text text-white" dir="rtl">معلومات الشركة</div></div><div class="company-info-list"><div><span>Company Name</span><strong>Silvora Talenza World LLC</strong></div><div><span>Business Type</span><strong>HR Consultancy | Manpower Supply | Visa Services | PRO Services | Business Setup | Digital Solutions</strong></div><div><span>Office Hours</span><strong>Monday - Saturday, 10:00 AM - 8:00 PM | Sunday: Closed</strong></div><div><span>Contact Number</span><strong><a href="tel:+971585895827">+971 58 589 5827</a></strong></div><div><span>Email Address</span><strong><a href="mailto:info@silvoratalenzaworld.com">info@silvoratalenzaworld.com</a></strong></div><div><span>Website</span><strong><a href="https://www.silvoratalenzaworld.com" target="_blank" rel="noopener">www.silvoratalenzaworld.com</a></strong></div></div><div class="footer-verified-badges"><span>UAE Registered Company</span><span>Global Recruitment</span><span>Visa Assistance</span><span>Business Consultancy</span><span>Digital Solutions</span></div></div>';
+            footerRow.appendChild(companyPanelCol);
+        }
+    });
 });
 

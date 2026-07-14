@@ -1,5 +1,4 @@
-﻿        <!-- Top Navbar Request Manpower Button -->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,6 +30,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="img/TALENZA_logo_v2.png">
+    <link rel="preload" as="image" href="img/PRO2.png">
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
 
     <!-- Icon Font Stylesheet -->
@@ -45,15 +46,6 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
-        <style>
-            .arabic-text {
-                color: #111 !important;
-                font-family: 'Cairo', 'Tajawal', 'Amiri', 'Arial', sans-serif;
-                font-weight: bold;
-                direction: rtl;
-            }
-        </style>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6T834E8S3"></script>
@@ -114,8 +106,8 @@
                     <a class="text-light ms-2" href="https://www.facebook.com/profile.php?id=61588411206914" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a class="text-light ms-2" href="https://www.youtube.com/channel/UCnORIK_eKlP-lgx-j89RoZg" target="_blank" rel="noopener" title="YouTube"><i class="fab fa-youtube"></i></a>
                     <a class="text-light ms-2" href="https://www.instagram.com/talenza.uae/" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a class="text-light ms-2" href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                    <a class="text-light ms-2" href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="text-light ms-2" href="https://www.instagram.com/talenza.uae/" target="_blank" rel="noopener" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a class="text-light ms-2" href="https://www.linkedin.com/company/talenza-hr-world/" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -124,20 +116,15 @@
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="index.html" class="navbar-brand p-0">
-                    <h1 class="m-0 d-flex align-items-center">
+                    <div class="m-0 d-flex align-items-center brand-heading">
                         <img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World Logo" class="logo-white" style="height: 130px; margin-right: 10px; vertical-align: middle;">
                         <img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World Logo" class="logo-blue" style="height: 130px; margin-right: 10px; vertical-align: middle;">
                         <span class="brand-text">
                             <span>Silvora Talenza World</span>
                             <span class="brand-text-ar">سيلفورا تالينزا وورلد</span>
                         </span>
-                    </h1>
-                </a>
-                <button type="button" class="btn btn-warning btn-lg d-flex align-items-center gap-2 ms-3" data-bs-toggle="modal" data-bs-target="#manpowerRequestModal" style="border-radius: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); font-weight: bold; padding: 10px 24px 10px 16px;">
-                    <i class="fas fa-user-plus" style="font-size: 1.2em;"></i>
-                    Request Manpower
-                </button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    </div>
+                </a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -183,10 +170,11 @@
                             <div class="arabic-text" dir="rtl">اتصل بنا</div>
 </div>
                     </div>
-                    <form class="d-flex ms-3 ai-search-form" role="search" onsubmit="openSilvoraTalenzaAssistant(); return false;">
-                        <input class="form-control" type="search" placeholder="Ask about Silvora Talenza World..." aria-label="Search" id="aiSearchInput">
-                        <button class="btn btn-outline-primary ms-2 ai-search-btn" type="button" onclick="openSilvoraTalenzaAssistant()">Search</button>
-                    </form>
+                    <div class="nav-utilities d-flex align-items-center ms-lg-4">
+                        <div class="language-switcher nav-language" aria-label="Language switcher">
+                            <a href="#" lang="en">EN</a> / <a href="#" lang="ar" dir="rtl">العربية</a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -237,8 +225,8 @@
                                 <div class="arabic-text text-white pb-3 animated zoomIn" dir="rtl">توفر سيلفورا تالينزا وورلد للستشارات ش.ذ.م.م استشارات مهنية متخصصة، تعليم بالخارج، خدمات PRO/حكومية، عقارات، تأشيرات (التأشيرة الذهبية، البطاقة الخضراء)، تسويق رقمي، تأسيس شركات، وحلول هجرة. مقرنا في دبي ونساعدك على تحقيق أهدافك بثقة وكفاءة.<br><br>كشريك موثوق للشركات والمؤسسات، تقدم سيلفورا تالينزا وورلد للستشارات ش.ذ.م.م حلول موارد بشرية استراتيجية، تخطيط قوى عاملة، وإدارة امتثال مصممة للعمليات واسعة النطاق. يعتمد فريقنا على خبرة عميقة وتقنيات متقدمة لتحسين استقطاب المواهب وتبسيط العمليات وضمان الامتثال التنظيمي. نمكن المؤسسات من التوسع عالمياً ودفع الابتكار والحفاظ على ميزة تنافسية في بيئة الأعمال الديناميكية اليوم.</div>
                             <a href="jobs.html" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Apply for Jobs</a>
                                 <div class="arabic-text mt-1" dir="rtl">تقدم للوظائف</div>
-                        <a href="contact.html" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
-                                <div class="arabic-text mt-1" dir="rtl">تواصل معنا</div>
+                        <a href="contact.html" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Hire Employees</a>
+                            <div class="arabic-text mt-1" dir="rtl">توظيف موظفين</div>
                     </div>
                     <div class="col-lg-6 text-center text-lg-start">
                         <img class="img-fluid hero-logo" src="img/Untitled design (12).png" alt="">
@@ -292,9 +280,287 @@
         </div>
         <!-- About End -->
 
+        <!-- Why Choose Us Start -->
+        <section class="container-fluid section-shell bg-light process-home-section">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Why Choose Silvora Talenza World</h2>
+                    <div class="arabic-text" dir="rtl">لماذا تختار سيلفورا تالينزا وورلد</div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6"><article class="why-choose-card enterprise-card"><span class="icon"><i class="fa fa-globe"></i></span><h3 class="h5">Global Talent Reach</h3><p class="mb-0">Access verified talent pipelines across multiple countries and sectors.</p></article></div>
+                    <div class="col-lg-3 col-md-6"><article class="why-choose-card enterprise-card"><span class="icon"><i class="fa fa-shield-alt"></i></span><h3 class="h5">Compliance First</h3><p class="mb-0">Structured PRO and visa workflows aligned with UAE regulations.</p></article></div>
+                    <div class="col-lg-3 col-md-6"><article class="why-choose-card enterprise-card"><span class="icon"><i class="fa fa-people-group"></i></span><h3 class="h5">Dedicated Account Teams</h3><p class="mb-0">Consultative support from requirement gathering to deployment.</p></article></div>
+                    <div class="col-lg-3 col-md-6"><article class="why-choose-card enterprise-card"><span class="icon"><i class="fa fa-bolt"></i></span><h3 class="h5">Fast Turnaround</h3><p class="mb-0">Rapid shortlisting and onboarding without compromising quality.</p></article></div>
+                </div>
+            </div>
+        </section>
+        <!-- Why Choose Us End -->
+
+        <!-- Company Statistics Start -->
+        <section class="container-fluid section-shell stats-section">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Company Statistics</h2>
+                    <div class="arabic-text" dir="rtl">إحصائيات الشركة</div>
+                    <p class="section-intro mx-auto mt-3 mb-0">A measurable track record that gives employers and candidates confidence in every stage of recruitment, mobility, and workforce delivery.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.1s"><span class="icon"><i class="fa fa-users"></i></span><h3 data-counter-target="5000" data-counter-suffix="+">0</h3><h4 class="h6">Candidates Successfully Placed</h4><p class="mb-0">Providing skilled professionals across multiple industries worldwide.</p></article></div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.15s"><span class="icon"><i class="fa fa-building"></i></span><h3 data-counter-target="250" data-counter-suffix="+">0</h3><h4 class="h6">Corporate Clients</h4><p class="mb-0">Trusted by leading businesses and organizations across different sectors.</p></article></div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.2s"><span class="icon"><i class="fa fa-earth-asia"></i></span><h3 data-counter-target="15" data-counter-suffix="+">0</h3><h4 class="h6">Countries Served</h4><p class="mb-0">Global manpower recruitment and visa solutions across multiple destinations.</p></article></div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.25s"><span class="icon"><i class="fa fa-file-lines"></i></span><h3 data-counter-target="10000" data-counter-suffix="+">0</h3><h4 class="h6">Visa Applications Processed</h4><p class="mb-0">Successfully processed tourist, employment, business and family visas.</p></article></div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.3s"><span class="icon"><i class="fa fa-briefcase"></i></span><h3 data-counter-target="500" data-counter-suffix="+">0</h3><h4 class="h6">Active Job Openings</h4><p class="mb-0">New opportunities available across multiple industries every month.</p></article></div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.35s"><span class="icon"><i class="fa fa-star"></i></span><h3 data-counter-target="98" data-counter-suffix="%">0</h3><h4 class="h6">Client Satisfaction</h4><p class="mb-0">Delivering reliable recruitment and business services with outstanding support.</p></article></div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.4s"><span class="icon"><i class="fa fa-handshake"></i></span><h3 data-counter-target="1200" data-counter-suffix="+">0</h3><h4 class="h6">Successful Placements</h4><p class="mb-0">Connecting talented professionals with trusted employers globally.</p></article></div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12"><article class="stat-card enterprise-card wow fadeInUp" data-wow-delay="0.45s"><span class="icon"><i class="fa fa-chart-line"></i></span><h3 data-counter-target="8" data-counter-suffix="+">0</h3><h4 class="h6">Years of Industry Experience</h4><p class="mb-0">Delivering manpower, visa, PRO, business setup and corporate solutions.</p></article></div>
+                </div>
+            </div>
+        </section>
+        <!-- Company Statistics End -->
+
+        <!-- Industries Start -->
+        <section class="container-fluid section-shell bg-light">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Industries We Serve</h2>
+                    <div class="arabic-text" dir="rtl">القطاعات التي نخدمها</div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-hard-hat"></i></span><h3 class="h6 mb-0">Construction</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-hotel"></i></span><h3 class="h6 mb-0">Hospitality</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-warehouse"></i></span><h3 class="h6 mb-0">Warehousing</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-truck-fast"></i></span><h3 class="h6 mb-0">Logistics</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-notes-medical"></i></span><h3 class="h6 mb-0">Healthcare</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-industry"></i></span><h3 class="h6 mb-0">Manufacturing</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-store"></i></span><h3 class="h6 mb-0">Retail</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-user-shield"></i></span><h3 class="h6 mb-0">Security</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-building-shield"></i></span><h3 class="h6 mb-0">Facility Management</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-bus"></i></span><h3 class="h6 mb-0">Transportation</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-oil-can"></i></span><h3 class="h6 mb-0">Oil &amp; Gas</h3></article></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><article class="industry-card enterprise-card"><span class="icon"><i class="fa fa-laptop-code"></i></span><h3 class="h6 mb-0">Information Technology</h3></article></div>
+                </div>
+            </div>
+        </section>
+        <!-- Industries End -->
+
+        <!-- Countries From Start -->
+        <section class="container-fluid section-shell countries-section">
+            <div class="container px-lg-5">
+                <div class="row g-4 align-items-start">
+                    <div class="col-lg-6">
+                        <div class="section-title mb-4">
+                            <h2>Countries We Recruit From</h2>
+                            <div class="arabic-text" dir="rtl">الدول التي نوظف منها</div>
+                        </div>
+                        <div class="country-grid">
+                            <article class="country-chip"><span class="flag">🇮🇳</span><span>India</span></article>
+                            <article class="country-chip"><span class="flag">🇵🇰</span><span>Pakistan</span></article>
+                            <article class="country-chip"><span class="flag">🇧🇩</span><span>Bangladesh</span></article>
+                            <article class="country-chip"><span class="flag">🇳🇵</span><span>Nepal</span></article>
+                            <article class="country-chip"><span class="flag">🇱🇰</span><span>Sri Lanka</span></article>
+                            <article class="country-chip"><span class="flag">🇵🇭</span><span>Philippines</span></article>
+                            <article class="country-chip"><span class="flag">🇰🇪</span><span>Kenya</span></article>
+                            <article class="country-chip"><span class="flag">🇺🇬</span><span>Uganda</span></article>
+                            <article class="country-chip"><span class="flag">🇪🇹</span><span>Ethiopia</span></article>
+                            <article class="country-chip"><span class="flag">🇬🇭</span><span>Ghana</span></article>
+                            <article class="country-chip"><span class="flag">🇨🇲</span><span>Cameroon</span></article>
+                            <article class="country-chip"><span class="flag">🇮🇩</span><span>Indonesia</span></article>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="section-title mb-4">
+                            <h2>Countries We Recruit For</h2>
+                            <div class="arabic-text" dir="rtl">الدول التي نوظف لها</div>
+                        </div>
+                        <div class="country-grid">
+                            <article class="country-chip country-chip-destination"><span class="flag">🇦🇪</span><span>United Arab Emirates</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇸🇦</span><span>Saudi Arabia</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇶🇦</span><span>Qatar</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇰🇼</span><span>Kuwait</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇴🇲</span><span>Oman</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇧🇭</span><span>Bahrain</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇷🇴</span><span>Romania</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇭🇷</span><span>Croatia</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇭🇺</span><span>Hungary</span></article>
+                            <article class="country-chip country-chip-destination"><span class="flag">🇵🇱</span><span>Poland</span></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Countries From End -->
+
+        <!-- Recruitment Process Start -->
+        <section class="container-fluid section-shell bg-light">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Recruitment Process Timeline</h2>
+                    <div class="arabic-text" dir="rtl">الجدول الزمني لعملية التوظيف</div>
+                </div>
+                <div class="process-grid process-grid-steps">
+                    <article class="process-card"><span class="step">01</span><span class="icon"><i class="fa fa-comments"></i></span><h3 class="h6">Requirement Discussion</h3></article>
+                    <article class="process-card"><span class="step">02</span><span class="icon"><i class="fa fa-magnifying-glass"></i></span><h3 class="h6">Candidate Sourcing</h3></article>
+                    <article class="process-card"><span class="step">03</span><span class="icon"><i class="fa fa-clipboard-check"></i></span><h3 class="h6">Screening &amp; Interviews</h3></article>
+                    <article class="process-card"><span class="step">04</span><span class="icon"><i class="fa fa-folder-open"></i></span><h3 class="h6">Documentation</h3></article>
+                    <article class="process-card"><span class="step">05</span><span class="icon"><i class="fa fa-passport"></i></span><h3 class="h6">Visa Processing</h3></article>
+                    <article class="process-card"><span class="step">06</span><span class="icon"><i class="fa fa-plane-departure"></i></span><h3 class="h6">Deployment</h3></article>
+                    <article class="process-card"><span class="step">07</span><span class="icon"><i class="fa fa-headset"></i></span><h3 class="h6">After Placement Support</h3></article>
+                </div>
+            </div>
+        </section>
+        <!-- Recruitment Process End -->
+
+        <!-- Trusted By Start -->
+        <section class="container-fluid section-shell trusted-by-section">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-4">
+                    <h2>Trusted By</h2>
+                    <div class="arabic-text" dir="rtl">يثق بنا</div>
+                </div>
+                <div class="logo-slider-track" data-auto-track data-track-speed="0.65" aria-label="Client logos slider">
+                    <div class="logo-slide"><img src="img/projects/world star.png" alt="World Star logo"></div>
+                    <div class="logo-slide"><img src="img/projects/a_s_group_dubai_logo.jpeg" alt="A S Group Dubai logo"></div>
+                    <div class="logo-slide"><img src="img/projects/all khaleej global.jpeg" alt="All Khaleej Global logo"></div>
+                    <div class="logo-slide"><img src="img/projects/jumboforce_logo.jpeg" alt="JumboForce logo"></div>
+                    <div class="logo-slide"><img src="img/projects/meethaq_employment_agency_dubai_logo.jpeg" alt="Meethaq Employment Agency logo"></div>
+                    <div class="logo-slide"><img src="img/projects/pact manpower services.png" alt="Pact Manpower Services logo"></div>
+                    <div class="logo-slide"><img src="img/projects/world star.png" alt="World Star logo repeat"></div>
+                    <div class="logo-slide"><img src="img/projects/a_s_group_dubai_logo.jpeg" alt="A S Group Dubai logo repeat"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Trusted By End -->
+
+        <!-- Trust Badges Start -->
+        <section class="container-fluid section-shell bg-light trust-badges-section">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Verified Trust Signals</h2>
+                    <div class="arabic-text" dir="rtl">مؤشرات الثقة المعتمدة</div>
+                    <p class="section-intro mx-auto mt-3 mb-0">Clear business signals for employers, candidates, and partners evaluating Silvora Talenza World.</p>
+                </div>
+                <div class="trust-badge-grid">
+                    <article class="trust-badge-chip"><i class="fa fa-check-circle"></i><span>UAE Registered Company</span></article>
+                    <article class="trust-badge-chip"><i class="fa fa-check-circle"></i><span>Global Recruitment</span></article>
+                    <article class="trust-badge-chip"><i class="fa fa-check-circle"></i><span>Visa Assistance</span></article>
+                    <article class="trust-badge-chip"><i class="fa fa-check-circle"></i><span>Business Consultancy</span></article>
+                    <article class="trust-badge-chip"><i class="fa fa-check-circle"></i><span>Digital Solutions</span></article>
+                </div>
+            </div>
+        </section>
+        <!-- Trust Badges End -->
+
+        <!-- Google Reviews Start -->
+        <section class="container-fluid section-shell google-reviews-section">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Google Reviews</h2>
+                    <div class="arabic-text" dir="rtl">تقييمات جوجل</div>
+                    <p class="section-intro mx-auto mt-3 mb-0">This section is ready for a live Google Business Profile connection. Placeholder cards are shown until the approved review feed is integrated.</p>
+                </div>
+                <div class="google-rating-banner enterprise-card">
+                    <div>
+                        <p class="google-stars mb-2" aria-label="Google reviews placeholder">★★★★★</p>
+                        <h3 class="h4 mb-1">Google Rating</h3>
+                        <p class="mb-0 text-muted">Customer Reviews will appear here after verified Google Business Profile sync.</p>
+                    </div>
+                    <span class="placeholder-review-chip">Pending live connection</span>
+                </div>
+                <div class="google-review-track" data-auto-track data-track-speed="0.3" aria-label="Google review placeholders slider">
+                    <article class="google-review-card enterprise-card">
+                        <p class="google-stars mb-3">★★★★★</p>
+                        <h3 class="h6">Customer Reviews</h3>
+                        <p class="mb-0">Live Google review content will be published here once the verified business profile integration is enabled.</p>
+                    </article>
+                    <article class="google-review-card enterprise-card">
+                        <p class="google-stars mb-3">★★★★★</p>
+                        <h3 class="h6">Business Profile Feed</h3>
+                        <p class="mb-0">This placeholder card is reserved for approved public review data from the official Google listing.</p>
+                    </article>
+                    <article class="google-review-card enterprise-card">
+                        <p class="google-stars mb-3">★★★★★</p>
+                        <h3 class="h6">Verified Review Sync</h3>
+                        <p class="mb-0">Ratings, reviewer names, and review text are intentionally withheld until the live source is connected.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Google Reviews End -->
+
+        <!-- Testimonials Start -->
+        <section class="container-fluid section-shell bg-light testimonials-section">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Client Experience Highlights</h2>
+                    <div class="arabic-text" dir="rtl">أبرز جوانب تجربة العملاء</div>
+                </div>
+                <div class="testimonial-slider" data-auto-track data-track-speed="0.35">
+                    <article class="testimonial-card enterprise-card">
+                        <div class="testimonial-head"><img src="img/TEAM/OPREATIONS.webp" alt="Operational coordination illustration" class="testimonial-avatar"><div><h3 class="h6 mb-1">Fast Candidate Coordination</h3><p class="mb-0 text-muted">Operational delivery focus</p><small class="text-muted">Recruitment workflow strength</small></div></div>
+                        <p>Structured sourcing, screening, and mobilisation support helps employers move from requirement discussion to deployment with less delay.</p>
+                    </article>
+                    <article class="testimonial-card enterprise-card">
+                        <div class="testimonial-head"><img src="img/TEAM/FATIMA.png" alt="Visa support illustration" class="testimonial-avatar"><div><h3 class="h6 mb-1">Documentation & Visa Support</h3><p class="mb-0 text-muted">Compliance-driven process</p><small class="text-muted">Cross-border hiring support</small></div></div>
+                        <p>Documentation review, visa coordination, and post-submission follow-up are positioned clearly for employers and candidates who need reliable process visibility.</p>
+                    </article>
+                    <article class="testimonial-card enterprise-card">
+                        <div class="testimonial-head"><img src="img/TEAM/SHERIS.webp" alt="Transparent communication illustration" class="testimonial-avatar"><div><h3 class="h6 mb-1">Transparent Communication</h3><p class="mb-0 text-muted">Business relationship focus</p><small class="text-muted">Clear status updates</small></div></div>
+                        <p>Silvora Talenza World presents services, contact channels, and recruitment stages in a more transparent way for businesses assessing a potential service partner.</p>
+                    </article>
+                    <article class="testimonial-card enterprise-card">
+                        <div class="testimonial-head"><img src="img/TEAM/YOUSUF.webp" alt="Enterprise process illustration" class="testimonial-avatar"><div><h3 class="h6 mb-1">Enterprise-Ready Process</h3><p class="mb-0 text-muted">Scalable support model</p><small class="text-muted">Workforce and business services</small></div></div>
+                        <p>From first enquiry to consultation, the site now emphasizes structured service categories, verified contact details, and stronger business readiness signals.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials End -->
+
+        <!-- Latest Jobs Start -->
+        <section class="container-fluid section-shell latest-jobs-section">
+            <div class="container px-lg-5">
+                <div class="section-title text-center mb-5">
+                    <h2>Latest Job Openings</h2>
+                    <div class="arabic-text" dir="rtl">أحدث الوظائف</div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-xl-3 col-md-6"><article class="latest-job-card enterprise-card"><h3 class="h5">Electrical Technician</h3><p class="job-meta"><i class="fa fa-location-dot text-primary me-2"></i>United Arab Emirates</p><p class="job-meta"><i class="fa fa-wallet text-primary me-2"></i>AED 2,200 - 2,800</p><p class="job-meta mb-4"><i class="fa fa-briefcase text-primary me-2"></i>Full Time</p><a href="jobs.html" class="btn btn-primary w-100">Apply Now</a></article></div>
+                    <div class="col-xl-3 col-md-6"><article class="latest-job-card enterprise-card"><h3 class="h5">Senior Accountant</h3><p class="job-meta"><i class="fa fa-location-dot text-primary me-2"></i>Saudi Arabia</p><p class="job-meta"><i class="fa fa-wallet text-primary me-2"></i>SAR 5,500 - 7,000</p><p class="job-meta mb-4"><i class="fa fa-briefcase text-primary me-2"></i>Contract</p><a href="jobs.html" class="btn btn-primary w-100">Apply Now</a></article></div>
+                    <div class="col-xl-3 col-md-6"><article class="latest-job-card enterprise-card"><h3 class="h5">Warehouse Supervisor</h3><p class="job-meta"><i class="fa fa-location-dot text-primary me-2"></i>Qatar</p><p class="job-meta"><i class="fa fa-wallet text-primary me-2"></i>QAR 3,500 - 4,200</p><p class="job-meta mb-4"><i class="fa fa-briefcase text-primary me-2"></i>Full Time</p><a href="jobs.html" class="btn btn-primary w-100">Apply Now</a></article></div>
+                    <div class="col-xl-3 col-md-6"><article class="latest-job-card enterprise-card"><h3 class="h5">Civil Foreman</h3><p class="job-meta"><i class="fa fa-location-dot text-primary me-2"></i>Oman</p><p class="job-meta"><i class="fa fa-wallet text-primary me-2"></i>OMR 350 - 450</p><p class="job-meta mb-4"><i class="fa fa-briefcase text-primary me-2"></i>Permanent</p><a href="jobs.html" class="btn btn-primary w-100">Apply Now</a></article></div>
+                </div>
+            </div>
+        </section>
+        <!-- Latest Jobs End -->
+
+        <!-- Final CTA Start -->
+        <section class="container-fluid section-shell final-cta-section">
+            <div class="container px-lg-5">
+                <div class="final-cta enterprise-card text-center text-lg-start">
+                    <div class="row align-items-center g-4">
+                        <div class="col-lg-7">
+                            <h2 class="mb-3">Ready to Hire Skilled Professionals or Start Your Career?</h2>
+                            <div class="arabic-text mb-0" dir="rtl">هل تبحث عن موظفين مهرة أو عن فرصتك المهنية القادمة؟</div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="cta-actions">
+                                <a href="contact.html" class="btn btn-light">Hire Employees</a>
+                                <a href="jobs.html" class="btn btn-outline-light">Apply for Jobs</a>
+                                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                                <a href="https://wa.me/971585895827" class="btn btn-gold" target="_blank" rel="noopener">WhatsApp</a>
+                                <a href="contact.html#contact-form" class="btn btn-outline-light">Book a Consultation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Final CTA End -->
+
 
         <!-- Service Start -->
-        <div class="container-fluid py-5">
+        <div class="container-fluid py-5 home-services-section">
             <div class="container px-lg-5">
                 <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="position-relative d-inline text-primary ps-4">Our Services</h6>
@@ -490,10 +756,10 @@
 
 
         <!-- Blogs Start (copied from blogs.html) -->
-        <div class="container py-5 inner-page-content wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5 inner-page-content wow fadeInUp home-blogs-section" data-wow-delay="0.1s">
             <h6 class="text-primary text-uppercase mb-1">Our Blogs</h6>
                 <div class="arabic-text text-primary text-uppercase mb-1" dir="rtl">مدونتنا</div>
-            <h1 class="mb-3">Dubai Jobs &amp; Career Blog</h1>
+            <h2 class="mb-3">Dubai Jobs &amp; Career Blog</h2>
                 <div class="arabic-text mb-3" dir="rtl">مدونة الوظائف والمسار المهني في دبي</div>
             <p class="mb-4 lead">Practical tips from Silvora Talenza World to help you find a job in Dubai and across the UAE faster – from CV writing and interviews to visas and recruitment trends.</p>
                 <div class="arabic-text mb-4 lead" dir="rtl">نصائح عملية من سيلفورا تالينزا وورلد للستشارات ش.ذ.م.م لمساعدتك في العثور على وظيفة في دبي والإمارات بسرعة أكبر – من كتابة السيرة الذاتية والمقابلات إلى التأشيرات واتجاهات التوظيف.</div>
@@ -679,7 +945,7 @@
 
 
         <!-- Portfolio Start -->
-        <div class="container-fluid py-5">
+        <div class="container-fluid py-5 home-contact-section">
             <div class="container px-lg-5">
                 <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="position-relative d-inline text-primary ps-4">Our Projects</h6>
@@ -819,7 +1085,7 @@
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
                             <h4 class="text-center mb-4">Share your requirements with Silvora Talenza World and our team will get back to you shortly.</h4>
                                 <div class="arabic-text text-center mb-4" dir="rtl">شارك متطلباتك مع سيلفورا تالينزا وورلد للستشارات ش.ذ.م.م وسيتواصل معك فريقنا قريباً.</div>
-                            <form action="contact.php" method="post" enctype="multipart/form-data">
+                            <form id="contact-form" data-contact-form action="contact.php" method="post" enctype="multipart/form-data">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
@@ -931,13 +1197,19 @@
                         <p><i class="fa fa-phone-alt me-3"></i>+971 58 589 5827</p>
                         <p><i class="fa fa-envelope me-3"></i><a href="mailto:info@silvoratalenzaworld.com" class="text-light">info@silvoratalenzaworld.com</a></p>
                         <p><i class="fa fa-globe me-3"></i><a href="https://www.silvoratalenzaworld.com" class="text-light">www.silvoratalenzaworld.com</a></p>
+                        <div class="footer-office-hours" data-office-hours>
+                            <p class="mb-2"><i class="fa fa-clock me-3"></i><strong>Office Hours</strong></p>
+                            <p class="mb-1 ps-4">Monday - Saturday</p>
+                            <p class="mb-1 ps-4">10:00 AM - 8:00 PM</p>
+                            <p class="mb-0 ps-4">Sunday: Closed</p>
+                        </div>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href="https://x.com/TALENZA216728" target="_blank" rel="noopener" title="Twitter/X"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/profile.php?id=61588411206914" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/channel/UCnORIK_eKlP-lgx-j89RoZg" target="_blank" rel="noopener" title="YouTube"><i class="fab fa-youtube"></i></a>
                             <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/talenza.uae/" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/talenza.uae/" target="_blank" rel="noopener" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/talenza-hr-world/" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
@@ -979,16 +1251,14 @@
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Feedback &amp; Complaints</h5>
                             <div class="arabic-text text-white mb-4" dir="rtl">الملاحظات والشكاوى</div>
-                        <p class="mb-2">
-                            <div class="arabic-text mb-2" dir="rtl">لأي شكاوى أو ملاحظات أو تقارير عن سوء سلوك من موظفينا، يرجى التواصل مع فريق الامتثال لدينا على</div>
-                            For any complaints, concerns, or reports of misconduct involving our employees,
-                            please contact our Compliance Team at
-                            <a href="mailto:complaints@silvoratalenzaworld.com" class="text-light fw-medium">complaints@silvoratalenzaworld.com</a>.
-                        </p>
-                        <p class="mb-0">
-                            <div class="arabic-text mb-0" dir="rtl">جميع التصعيدات تتم مراجعتها بسرية وتتخذ الإجراءات المناسبة وفق سياسات الشركة.</div>
-                            All escalations are reviewed confidentially, and appropriate action is taken in line with our corporate policies.
-                        </p>
+                        <div class="mb-2">
+                            <p class="arabic-text mb-2" dir="rtl">لأي شكاوى أو ملاحظات أو تقارير عن سوء سلوك من موظفينا، يرجى التواصل مع فريق الامتثال لدينا على</p>
+                            <p class="mb-0">For any complaints, concerns, or reports of misconduct involving our employees, please contact our Compliance Team at <a href="mailto:complaints@silvoratalenzaworld.com" class="text-light fw-medium">complaints@silvoratalenzaworld.com</a>.</p>
+                        </div>
+                        <div>
+                            <p class="arabic-text mb-0" dir="rtl">جميع التصعيدات تتم مراجعتها بسرية وتتخذ الإجراءات المناسبة وفق سياسات الشركة.</p>
+                            <p class="mb-0">All escalations are reviewed confidentially, and appropriate action is taken in line with our corporate policies.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -998,7 +1268,7 @@
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="https://www.silvoratalenzaworld.com">Silvora Talenza World</a>, All Rights Reserved. 
 							
-                            Designed By <a class="border-bottom" href="">SHAHABAZ PASHA S.N</a>
+                            Designed By <span class="border-bottom">SHAHABAZ PASHA S.N</span>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                         </div>
@@ -1008,210 +1278,9 @@
         </div>
         <!-- Footer End -->
 
-        <!-- Silvora Talenza World Assistant Modal -->
-        <div class="modal fade" id="assistantModal" tabindex="-1" aria-labelledby="assistantModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="assistantModalLabel">Silvora Talenza World Assistant</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="assistantModalBody"></div>
-                </div>
-            </div>
         </div>
-
-
-        <!-- Floating WhatsApp Button -->
-                <!-- Request Manpower Button and Modal -->
-                <button type="button" class="btn btn-warning btn-lg d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#manpowerRequestModal" style="position: fixed; bottom: 240px; right: 30px; z-index: 1050; border-radius: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); font-weight: bold; padding: 12px 28px 12px 20px;">
-                    <i class="fas fa-user-plus" style="font-size: 1.3em;"></i>
-                        Request Manpower
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="manpowerRequestModal" tabindex="-1" aria-labelledby="manpowerRequestModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="manpowerRequestModalLabel">Request Manpower</h5>
-                                    <div class="arabic-text modal-title" dir="rtl">طلب موظفين</div>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="manpowerRequestForm" method="POST" action="manpower-request.php">
-                                    <div class="mb-3">
-                                        <label for="companyName" class="form-label">Company Name</label>
-                                            <div class="arabic-text form-label" dir="rtl">اسم الشركة</div>
-                                        <input type="text" class="form-control" id="companyName" name="companyName" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="sector" class="form-label">Sector</label>
-                                            <div class="arabic-text form-label" dir="rtl">القطاع</div>
-                                        <select class="form-select" id="sector" name="sector" required>
-                                            <option value="">Select Sector</option>
-                                            <option>Construction & Engineering</option>
-                                            <option>Manufacturing</option>
-                                            <option>Hospitality & Tourism</option>
-                                            <option>Healthcare & Medical</option>
-                                            <option>Retail & FMCG</option>
-                                            <option>Logistics & Transportation</option>
-                                            <option>Oil & Gas</option>
-                                            <option>Facilities Management</option>
-                                            <option>Cleaning & Maintenance</option>
-                                            <option>Security Services</option>
-                                            <option>IT & Technology</option>
-                                            <option>Banking & Finance</option>
-                                            <option>Insurance</option>
-                                            <option>Education & Training</option>
-                                            <option>Real Estate</option>
-                                            <option>Legal & Compliance</option>
-                                            <option>Human Resources</option>
-                                            <option>Sales & Marketing</option>
-                                            <option>Administration</option>
-                                            <option>Customer Service</option>
-                                            <option>Procurement & Supply Chain</option>
-                                            <option>Automotive</option>
-                                            <option>Telecommunications</option>
-                                            <option>Media & Advertising</option>
-                                            <option>Government & Public Sector</option>
-                                            <option>NGO & Non-Profit</option>
-                                            <option>Blue Collar - General Labor</option>
-                                            <option>Blue Collar - Drivers</option>
-                                            <option>Blue Collar - Cleaners</option>
-                                            <option>Blue Collar - Security Guards</option>
-                                            <option>Blue Collar - Technicians</option>
-                                            <option>White Collar - Managers</option>
-                                            <option>White Collar - Executives</option>
-                                            <option>White Collar - Accountants</option>
-                                            <option>White Collar - Engineers</option>
-                                            <option>White Collar - IT Professionals</option>
-                                            <option>White Collar - HR Professionals</option>
-                                            <option>White Collar - Sales/Marketing</option>
-                                            <option>Other</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="numEmployees" class="form-label">Number of Employees Needed</label>
-                                            <div class="arabic-text form-label" dir="rtl">عدد الموظفين المطلوبين</div>
-                                        <input type="number" class="form-control" id="numEmployees" name="numEmployees" min="1" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="contactPerson" class="form-label">Contact Person</label>
-                                            <div class="arabic-text form-label" dir="rtl">الشخص المسؤول</div>
-                                        <input type="text" class="form-control" id="contactPerson" name="contactPerson" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="contactEmail" class="form-label">Contact Email</label>
-                                            <div class="arabic-text form-label" dir="rtl">البريد الإلكتروني للتواصل</div>
-                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="additionalInfo" class="form-label">Additional Information</label>
-                                            <div class="arabic-text form-label" dir="rtl">معلومات إضافية</div>
-                                        <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="2"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="companyProfile" class="form-label">Company Profile (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</label>
-                                            <div class="arabic-text form-label" dir="rtl">ملف الشركة (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</div>
-                                        <input type="file" class="form-control" id="companyProfile" name="companyProfile" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="vatCertificate" class="form-label">VAT Certificate (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</label>
-                                            <div class="arabic-text form-label" dir="rtl">شهادة ضريبة القيمة المضافة (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</div>
-                                        <input type="file" class="form-control" id="vatCertificate" name="vatCertificate" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tradeLicence" class="form-label">Trade Licence (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</label>
-                                            <div class="arabic-text form-label" dir="rtl">رخصة تجارية (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</div>
-                                        <input type="file" class="form-control" id="tradeLicence" name="tradeLicence" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="emiratesId" class="form-label">Emirates ID (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</label>
-                                            <div class="arabic-text form-label" dir="rtl">الهوية الإماراتية (PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP)</div>
-                                        <input type="file" class="form-control" id="emiratesId" name="emiratesId" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit Request</button>
-                                        <div class="arabic-text" dir="rtl">إرسال الطلب</div>
-                                                            <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#advancedOptions" aria-expanded="false" aria-controls="advancedOptions">Advanced Options</button>
-                                                                <div class="arabic-text" dir="rtl">خيارات متقدمة</div>
-                                                            <div class="collapse mt-3" id="advancedOptions">
-                                                                <div class="card card-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="jobTitles" class="form-label">Job Titles / Roles Needed</label>
-                                                                            <div class="arabic-text form-label" dir="rtl">المسميات الوظيفية / الأدوار المطلوبة</div>
-                                                                        <input type="text" class="form-control" id="jobTitles" name="jobTitles" placeholder="e.g. Electrician, Accountant, Driver">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="experienceLevel" class="form-label">Experience Level</label>
-                                                                            <div class="arabic-text form-label" dir="rtl">مستوى الخبرة</div>
-                                                                        <select class="form-select" id="experienceLevel" name="experienceLevel">
-                                                                            <option value="">Select</option>
-                                                                            <option>Entry Level</option>
-                                                                            <option>Mid Level</option>
-                                                                            <option>Senior Level</option>
-                                                                            <option>Supervisor</option>
-                                                                            <option>Manager</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="nationalityPreference" class="form-label">Nationality Preference</label>
-                                                                            <div class="arabic-text form-label" dir="rtl">تفضيل الجنسية</div>
-                                                                        <input type="text" class="form-control" id="nationalityPreference" name="nationalityPreference" placeholder="Optional">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="genderPreference" class="form-label">Gender Preference</label>
-                                                                            <div class="arabic-text form-label" dir="rtl">تفضيل الجنس</div>
-                                                                        <select class="form-select" id="genderPreference" name="genderPreference">
-                                                                            <option value="">No Preference</option>
-                                                                            <option>Male</option>
-                                                                            <option>Female</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="joiningDate" class="form-label">Expected Joining Date</label>
-                                                                            <div class="arabic-text form-label" dir="rtl">تاريخ الانضمام المتوقع</div>
-                                                                        <input type="date" class="form-control" id="joiningDate" name="joiningDate">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                </form>
-                                <div id="manpowerRequestSuccess" class="alert alert-success mt-3 d-none" role="alert">
-                                    Thank you! Your manpower request has been submitted.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var form = document.getElementById('manpowerRequestForm');
-                        if(form) {
-                            form.addEventListener('submit', function(event) {
-                                event.preventDefault();
-                                var formData = new FormData(form);
-                                fetch('manpower-request.php', {
-                                    method: 'POST',
-                                    body: formData
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        form.classList.add('d-none');
-                                        document.getElementById('manpowerRequestSuccess').classList.remove('d-none');
-                                    } else {
-                                        alert('There was an error sending your request. Please try again later.');
-                                    }
-                                })
-                                .catch(() => {
-                                    alert('There was an error sending your request. Please try again later.');
-                                });
-                            });
-                        }
-                    });
-                </script>
-        <a href="https://wa.me/971585895827" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/971585895827" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
 
@@ -1227,9 +1296,7 @@
     <script src="lib/waypoints/waypoints.min.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.min.js"></script>
-        <!-- Animate.css for modal animation -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <script src="js/main.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var buttons = document.querySelectorAll('.service-readmore');
@@ -1255,3 +1322,10 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
