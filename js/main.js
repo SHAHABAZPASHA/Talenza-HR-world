@@ -115,3 +115,79 @@
     
 })(jQuery);
 
+document.addEventListener('DOMContentLoaded', function () {
+    var navbars = document.querySelectorAll('.navbar');
+
+    navbars.forEach(function (navbar) {
+        // Remove request CTA buttons from navbar area.
+        navbar.querySelectorAll('button[data-bs-target="#manpowerRequestModal"]').forEach(function (button) {
+            button.remove();
+        });
+
+        // Remove AI search form from navbar.
+        navbar.querySelectorAll('.ai-search-form').forEach(function (form) {
+            form.remove();
+        });
+
+        // Ensure language switcher is present on right side.
+        var collapse = navbar.querySelector('.navbar-collapse');
+        var existingLang = navbar.querySelector('.language-switcher');
+        if (collapse && !existingLang) {
+            var navUtils = document.createElement('div');
+            navUtils.className = 'nav-utilities d-flex align-items-center ms-3';
+            navUtils.innerHTML = '<div class="language-switcher nav-lang" aria-label="Language switcher">EN / <a href="#" lang="ar" dir="rtl">العربية</a></div>';
+            collapse.appendChild(navUtils);
+        }
+
+        // Add labels for keyboard and screen-reader clarity.
+        navbar.querySelectorAll('.nav-link').forEach(function (link) {
+            if (!link.getAttribute('aria-label')) {
+                link.setAttribute('aria-label', 'Go to ' + link.textContent.trim());
+            }
+        });
+    });
+
+    // Hide floating request manpower buttons globally.
+    document.querySelectorAll('button[data-bs-target="#manpowerRequestModal"]').forEach(function (button) {
+        button.remove();
+    });
+
+    // Improve image loading defaults for better performance.
+    document.querySelectorAll('img').forEach(function (img, index) {
+        if (!img.hasAttribute('loading')) {
+            img.setAttribute('loading', index < 2 ? 'eager' : 'lazy');
+        }
+        if (!img.hasAttribute('decoding')) {
+            img.setAttribute('decoding', 'async');
+        }
+    });
+
+    // Mobile menu state, scroll lock, and auto-close after navigation.
+    var navbarCollapse = document.getElementById('navbarCollapse');
+    if (navbarCollapse && window.bootstrap) {
+        var collapseApi = window.bootstrap.Collapse.getOrCreateInstance(navbarCollapse, { toggle: false });
+
+        navbarCollapse.addEventListener('show.bs.collapse', function () {
+            document.body.classList.add('no-scroll', 'mobile-nav-open');
+        });
+
+        navbarCollapse.addEventListener('hide.bs.collapse', function () {
+            document.body.classList.remove('no-scroll', 'mobile-nav-open');
+        });
+
+        navbarCollapse.querySelectorAll('.nav-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+                    collapseApi.hide();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && navbarCollapse.classList.contains('show')) {
+                collapseApi.hide();
+            }
+        });
+    }
+});
+
