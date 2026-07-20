@@ -22,12 +22,12 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <style>
-    .service-hub-hero { background: linear-gradient(135deg, #153673 0%, #215cc0 58%, #5d87e4 100%); }
+    .service-hub-hero { background: #ffffff; }
     .service-hub-card { border: 1px solid rgba(23,63,138,.12); border-radius: 14px; transition: transform .25s ease, box-shadow .25s ease; }
     .service-hub-card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(21,54,115,.13); }
   </style>
 </head>
-<body>
+<body class="service-page">
   <div class="container-fluid bg-white p-0">
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"><div class="spinner-grow text-primary" style="width:3rem;height:3rem;" role="status"><span class="sr-only">Loading...</span></div></div>
     <div class="container-fluid position-relative p-0">
@@ -36,17 +36,17 @@
       </nav>
     </div>
 
-    <section class="container-fluid service-hub-hero py-5 text-white">
+    <section class="container-fluid service-hub-hero py-5">
       <div class="container py-4">
         <div class="row g-4 align-items-center">
           <div class="col-lg-8">
-            <h1 class="display-5 fw-bold mb-3 english-text">Services</h1>
-            <h1 class="display-6 fw-bold mb-3 arabic-text" dir="rtl">الخدمات</h1>
-            <p class="lead mb-0 english-text">A premium, simplified architecture where every client can find the right service line in two clicks.</p>
+            <h1 class="display-5 fw-bold mb-3 english-text text-dark">Services</h1>
+            <h1 class="display-6 fw-bold mb-3 arabic-text text-dark" dir="rtl">الخدمات</h1>
+            <p class="lead mb-0 english-text text-dark">A premium, simplified architecture where every client can find the right service line in two clicks.</p>
             <div class="arabic-text mt-2" dir="rtl">هيكلة مبسطة واحترافية تمكّن العميل من الوصول للخدمة المناسبة خلال خطوتين.</div>
           </div>
           <div class="col-lg-4">
-            <div class="p-4 rounded-3" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);">
+            <div class="p-4 rounded-3 bg-light border" style="border-color:rgba(23,63,138,.12) !important;">
               <strong>Navigation</strong>
               <div class="mt-2">Home / About Us / Services / Jobs / Blogs / Clients / Contact</div>
             </div>

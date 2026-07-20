@@ -1539,6 +1539,10 @@ var SilvoraI18n = (function () {
             localizeSharedControls();
             updateLanguageSwitcher();
 
+            if (typeof window.SilvoraNormalizeServicePagePanels === 'function') {
+                window.SilvoraNormalizeServicePagePanels();
+            }
+
             if (typeof window.SilvoraRefreshHeaderOffset === 'function') {
                 window.setTimeout(function () {
                     window.SilvoraRefreshHeaderOffset();
@@ -1820,6 +1824,47 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         window.setTimeout(callback, Math.min(timeout || 2000, 1200));
     }
+
+    function normalizeServicePagePanels() {
+        if (!/^service-[^.]+\.html$/i.test(pageName)) {
+            return;
+        }
+
+        document.querySelectorAll('section .row.g-4').forEach(function (row) {
+            var columns = Array.prototype.slice.call(row.children).filter(function (child) {
+                return child.classList && child.classList.contains('col-lg-6');
+            });
+
+            if (columns.length !== 2) {
+                return;
+            }
+
+            columns.forEach(function (col) {
+                col.classList.remove('col-lg-12', 'stw-service-panel-hidden', 'd-none');
+                col.classList.add('col-lg-6');
+                col.removeAttribute('aria-hidden');
+            });
+
+            var englishOnly = columns[0].querySelector('.english-text') && !columns[0].querySelector('.arabic-text');
+            var arabicOnly = columns[1].querySelector('.arabic-text') && !columns[1].querySelector('.english-text');
+
+            if (!englishOnly || !arabicOnly) {
+                return;
+            }
+
+            var activeLanguage = (document.documentElement.getAttribute('lang') || 'en').toLowerCase();
+            var visibleColumn = activeLanguage === 'ar' ? columns[1] : columns[0];
+            var hiddenColumn = activeLanguage === 'ar' ? columns[0] : columns[1];
+
+            visibleColumn.classList.remove('col-lg-6');
+            visibleColumn.classList.add('col-lg-12');
+            hiddenColumn.classList.remove('col-lg-12');
+            hiddenColumn.classList.add('stw-service-panel-hidden', 'd-none');
+            hiddenColumn.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    window.SilvoraNormalizeServicePagePanels = normalizeServicePagePanels;
 
     function applyHeaderOffsetSpacing() {
         var header = document.querySelector('.stw-header');

@@ -1719,6 +1719,42 @@ body.service-page .stw-theme-hero {
     background: #ffffff !important;
 }
 
+body.home-page .topbar {
+    background: #ffffff !important;
+    color: var(--dark) !important;
+    border-bottom: 1px solid var(--border);
+}
+
+body.home-page .topbar a,
+body.home-page .topbar small {
+    color: var(--dark) !important;
+}
+
+body.home-page .topbar .text-light,
+body.home-page .topbar [class*="text-light"],
+body.home-page .topbar i {
+    color: var(--dark) !important;
+}
+
+body.home-page .topbar .btn,
+body.home-page .topbar .btn * {
+    color: #ffffff !important;
+}
+
+body.home-page .navbar-light {
+    background: #ffffff !important;
+}
+
+body.home-page .navbar-light .navbar-brand h1,
+body.home-page .navbar-light .navbar-nav .nav-link {
+    color: var(--dark) !important;
+}
+
+body.home-page .navbar-light .navbar-toggler {
+    color: var(--dark) !important;
+    border-color: rgba(23, 32, 51, 0.16);
+}
+
 body.service-page .hero-header::before,
 body.service-page .hero-header::after,
 body.service-page .stw-theme-hero::before,
@@ -2573,7 +2609,8 @@ html {
 }
 
 .stw-header-home {
-    background: rgba(23, 63, 138, 0.36);
+    background: #ffffff;
+    border-bottom: 1px solid rgba(23, 63, 138, 0.1);
 }
 
 .stw-header-inner,
@@ -3641,15 +3678,30 @@ body.stw-scrolled .stw-header-home .nav-link {
 }
 
 body:not(.stw-scrolled) .stw-header-home .nav-link {
-    color: #ffffff !important;
+    color: #1d2a46 !important;
 }
 
 body:not(.stw-scrolled) .stw-header-home .stw-brand-name {
-    color: #ffffff;
+    color: #1d2a46;
 }
 
 body:not(.stw-scrolled) .stw-header-home .stw-brand-tagline {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(27, 42, 67, 0.72);
+}
+
+body:not(.stw-scrolled) .stw-header-home .language-switcher .stw-lang-trigger,
+body:not(.stw-scrolled) .stw-header-home .stw-wa-btn {
+    color: var(--stw-brand-blue);
+    border-color: rgba(23, 63, 138, 0.34);
+    background: #ffffff;
+}
+
+body:not(.stw-scrolled) .stw-header-home .language-switcher .stw-lang-trigger:hover,
+body:not(.stw-scrolled) .stw-header-home .language-switcher.is-open .stw-lang-trigger,
+body:not(.stw-scrolled) .stw-header-home .stw-wa-btn:hover {
+    color: #ffffff;
+    background: var(--stw-brand-blue);
+    border-color: var(--stw-brand-blue);
 }
 
 .stw-header .nav-link {
