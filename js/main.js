@@ -73,15 +73,62 @@ if (window.jQuery) {
 
 var SilvoraI18n = (function () {
     var storageKey = 'language';
-    var resourcePaths = {
-        en: 'locales/en/translation.json',
-        ar: 'locales/ar/translation.json'
+    var languageSuggestionKey = 'languageSuggestionDismissed';
+    var localePathTemplate = 'locales/{lang}.json';
+    var languageCatalog = {
+        en: { code: 'en', flag: 'GB', label: 'English', native: 'English', dir: 'ltr', locale: 'en_US' },
+        ar: { code: 'ar', flag: 'SA', label: 'Arabic', native: 'العربية', dir: 'rtl', locale: 'ar_AE' },
+        fr: { code: 'fr', flag: 'FR', label: 'French', native: 'Français', dir: 'ltr', locale: 'fr_FR' },
+        de: { code: 'de', flag: 'DE', label: 'German', native: 'Deutsch', dir: 'ltr', locale: 'de_DE' },
+        es: { code: 'es', flag: 'ES', label: 'Spanish', native: 'Español', dir: 'ltr', locale: 'es_ES' },
+        it: { code: 'it', flag: 'IT', label: 'Italian', native: 'Italiano', dir: 'ltr', locale: 'it_IT' },
+        pt: { code: 'pt', flag: 'PT', label: 'Portuguese', native: 'Português', dir: 'ltr', locale: 'pt_PT' },
+        nl: { code: 'nl', flag: 'NL', label: 'Dutch', native: 'Nederlands', dir: 'ltr', locale: 'nl_NL' },
+        pl: { code: 'pl', flag: 'PL', label: 'Polish', native: 'Polski', dir: 'ltr', locale: 'pl_PL' },
+        ro: { code: 'ro', flag: 'RO', label: 'Romanian', native: 'Romana', dir: 'ltr', locale: 'ro_RO' },
+        ja: { code: 'ja', flag: 'JP', label: 'Japanese', native: '日本語', dir: 'ltr', locale: 'ja_JP' },
+        ko: { code: 'ko', flag: 'KR', label: 'Korean', native: '한국어', dir: 'ltr', locale: 'ko_KR' },
+        zh: { code: 'zh', flag: 'CN', label: 'Chinese', native: '简体中文', dir: 'ltr', locale: 'zh_CN' },
+        ru: { code: 'ru', flag: 'RU', label: 'Russian', native: 'Русский', dir: 'ltr', locale: 'ru_RU' },
+        ne: { code: 'ne', flag: 'NP', label: 'Nepali', native: 'नेपाली', dir: 'ltr', locale: 'ne_NP' },
+        si: { code: 'si', flag: 'LK', label: 'Sinhala', native: 'සිංහල', dir: 'ltr', locale: 'si_LK' },
+        ta: { code: 'ta', flag: 'LK', label: 'Tamil', native: 'தமிழ்', dir: 'ltr', locale: 'ta_LK' }
     };
+    var futureLanguageCatalog = {
+        tr: { code: 'tr', flag: 'TR', label: 'Turkish', native: 'Turkce' },
+        th: { code: 'th', flag: 'TH', label: 'Thai', native: 'ไทย' },
+        vi: { code: 'vi', flag: 'VN', label: 'Vietnamese', native: 'Tiếng Việt' },
+        id: { code: 'id', flag: 'ID', label: 'Indonesian', native: 'Bahasa Indonesia' },
+        ms: { code: 'ms', flag: 'MY', label: 'Malay', native: 'Bahasa Melayu' }
+    };
+    var supportedLanguages = Object.keys(languageCatalog);
+    var loadedLanguages = {};
     var currentLanguage = 'en';
-    var resources = null;
+    var resources = {};
     var observer = null;
     var initializationPromise = null;
     var cdnSource = 'https://cdn.jsdelivr.net/npm/i18next@23.12.2/dist/umd/i18next.min.js';
+
+    function getResourcePath(language) {
+        return localePathTemplate.replace('{lang}', language);
+    }
+
+    function getLanguageConfig(language) {
+        return languageCatalog[language] || languageCatalog.en;
+    }
+
+    function detectBrowserLanguage() {
+        var navLanguage = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        var exact = navLanguage.replace('_', '-');
+        var shortCode = exact.split('-')[0];
+        if (supportedLanguages.indexOf(exact) !== -1) {
+            return exact;
+        }
+        if (supportedLanguages.indexOf(shortCode) !== -1) {
+            return shortCode;
+        }
+        return 'en';
+    }
 
     var seoByPage = {
         'index.html': {
@@ -386,6 +433,25 @@ var SilvoraI18n = (function () {
         return '';
     }
 
+    function toFlagEmoji(countryCode) {
+        return countryCode
+            .toUpperCase()
+            .replace(/./g, function (char) {
+                return String.fromCodePoint(127397 + char.charCodeAt(0));
+            });
+    }
+
+    function buildLanguageSwitcherMarkup(options) {
+        var opts = options || {};
+        var mobileClass = opts.mobile ? ' stw-mobile-lang' : '';
+        var menuItems = supportedLanguages.map(function (langCode) {
+            var cfg = getLanguageConfig(langCode);
+            return '<button type="button" class="stw-lang-option" role="option" data-language="' + cfg.code + '" lang="' + cfg.code + '" aria-selected="false"><span class="stw-lang-flag" aria-hidden="true">' + toFlagEmoji(cfg.flag) + '</span><span class="stw-lang-meta"><span class="stw-lang-label">' + cfg.label + '</span><span class="stw-lang-native"' + (cfg.dir === 'rtl' ? ' dir="rtl"' : '') + '>' + cfg.native + '</span></span></button>';
+        }).join('');
+
+        return '<div class="language-switcher stw-lang-dropdown' + mobileClass + '" aria-label="Language switcher" data-i18n-skip="true"><button type="button" class="stw-lang-trigger" aria-haspopup="listbox" aria-expanded="false"><span class="stw-lang-trigger-flag" aria-hidden="true">' + toFlagEmoji(getLanguageConfig(currentLanguage).flag) + '</span><span class="stw-lang-trigger-label">' + getLanguageConfig(currentLanguage).label + '</span><i class="fa fa-chevron-down" aria-hidden="true"></i></button><div class="stw-lang-menu" role="listbox" tabindex="-1">' + menuItems + '</div></div>';
+    }
+
     function buildUnifiedNavbar(pageName) {
         var activeKey = getPageKey(pageName);
         var links = corporateBaseLinks.map(function (link) {
@@ -405,9 +471,7 @@ var SilvoraI18n = (function () {
                     '</span>' +
                 '</a>' +
                 '<div class="stw-header-actions d-none d-lg-inline-flex">' +
-                    '<div class="language-switcher" aria-label="Language switcher">' +
-                        '<button type="button" data-language="en">EN</button><span aria-hidden="true">/</span><button type="button" data-language="ar" dir="rtl">العربية</button>' +
-                    '</div>' +
+                    buildLanguageSwitcherMarkup({ mobile: false }) +
                     '<a href="https://wa.me/971585895827" class="btn btn-outline-light stw-header-btn stw-wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i><span class="english-text">WhatsApp</span><span class="arabic-text" dir="rtl">واتساب</span></a>' +
                     '<a href="tel:+971585895827" class="btn btn-warning stw-header-btn stw-call-btn" aria-label="Call us"><i class="fa fa-phone"></i><span class="english-text stw-call-full">Call Us</span><span class="english-text stw-call-short">Call</span><span class="arabic-text stw-call-ar" dir="rtl">اتصل بنا</span></a>' +
                 '</div>' +
@@ -415,9 +479,7 @@ var SilvoraI18n = (function () {
                 '<div class="collapse navbar-collapse" id="navbarCollapse">' +
                     '<div class="navbar-nav ms-auto py-0">' + links + '</div>' +
                     '<div class="stw-mobile-actions d-lg-none">' +
-                        '<div class="language-switcher stw-mobile-lang" aria-label="Language switcher">' +
-                            '<button type="button" data-language="en">EN</button><span aria-hidden="true">/</span><button type="button" data-language="ar" dir="rtl">العربية</button>' +
-                        '</div>' +
+                        buildLanguageSwitcherMarkup({ mobile: true }) +
                         '<a href="tel:+971585895827" class="btn btn-primary stw-mobile-btn"><i class="fa fa-phone"></i><span class="english-text">Call</span><span class="arabic-text" dir="rtl">اتصال</span></a>' +
                         '<a href="https://wa.me/971585895827" target="_blank" rel="noopener" class="btn btn-outline-primary stw-mobile-btn"><i class="fab fa-whatsapp"></i><span class="english-text">WhatsApp</span><span class="arabic-text" dir="rtl">واتساب</span></a>' +
                     '</div>' +
@@ -523,13 +585,31 @@ var SilvoraI18n = (function () {
     }
 
     function sanitizeLanguage(language) {
-        return language === 'ar' ? 'ar' : 'en';
+        var candidate = (language || '').toString().toLowerCase().split('-')[0];
+        if (supportedLanguages.indexOf(candidate) !== -1) {
+            return candidate;
+        }
+        return 'en';
     }
 
     function getCurrentPageName() {
         var pathName = window.location.pathname.toLowerCase();
         var pageName = pathName.split('/').pop() || 'index.html';
         return pageName;
+    }
+
+    function getLanguageFromPath(pathname) {
+        var parts = (pathname || '').split('/').filter(Boolean);
+        if (!parts.length) {
+            return '';
+        }
+
+        var first = sanitizeLanguage(parts[0]);
+        if (supportedLanguages.indexOf(first) !== -1 && parts[0].toLowerCase() === first) {
+            return first;
+        }
+
+        return '';
     }
 
     function getStoredLanguage() {
@@ -542,7 +622,16 @@ var SilvoraI18n = (function () {
             storedLanguage = '';
         }
 
-        return sanitizeLanguage(queryLanguage || storedLanguage || document.documentElement.getAttribute('lang') || 'en');
+        var pathLanguage = getLanguageFromPath(window.location.pathname);
+        return sanitizeLanguage(queryLanguage || pathLanguage || storedLanguage || document.documentElement.getAttribute('lang') || 'en');
+    }
+
+    function hasStoredLanguagePreference() {
+        try {
+            return !!window.localStorage.getItem(storageKey);
+        } catch (error) {
+            return false;
+        }
     }
 
     function loadScript(source) {
@@ -573,13 +662,41 @@ var SilvoraI18n = (function () {
     }
 
     function loadJson(path) {
-        return fetch(path, { cache: 'no-cache' }).then(function (response) {
+        return fetch(path, { cache: 'force-cache' }).then(function (response) {
             if (!response.ok) {
                 throw new Error('Failed to load ' + path);
             }
 
             return response.json();
         });
+    }
+
+    function ensureLanguageResource(language) {
+        var lang = sanitizeLanguage(language);
+        if (loadedLanguages[lang] && resources[lang]) {
+            return Promise.resolve(resources[lang]);
+        }
+
+        return loadJson(getResourcePath(lang))
+            .then(function (payload) {
+                resources[lang] = { translation: payload || {} };
+                loadedLanguages[lang] = true;
+                return resources[lang];
+            })
+            .catch(function () {
+                if (!resources[lang]) {
+                    resources[lang] = { translation: {} };
+                }
+                loadedLanguages[lang] = true;
+                return resources[lang];
+            });
+    }
+
+    function applyLanguageTransition() {
+        document.documentElement.classList.add('stw-lang-switching');
+        window.setTimeout(function () {
+            document.documentElement.classList.remove('stw-lang-switching');
+        }, 320);
     }
 
     function createFallbackI18n(resourceBundle) {
@@ -597,23 +714,43 @@ var SilvoraI18n = (function () {
                 currentLanguage = this.language;
                 return Promise.resolve(this.language);
             },
-            t: function (key) {
+            t: function (key, options) {
                 var bundle = this.resources && this.resources[this.language] && this.resources[this.language].translation;
+                var enBundle = this.resources && this.resources.en && this.resources.en.translation;
+                var value = key;
+
                 if (bundle && Object.prototype.hasOwnProperty.call(bundle, key)) {
-                    return bundle[key];
+                    value = bundle[key];
+                } else if (enBundle && Object.prototype.hasOwnProperty.call(enBundle, key)) {
+                    value = enBundle[key];
                 }
 
-                return key;
+                if (typeof value !== 'string') {
+                    return key;
+                }
+
+                if (options && typeof options === 'object') {
+                    Object.keys(options).forEach(function (optKey) {
+                        value = value.replace(new RegExp('{{\\s*' + optKey + '\\s*}}', 'g'), options[optKey]);
+                    });
+                }
+
+                return value;
             }
         };
     }
 
-    function translate(key) {
+    function translate(key, options) {
         if (!window.i18next || typeof window.i18next.t !== 'function') {
-            return key;
+            return key || '';
         }
 
-        return window.i18next.t(key);
+        var translated = window.i18next.t(key, options || {});
+        if (translated === undefined || translated === null || translated === '') {
+            return key || '';
+        }
+
+        return translated;
     }
 
     function isTranslatableElement(element) {
@@ -683,6 +820,9 @@ var SilvoraI18n = (function () {
 
     function localizeControlText(selector) {
         document.querySelectorAll(selector).forEach(function (element) {
+            if (element.closest('[data-i18n-skip]')) {
+                return;
+            }
             Array.prototype.forEach.call(element.childNodes, function (node) {
                 if (node.nodeType !== Node.TEXT_NODE) {
                     return;
@@ -703,7 +843,7 @@ var SilvoraI18n = (function () {
                     lookupText = trimmedText;
                 }
 
-                node.nodeValue = currentLanguage === 'ar' ? originalText.replace(trimmedText, translate(lookupText)) : originalText;
+                node.nodeValue = currentLanguage !== 'en' ? originalText.replace(trimmedText, translate(lookupText)) : originalText;
             });
         });
     }
@@ -725,7 +865,7 @@ var SilvoraI18n = (function () {
                     return;
                 }
 
-                if (currentLanguage === 'ar') {
+                if (currentLanguage !== 'en') {
                     var localizedText = originalText
                         .replace(/All Rights Reserved\./g, translate('All Rights Reserved.'))
                         .replace(/Designed By/g, translate('Designed By'));
@@ -750,6 +890,10 @@ var SilvoraI18n = (function () {
                 return;
             }
 
+            if (element.closest('[data-i18n-skip]')) {
+                return;
+            }
+
             if (element.closest('.arabic-text, .brand-text-ar')) {
                 return;
             }
@@ -764,7 +908,7 @@ var SilvoraI18n = (function () {
 
             var originalValue = element.__i18nOriginalAttributes[attributeName];
 
-            if (currentLanguage === 'ar') {
+            if (currentLanguage !== 'en') {
                 element.setAttribute(attributeName, translate(originalValue));
             } else {
                 element.setAttribute(attributeName, originalValue);
@@ -809,7 +953,12 @@ var SilvoraI18n = (function () {
                 return;
             }
 
-            node.nodeValue = currentLanguage === 'ar' ? translate(originalText) : originalText;
+            if (currentLanguage !== 'en') {
+                var localized = translate(originalText);
+                node.nodeValue = (localized === undefined || localized === null || localized === '') ? originalText : localized;
+            } else {
+                node.nodeValue = originalText;
+            }
         });
 
         var elementRoot = root.querySelectorAll ? root : null;
@@ -822,21 +971,52 @@ var SilvoraI18n = (function () {
 
     function updateLanguageSwitcher() {
         document.querySelectorAll('.language-switcher').forEach(function (switcher) {
+            var langCfg = getLanguageConfig(currentLanguage);
+            var trigger = switcher.querySelector('.stw-lang-trigger');
+            var triggerFlag = switcher.querySelector('.stw-lang-trigger-flag');
+            var triggerLabel = switcher.querySelector('.stw-lang-trigger-label');
+            if (triggerFlag) {
+                triggerFlag.textContent = toFlagEmoji(langCfg.flag);
+            }
+            if (triggerLabel) {
+                triggerLabel.textContent = langCfg.label;
+            }
+            if (trigger) {
+                trigger.setAttribute('aria-label', translate('Current language {{language}}', { language: langCfg.label }));
+            }
+
             switcher.querySelectorAll('[data-language], a[lang], button[lang]').forEach(function (control) {
                 var controlLanguage = sanitizeLanguage(control.getAttribute('data-language') || control.getAttribute('lang'));
                 var isActive = controlLanguage === currentLanguage;
                 control.classList.toggle('is-active', isActive);
                 control.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                control.setAttribute('aria-selected', isActive ? 'true' : 'false');
             });
         });
     }
 
     function updateUrl(language) {
         var url = new URL(window.location.href);
+        var pathLanguage = getLanguageFromPath(url.pathname);
+
+        if (pathLanguage) {
+            var parts = url.pathname.split('/');
+            for (var i = 0; i < parts.length; i += 1) {
+                if (parts[i] && sanitizeLanguage(parts[i]) === pathLanguage) {
+                    parts[i] = language === 'en' ? '' : language;
+                    break;
+                }
+            }
+            url.pathname = parts.join('/').replace(/\/+/g, '/');
+            url.searchParams.delete('lang');
+            window.history.replaceState({}, '', url.toString());
+            return;
+        }
+
         if (language === 'en') {
             url.searchParams.delete('lang');
         } else {
-            url.searchParams.set('lang', 'ar');
+            url.searchParams.set('lang', language);
         }
 
         window.history.replaceState({}, '', url.toString());
@@ -861,8 +1041,23 @@ var SilvoraI18n = (function () {
         var pageName = getCurrentPageName();
         var pageMeta = seoByPage[pageName] || seoByPage['index.html'];
         var pageSeo = window.SilvoraPageSeo || null;
-        var meta = (pageSeo && pageSeo[language]) || pageMeta[language] || pageMeta.en;
+        var localizedFromPage = pageSeo && pageSeo[language];
+        var localizedFromDefaultMap = pageMeta[language];
+        var englishMeta = pageMeta.en || { title: document.title || 'Silvora Talenza World', description: '' };
+        var meta = localizedFromPage || localizedFromDefaultMap || {
+            title: translate(englishMeta.title),
+            description: translate(englishMeta.description)
+        };
+
+        if (!meta.title) {
+            meta.title = englishMeta.title;
+        }
+        if (!meta.description) {
+            meta.description = englishMeta.description;
+        }
         var baseUrl = window.location.origin + window.location.pathname;
+        var localizedUrl = baseUrl + (language === 'en' ? '' : '?lang=' + language);
+        var languageConfig = getLanguageConfig(language);
 
         document.title = meta.title;
 
@@ -870,10 +1065,12 @@ var SilvoraI18n = (function () {
         setMeta('meta[name="keywords"]', 'content', language === 'ar' ? 'سيلفورا تالينزا وورلد، دبي، الإمارات العربية المتحدة' : 'Silvora Talenza World, Dubai, UAE');
         setMeta('meta[property="og:title"]', 'content', meta.title);
         setMeta('meta[property="og:description"]', 'content', meta.description);
-        setMeta('meta[property="og:locale"]', 'content', language === 'ar' ? 'ar_AE' : 'en_US');
-        setMeta('meta[property="og:url"]', 'content', baseUrl + (language === 'ar' ? '?lang=ar' : ''));
+        setMeta('meta[property="og:locale"]', 'content', languageConfig.locale || 'en_US');
+        setMeta('meta[property="og:url"]', 'content', localizedUrl);
+        setMeta('meta[property="og:site_name"]', 'content', 'Silvora Talenza World');
         setMeta('meta[name="twitter:title"]', 'content', meta.title);
         setMeta('meta[name="twitter:description"]', 'content', meta.description);
+        setMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
 
         var canonical = document.querySelector('link[rel="canonical"]');
         if (!canonical) {
@@ -881,25 +1078,29 @@ var SilvoraI18n = (function () {
             canonical.rel = 'canonical';
             document.head.appendChild(canonical);
         }
-        canonical.setAttribute('href', baseUrl);
+        canonical.setAttribute('href', localizedUrl);
 
-        var hreflangEn = document.querySelector('link[rel="alternate"][hreflang="en"]');
-        if (!hreflangEn) {
-            hreflangEn = document.createElement('link');
-            hreflangEn.setAttribute('rel', 'alternate');
-            hreflangEn.setAttribute('hreflang', 'en');
-            document.head.appendChild(hreflangEn);
-        }
-        hreflangEn.setAttribute('href', baseUrl);
+        document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(function (node) {
+            node.remove();
+        });
 
-        var hreflangAr = document.querySelector('link[rel="alternate"][hreflang="ar"]');
-        if (!hreflangAr) {
-            hreflangAr = document.createElement('link');
-            hreflangAr.setAttribute('rel', 'alternate');
-            hreflangAr.setAttribute('hreflang', 'ar');
-            document.head.appendChild(hreflangAr);
-        }
-        hreflangAr.setAttribute('href', baseUrl + '?lang=ar');
+        document.querySelectorAll('meta[property="og:locale:alternate"]').forEach(function (node) {
+            node.remove();
+        });
+
+        supportedLanguages.forEach(function (langCode) {
+            var alternate = document.createElement('link');
+            alternate.setAttribute('rel', 'alternate');
+            alternate.setAttribute('hreflang', langCode);
+            alternate.setAttribute('href', baseUrl + (langCode === 'en' ? '' : '?lang=' + langCode));
+            document.head.appendChild(alternate);
+        });
+
+        var xDefault = document.createElement('link');
+        xDefault.setAttribute('rel', 'alternate');
+        xDefault.setAttribute('hreflang', 'x-default');
+        xDefault.setAttribute('href', baseUrl);
+        document.head.appendChild(xDefault);
     }
 
     function syncDocumentLanguage(language) {
@@ -907,15 +1108,130 @@ var SilvoraI18n = (function () {
         document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
         document.body.classList.toggle('lang-ar', language === 'ar');
         document.body.classList.toggle('lang-en', language === 'en');
+        document.body.classList.toggle('lang-other', language !== 'en' && language !== 'ar');
     }
 
     function attachLanguageControls() {
-        document.querySelectorAll('.language-switcher [data-language], .language-switcher a[lang], .language-switcher button[lang]').forEach(function (control) {
-            control.addEventListener('click', function (event) {
-                event.preventDefault();
-                applyLanguage(sanitizeLanguage(control.getAttribute('data-language') || control.getAttribute('lang')));
+        document.querySelectorAll('.language-switcher').forEach(function (switcher) {
+            var trigger = switcher.querySelector('.stw-lang-trigger');
+            var menu = switcher.querySelector('.stw-lang-menu');
+            var options = menu ? Array.prototype.slice.call(menu.querySelectorAll('.stw-lang-option')) : [];
+            if (trigger && menu) {
+                trigger.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var isOpen = switcher.classList.toggle('is-open');
+                    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    if (isOpen) {
+                        var activeOption = menu.querySelector('.stw-lang-option.is-active') || menu.querySelector('.stw-lang-option');
+                        if (activeOption) {
+                            activeOption.focus();
+                        }
+                    }
+                });
+
+                trigger.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        trigger.click();
+                        return;
+                    }
+
+                    if (event.key !== 'ArrowDown') {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    if (!switcher.classList.contains('is-open')) {
+                        trigger.click();
+                    }
+                    if (options.length) {
+                        options[0].focus();
+                    }
+                });
+            }
+
+            options.forEach(function (option, index) {
+                option.addEventListener('keydown', function (event) {
+                    if (!options.length) {
+                        return;
+                    }
+
+                    if (event.key === 'ArrowDown') {
+                        event.preventDefault();
+                        options[(index + 1) % options.length].focus();
+                    }
+
+                    if (event.key === 'ArrowUp') {
+                        event.preventDefault();
+                        options[(index - 1 + options.length) % options.length].focus();
+                    }
+
+                    if (event.key === 'Home') {
+                        event.preventDefault();
+                        options[0].focus();
+                    }
+
+                    if (event.key === 'End') {
+                        event.preventDefault();
+                        options[options.length - 1].focus();
+                    }
+
+                    if (event.key === 'Escape') {
+                        event.preventDefault();
+                        switcher.classList.remove('is-open');
+                        if (trigger) {
+                            trigger.setAttribute('aria-expanded', 'false');
+                            trigger.focus();
+                        }
+                    }
+                });
+            });
+
+            switcher.querySelectorAll('[data-language], a[lang], button[lang]').forEach(function (control) {
+                if (control.classList.contains('stw-lang-trigger')) {
+                    return;
+                }
+                control.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    applyLanguage(sanitizeLanguage(control.getAttribute('data-language') || control.getAttribute('lang')));
+                    switcher.classList.remove('is-open');
+                    if (trigger) {
+                        trigger.setAttribute('aria-expanded', 'false');
+                    }
+                });
             });
         });
+
+        if (!document.body.dataset.langDropdownBound) {
+            document.addEventListener('click', function (event) {
+                document.querySelectorAll('.language-switcher.is-open').forEach(function (switcher) {
+                    if (switcher.contains(event.target)) {
+                        return;
+                    }
+                    switcher.classList.remove('is-open');
+                    var trigger = switcher.querySelector('.stw-lang-trigger');
+                    if (trigger) {
+                        trigger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key !== 'Escape') {
+                    return;
+                }
+                document.querySelectorAll('.language-switcher.is-open').forEach(function (switcher) {
+                    switcher.classList.remove('is-open');
+                    var trigger = switcher.querySelector('.stw-lang-trigger');
+                    if (trigger) {
+                        trigger.setAttribute('aria-expanded', 'false');
+                        trigger.focus();
+                    }
+                });
+            });
+
+            document.body.dataset.langDropdownBound = 'true';
+        }
     }
 
     function ensureLanguageSwitcher() {
@@ -930,14 +1246,11 @@ var SilvoraI18n = (function () {
 
         var floatingSwitcher = document.createElement('div');
         floatingSwitcher.className = 'lang-switcher-floating';
-        floatingSwitcher.innerHTML = '<div class="language-switcher" aria-label="Language switcher"><button type="button" data-language="en">EN</button><span aria-hidden="true">/</span><button type="button" data-language="ar" dir="rtl">العربية</button></div>';
+        floatingSwitcher.innerHTML = buildLanguageSwitcherMarkup({ mobile: false });
         document.body.appendChild(floatingSwitcher);
-        if (floatingSwitcher.querySelector('[data-language="en"]')) {
-            floatingSwitcher.querySelector('[data-language="en"]').setAttribute('type', 'button');
-        }
-        if (floatingSwitcher.querySelector('[data-language="ar"]')) {
-            floatingSwitcher.querySelector('[data-language="ar"]').setAttribute('type', 'button');
-        }
+        floatingSwitcher.querySelectorAll('[data-language]').forEach(function (control) {
+            control.setAttribute('type', 'button');
+        });
     }
 
     function ensureEnterpriseMegaMenu() {
@@ -1129,7 +1442,13 @@ var SilvoraI18n = (function () {
 
             window.addEventListener('resize', function () {
                 if (!window.matchMedia('(min-width: 992px)').matches) {
-                    closeMenu();
+                    document.querySelectorAll('.enterprise-mega.is-open').forEach(function (menu) {
+                        menu.classList.remove('is-open');
+                        var toggle = menu.querySelector('.enterprise-mega-toggle');
+                        if (toggle) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
                 }
             });
 
@@ -1175,25 +1494,32 @@ var SilvoraI18n = (function () {
     function applyLanguage(language) {
         currentLanguage = sanitizeLanguage(language);
 
-        try {
-            window.localStorage.setItem(storageKey, currentLanguage);
-        } catch (error) {
-            // Local storage may be unavailable in some contexts.
-        }
+        return ensureLanguageResource(currentLanguage).then(function () {
+            try {
+                window.localStorage.setItem(storageKey, currentLanguage);
+            } catch (error) {
+                // Local storage may be unavailable in some contexts.
+            }
 
-        syncDocumentLanguage(currentLanguage);
-        updateUrl(currentLanguage);
-        updateSeo(currentLanguage);
-        updateBilingualVisibility();
-        localizeTree(document.body);
-        localizeSharedControls();
-        updateLanguageSwitcher();
+            if (window.i18next && typeof window.i18next.changeLanguage === 'function') {
+                window.i18next.changeLanguage(currentLanguage);
+            }
 
-        if (typeof window.SilvoraRefreshHeaderOffset === 'function') {
-            window.setTimeout(function () {
-                window.SilvoraRefreshHeaderOffset();
-            }, 0);
-        }
+            applyLanguageTransition();
+            syncDocumentLanguage(currentLanguage);
+            updateUrl(currentLanguage);
+            updateSeo(currentLanguage);
+            updateBilingualVisibility();
+            localizeTree(document.body);
+            localizeSharedControls();
+            updateLanguageSwitcher();
+
+            if (typeof window.SilvoraRefreshHeaderOffset === 'function') {
+                window.setTimeout(function () {
+                    window.SilvoraRefreshHeaderOffset();
+                }, 0);
+            }
+        });
     }
 
     function observeMutations() {
@@ -1218,6 +1544,50 @@ var SilvoraI18n = (function () {
         observer.observe(document.body, { childList: true, subtree: true });
     }
 
+    function maybeShowLanguageSuggestion() {
+        if (hasStoredLanguagePreference()) {
+            return;
+        }
+
+        var dismissed = false;
+        try {
+            dismissed = window.localStorage.getItem(languageSuggestionKey) === 'true';
+        } catch (error) {
+            dismissed = false;
+        }
+        if (dismissed) {
+            return;
+        }
+
+        var detected = detectBrowserLanguage();
+        if (!detected || detected === 'en') {
+            return;
+        }
+
+        var cfg = getLanguageConfig(detected);
+        var host = document.createElement('div');
+        host.className = 'stw-lang-suggest';
+        host.setAttribute('data-i18n-skip', 'true');
+        host.innerHTML = '<div class="stw-lang-suggest__overlay" aria-hidden="true"></div><section class="stw-lang-suggest__dialog" role="dialog" aria-modal="true" aria-labelledby="stwLangSuggestTitle" dir="' + cfg.dir + '"><h3 id="stwLangSuggestTitle">🌍 ' + translate('Welcome') + '</h3><p>' + translate('We noticed your browser language is {{language}}.', { language: cfg.label }) + '</p><p>' + translate('Would you like to continue in {{language}}?', { language: cfg.native }) + '</p><div class="stw-lang-suggest__actions"><button type="button" class="btn btn-primary" data-action="switch">' + translate('Switch Language') + '</button><button type="button" class="btn btn-outline-primary" data-action="stay">' + translate('Continue in English') + '</button></div></section>';
+
+        var closeSuggestion = function () {
+            try {
+                window.localStorage.setItem(languageSuggestionKey, 'true');
+            } catch (error) {
+                // ignore persistence failures
+            }
+            host.remove();
+        };
+
+        host.querySelector('[data-action="switch"]').addEventListener('click', function () {
+            applyLanguage(detected).finally(closeSuggestion);
+        });
+        host.querySelector('[data-action="stay"]').addEventListener('click', closeSuggestion);
+        host.querySelector('.stw-lang-suggest__overlay').addEventListener('click', closeSuggestion);
+
+        document.body.appendChild(host);
+    }
+
     function init() {
         if (initializationPromise) {
             return initializationPromise;
@@ -1232,6 +1602,11 @@ var SilvoraI18n = (function () {
         removeDuplicateNodes('#manpowerRequestModal');
 
         currentLanguage = getStoredLanguage();
+        try {
+            window.localStorage.setItem(storageKey, currentLanguage);
+        } catch (error) {
+            // Storage may be unavailable in some contexts.
+        }
         ensureLanguageSwitcher();
         removeLegacyServiceMenuNodes();
         ensureEnterpriseMegaMenu();
@@ -1243,16 +1618,17 @@ var SilvoraI18n = (function () {
                 return null;
             })
             .then(function () {
-                return Promise.all([
-                    loadJson(resourcePaths.en),
-                    loadJson(resourcePaths.ar)
-                ]);
+                return ensureLanguageResource('en').then(function () {
+                    if (currentLanguage !== 'en') {
+                        return ensureLanguageResource(currentLanguage);
+                    }
+                    return Promise.resolve();
+                });
             })
-            .then(function (loadedResources) {
-                resources = {
-                    en: { translation: loadedResources[0] },
-                    ar: { translation: loadedResources[1] }
-                };
+            .then(function () {
+                if (!resources.en) {
+                    resources.en = { translation: {} };
+                }
 
                 if (!window.i18next || typeof window.i18next.init !== 'function') {
                     window.i18next = createFallbackI18n(resources);
@@ -1270,20 +1646,15 @@ var SilvoraI18n = (function () {
                 });
             })
             .catch(function () {
+                resources.en = resources.en || { translation: {} };
                 if (!window.i18next || typeof window.i18next.init !== 'function') {
-                    window.i18next = createFallbackI18n({
-                        en: { translation: {} },
-                        ar: { translation: {} }
-                    });
+                    window.i18next = createFallbackI18n(resources);
                 }
 
                 return window.i18next.init({
                     lng: currentLanguage,
                     fallbackLng: 'en',
-                    resources: {
-                        en: { translation: {} },
-                        ar: { translation: {} }
-                    },
+                    resources: resources,
                     interpolation: { escapeValue: false },
                     returnEmptyString: false,
                     returnNull: false,
@@ -1293,9 +1664,11 @@ var SilvoraI18n = (function () {
             })
             .then(function () {
                 registerBilingualPairs(document);
-                applyLanguage(currentLanguage);
-                observeMutations();
-                return window.i18next;
+                return applyLanguage(currentLanguage).then(function () {
+                    observeMutations();
+                    maybeShowLanguageSuggestion();
+                    return window.i18next;
+                });
             });
 
         return initializationPromise;
@@ -1317,6 +1690,52 @@ document.addEventListener('DOMContentLoaded', function () {
     var pageName = pathName.split('/').pop() || 'index.html';
     document.body.classList.add('page-' + pageName.replace('.html', '').replace(/[^a-z0-9-]/g, '-'));
 
+    function uiTranslate(key, options) {
+        if (window.SilvoraI18n && typeof window.SilvoraI18n.translate === 'function') {
+            var translated = window.SilvoraI18n.translate(key, options || {});
+            if (translated !== undefined && translated !== null && translated !== '') {
+                return translated;
+            }
+        }
+        return key;
+    }
+
+    function debounce(fn, delay) {
+        var timer = null;
+        return function () {
+            var args = arguments;
+            var context = this;
+            window.clearTimeout(timer);
+            timer = window.setTimeout(function () {
+                fn.apply(context, args);
+            }, delay);
+        };
+    }
+
+    function rafThrottle(fn) {
+        var ticking = false;
+        return function () {
+            var args = arguments;
+            var context = this;
+            if (ticking) {
+                return;
+            }
+            ticking = true;
+            window.requestAnimationFrame(function () {
+                ticking = false;
+                fn.apply(context, args);
+            });
+        };
+    }
+
+    function whenIdle(callback, timeout) {
+        if (typeof window.requestIdleCallback === 'function') {
+            window.requestIdleCallback(callback, { timeout: timeout || 2000 });
+            return;
+        }
+        window.setTimeout(callback, Math.min(timeout || 2000, 1200));
+    }
+
     function applyHeaderOffsetSpacing() {
         var header = document.querySelector('.stw-header');
         if (!header) {
@@ -1335,8 +1754,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function bindHeaderOffsetObservers() {
         applyHeaderOffsetSpacing();
-        window.addEventListener('resize', applyHeaderOffsetSpacing);
-        window.addEventListener('load', applyHeaderOffsetSpacing);
+        var applyHeaderOffsetDebounced = debounce(applyHeaderOffsetSpacing, 120);
+        window.addEventListener('resize', applyHeaderOffsetDebounced, { passive: true });
+        window.addEventListener('load', applyHeaderOffsetSpacing, { once: true });
 
         var header = document.querySelector('.stw-header');
         var collapse = document.getElementById('navbarCollapse');
@@ -1346,7 +1766,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!event || !event.propertyName) {
                     return;
                 }
-                applyHeaderOffsetSpacing();
+                applyHeaderOffsetDebounced();
             });
         }
 
@@ -1358,17 +1778,17 @@ document.addEventListener('DOMContentLoaded', function () {
         var resizeObserverSupported = typeof ResizeObserver !== 'undefined';
         if (resizeObserverSupported && header) {
             var ro = new ResizeObserver(function () {
-                applyHeaderOffsetSpacing();
+                applyHeaderOffsetDebounced();
             });
             ro.observe(header);
         }
     }
 
     function applyEnterpriseMicroInteractions() {
-        var onScroll = function () {
+        var onScroll = rafThrottle(function () {
             var scrolled = window.scrollY > 18;
             document.body.classList.toggle('stw-scrolled', scrolled);
-        };
+        });
 
         onScroll();
         window.addEventListener('scroll', onScroll, { passive: true });
@@ -1390,8 +1810,13 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        document.querySelectorAll('.btn').forEach(function (button) {
-            button.addEventListener('click', function (event) {
+        if (!document.body.dataset.rippleBound) {
+            document.addEventListener('click', function (event) {
+                var button = event.target.closest('.btn');
+                if (!button) {
+                    return;
+                }
+
                 var ripple = document.createElement('span');
                 ripple.className = 'stw-ripple';
                 var rect = button.getBoundingClientRect();
@@ -1404,17 +1829,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.setTimeout(function () {
                     ripple.remove();
                 }, 520);
-            });
-        });
+            }, { passive: true });
+            document.body.dataset.rippleBound = 'true';
+        }
 
-        document.querySelectorAll('input, textarea, select').forEach(function (field) {
-            field.addEventListener('focus', function () {
-                field.closest('.mb-3, .col-12, .col-lg-2, .col-lg-3, .col-lg-4')?.classList.add('stw-field-focus');
+        if (!document.body.dataset.focusRingBound) {
+            document.addEventListener('focusin', function (event) {
+                var field = event.target;
+                if (!field || !field.matches || !field.matches('input, textarea, select')) {
+                    return;
+                }
+                var group = field.closest('.mb-3, .col-12, .col-lg-2, .col-lg-3, .col-lg-4');
+                if (group) {
+                    group.classList.add('stw-field-focus');
+                }
             });
-            field.addEventListener('blur', function () {
-                field.closest('.mb-3, .col-12, .col-lg-2, .col-lg-3, .col-lg-4')?.classList.remove('stw-field-focus');
+            document.addEventListener('focusout', function (event) {
+                var field = event.target;
+                if (!field || !field.matches || !field.matches('input, textarea, select')) {
+                    return;
+                }
+                var group = field.closest('.mb-3, .col-12, .col-lg-2, .col-lg-3, .col-lg-4');
+                if (group) {
+                    group.classList.remove('stw-field-focus');
+                }
             });
-        });
+            document.body.dataset.focusRingBound = 'true';
+        }
 
         if (!document.querySelector('.stw-reading-progress')) {
             var progress = document.createElement('div');
@@ -1427,16 +1868,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 var value = total > 0 ? (window.scrollY / total) * 100 : 0;
                 progress.firstElementChild.style.width = Math.min(100, Math.max(0, value)) + '%';
             };
+            var updateProgressThrottled = rafThrottle(updateProgress);
+            var updateProgressDebounced = debounce(updateProgress, 120);
 
             updateProgress();
-            window.addEventListener('scroll', updateProgress, { passive: true });
-            window.addEventListener('resize', updateProgress);
+            window.addEventListener('scroll', updateProgressThrottled, { passive: true });
+            window.addEventListener('resize', updateProgressDebounced, { passive: true });
         }
 
         if (!document.querySelector('.stw-contact-widget')) {
             var widget = document.createElement('div');
             widget.className = 'stw-contact-widget';
-            widget.innerHTML = '<button type="button" class="stw-contact-toggle" aria-label="Open quick contact"><i class="fa fa-comments"></i></button><div class="stw-contact-panel"><a href="tel:+971585895827"><i class="fa fa-phone"></i><span>Call</span></a><a href="https://wa.me/971585895827" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a><a href="contact.html"><i class="fa fa-envelope"></i><span>Contact</span></a></div>';
+            widget.innerHTML = '<button type="button" class="stw-contact-toggle" aria-label="' + uiTranslate('Open quick contact') + '"><i class="fa fa-comments"></i></button><div class="stw-contact-panel"><a href="tel:+971585895827"><i class="fa fa-phone"></i><span>' + uiTranslate('Call') + '</span></a><a href="https://wa.me/971585895827" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><span>' + uiTranslate('WhatsApp') + '</span></a><a href="contact.html"><i class="fa fa-envelope"></i><span>' + uiTranslate('Contact') + '</span></a></div>';
             document.body.appendChild(widget);
 
             var toggle = widget.querySelector('.stw-contact-toggle');
@@ -1458,8 +1901,13 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.add('page-transition-enter');
         });
 
-        document.querySelectorAll('a[href$=".html"], a[href^="./"], a[href^="/"]').forEach(function (anchor) {
-            anchor.addEventListener('click', function (event) {
+        if (!document.body.dataset.pageTransitionsBound) {
+            document.addEventListener('click', function (event) {
+                var anchor = event.target.closest('a');
+                if (!anchor) {
+                    return;
+                }
+
                 var href = anchor.getAttribute('href') || '';
                 if (!href || href.startsWith('#') || anchor.target === '_blank' || event.metaKey || event.ctrlKey) {
                     return;
@@ -1475,7 +1923,101 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = href;
                 }, 180);
             });
+            document.body.dataset.pageTransitionsBound = 'true';
+        }
+    }
+
+    function optimizeHeroVideos(slider) {
+        if (!slider || slider.dataset.heroVideoOptimized === 'true') {
+            return;
+        }
+
+        var isFilePreview = window.location.protocol === 'file:';
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var videos = Array.prototype.slice.call(slider.querySelectorAll('.carousel-item video'));
+
+        function hydrateVideo(video, eager) {
+            if (!video || video.dataset.hydrated === 'true' || isFilePreview) {
+                return;
+            }
+
+            var source = video.querySelector('source');
+            if (!source) {
+                return;
+            }
+
+            var dataSrc = source.getAttribute('data-src');
+            if (!dataSrc) {
+                dataSrc = source.getAttribute('src');
+            }
+
+            if (!dataSrc) {
+                return;
+            }
+
+            source.setAttribute('src', dataSrc);
+            source.removeAttribute('data-src');
+            video.preload = eager ? 'metadata' : 'none';
+            video.dataset.hydrated = 'true';
+            video.load();
+        }
+
+        function syncActiveVideoPlayback() {
+            var activeVideo = slider.querySelector('.carousel-item.active video');
+            videos.forEach(function (video) {
+                if (video === activeVideo && !prefersReducedMotion) {
+                    hydrateVideo(video, true);
+                    if (!document.hidden && slider.dataset.inViewport === 'true') {
+                        var playPromise = video.play();
+                        if (playPromise && typeof playPromise.catch === 'function') {
+                            playPromise.catch(function () {});
+                        }
+                    }
+                } else {
+                    video.pause();
+                }
+            });
+        }
+
+        videos.forEach(function (video) {
+            video.preload = 'none';
+            video.muted = true;
+            video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            var source = video.querySelector('source');
+            if (source && source.getAttribute('src')) {
+                source.setAttribute('data-src', source.getAttribute('src'));
+                source.removeAttribute('src');
+            }
         });
+
+        if ('IntersectionObserver' in window) {
+            var sliderObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    slider.dataset.inViewport = entry.isIntersecting ? 'true' : 'false';
+                    if (!entry.isIntersecting) {
+                        videos.forEach(function (video) { video.pause(); });
+                    } else {
+                        syncActiveVideoPlayback();
+                    }
+                });
+            }, { threshold: 0.2 });
+            sliderObserver.observe(slider);
+        } else {
+            slider.dataset.inViewport = 'true';
+        }
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                videos.forEach(function (video) { video.pause(); });
+                return;
+            }
+            syncActiveVideoPlayback();
+        });
+
+        slider.addEventListener('slid.bs.carousel', syncActiveVideoPlayback);
+        syncActiveVideoPlayback();
+        slider.dataset.heroVideoOptimized = 'true';
     }
 
     function mountPremiumJobsPage() {
@@ -1648,6 +2190,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<div class="carousel-item"><div class="stw-slide"><video class="stw-hero-video" autoplay muted loop playsinline poster="img/index/construction-works-frankfurt-downtown-germany.webp"><source src="https://cdn.coverr.co/videos/coverr-walking-through-construction-site-5177/1080p.mp4" type="video/mp4"></video><img class="stw-hero-fallback" src="img/index/construction-works-frankfurt-downtown-germany.webp" alt="Recruitment Process" loading="lazy"><div class="stw-slide-overlay"><h2>Recruitment Process Excellence</h2><p>Role matching, interviews, and onboarding governance.</p></div></div></div>' +
                 '<div class="carousel-item"><div class="stw-slide"><video class="stw-hero-video" autoplay muted loop playsinline poster="img/index/photo-1731923508913-eba1fb7bd430.webp"><source src="https://cdn.coverr.co/videos/coverr-city-aerial-view-1576/1080p.mp4" type="video/mp4"></video><img class="stw-hero-fallback" src="img/index/photo-1731923508913-eba1fb7bd430.webp" alt="Business Setup" loading="lazy"><div class="stw-slide-overlay"><h2>Business Setup and PRO Execution</h2><p>Fast-track coordination with compliant documentation.</p></div></div></div>' +
             '</div><button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button><button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>';
+
+            if (window.location.protocol === 'file:') {
+                slider.querySelectorAll('video source').forEach(function (source) {
+                    source.removeAttribute('src');
+                });
+                slider.querySelectorAll('video').forEach(function (video) {
+                    video.load();
+                });
+            }
+
+            optimizeHeroVideos(slider);
         }
 
         if (!document.querySelector('.stw-home-enhancements')) {
@@ -1661,10 +2214,144 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function loadRecruitmentDemandConfig() {
+        if (window.SilvoraRecruitmentDemand) {
+            return Promise.resolve(window.SilvoraRecruitmentDemand);
+        }
+
+        return new Promise(function (resolve) {
+            var script = document.createElement('script');
+            script.src = 'js/demand-config.js';
+            script.async = true;
+            script.onload = function () {
+                resolve(window.SilvoraRecruitmentDemand || null);
+            };
+            script.onerror = function () {
+                resolve(null);
+            };
+            document.head.appendChild(script);
+        });
+    }
+
+    function mountRecruitmentPopup(config) {
+        if (!/^index\.html$/i.test(pageName)) {
+            return;
+        }
+
+        var demand = config || window.SilvoraRecruitmentDemand;
+        if (!demand || !demand.enabled) {
+            return;
+        }
+
+        var cooldownMs = (demand.cooldownMinutes || 1) * 60 * 1000;
+        if (document.querySelector('[data-stw-demand-popup]')) {
+            return;
+        }
+
+        var ctaButtons = Array.isArray(demand.ctaButtons) ? demand.ctaButtons : [];
+        var benefits = Array.isArray(demand.benefits) ? demand.benefits : [];
+        var facts = Array.isArray(demand.quickFacts) ? demand.quickFacts : [];
+
+        var overlay = document.createElement('div');
+        overlay.className = 'stw-demand-overlay';
+        overlay.setAttribute('data-stw-demand-popup', 'true');
+        overlay.setAttribute('aria-hidden', 'true');
+
+        var popup = document.createElement('section');
+        popup.className = 'stw-demand-popup';
+        popup.setAttribute('role', 'dialog');
+        popup.setAttribute('aria-modal', 'true');
+        popup.setAttribute('aria-labelledby', 'stwDemandPopupTitle');
+
+        var benefitMarkup = benefits.map(function (benefit, index) {
+            var iconClass = benefit.iconClass || 'fa fa-circle-check';
+            return '<div class="stw-demand-benefit" style="--stw-delay:' + ((index + 1) * 90) + 'ms"><i class="' + iconClass + '" aria-hidden="true"></i><span>' + uiTranslate(benefit.label) + '</span></div>';
+        }).join('');
+
+        var factMarkup = facts.map(function (fact, index) {
+            return '<div class="stw-demand-fact" style="--stw-delay:' + ((index + 1) * 70) + 'ms"><span>' + uiTranslate(fact.label) + '</span><strong>' + uiTranslate(fact.value) + '</strong></div>';
+        }).join('');
+
+        var ctaMarkup = ctaButtons.map(function (button, index) {
+            var variant = button.variant || 'primary';
+            var href = button.href || '#';
+            return '<a class="btn stw-demand-btn stw-demand-btn--' + variant + '" style="--stw-delay:' + ((index + 1) * 110) + 'ms" href="' + href + '">' + uiTranslate(button.label) + '</a>';
+        }).join('');
+
+        popup.innerHTML = '<div class="stw-demand-popup-shell"><div class="stw-demand-popup-header"><div class="stw-demand-brand"><img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World Logo" loading="eager" decoding="async"><div><span class="stw-demand-badge"><i class="fa fa-fire" aria-hidden="true"></i> ' + uiTranslate('URGENT HIRING') + '</span><p>' + uiTranslate(demand.announcement || 'Latest overseas recruitment demand') + '</p></div></div><button type="button" class="stw-demand-close" aria-label="' + uiTranslate('Close recruitment popup') + '"><i class="fa fa-xmark"></i></button></div><div class="stw-demand-popup-body"><div class="stw-demand-copy"><h2 id="stwDemandPopupTitle">' + uiTranslate(demand.title) + '</h2><p class="stw-demand-subtitle">' + uiTranslate(demand.subtitle) + '</p><div class="stw-demand-poster-wrap"><img class="stw-demand-poster" src="' + demand.poster + '" alt="' + uiTranslate(demand.posterAlt) + '" loading="lazy" decoding="async"></div><div class="stw-demand-benefits">' + benefitMarkup + '</div><div class="stw-demand-facts">' + factMarkup + '</div><div class="stw-demand-ctas">' + ctaMarkup + '</div></div></div><div class="stw-demand-footer"><span><i class="fa fa-phone"></i>' + demand.contact.phone + '</span><span><i class="fa fa-envelope"></i>' + demand.contact.email + '</span><span><i class="fa fa-globe"></i>' + demand.contact.website + '</span></div></div>';
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(popup);
+
+        var repeatTimer = null;
+        var scheduleRepeat = function () {
+            if (!/^index\.html$/i.test(pageName)) {
+                return;
+            }
+
+            if (repeatTimer) {
+                window.clearTimeout(repeatTimer);
+            }
+
+            repeatTimer = window.setTimeout(function () {
+                mountRecruitmentPopup(demand);
+            }, cooldownMs);
+        };
+
+        var openTimer = window.setTimeout(function () {
+            overlay.classList.add('is-visible');
+            popup.classList.add('is-visible');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('stw-demand-lock');
+            document.documentElement.classList.add('stw-demand-lock');
+            var closeButton = popup.querySelector('.stw-demand-close');
+            if (closeButton) {
+                closeButton.focus();
+            }
+        }, Math.max(0, demand.delayMs || 1000));
+
+        var closePopup = function () {
+            window.clearTimeout(openTimer);
+            if (repeatTimer) {
+                window.clearTimeout(repeatTimer);
+            }
+            overlay.classList.remove('is-visible');
+            popup.classList.remove('is-visible');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('stw-demand-lock');
+            document.documentElement.classList.remove('stw-demand-lock');
+
+            window.setTimeout(function () {
+                overlay.remove();
+                popup.remove();
+                document.removeEventListener('keydown', onKeyDown);
+                scheduleRepeat();
+            }, 260);
+        };
+
+        var onKeyDown = function (event) {
+            if (event.key === 'Escape') {
+                closePopup();
+            }
+        };
+
+        overlay.addEventListener('click', closePopup);
+        popup.querySelector('.stw-demand-close').addEventListener('click', closePopup);
+        document.addEventListener('keydown', onKeyDown);
+    }
+
     applyEnterpriseMicroInteractions();
     enablePageTransitions();
     mountPremiumJobsPage();
     upgradeHomepageExperience();
+
+    if (/^index\.html$/i.test(pageName)) {
+        whenIdle(function () {
+            loadRecruitmentDemandConfig().then(function (config) {
+                mountRecruitmentPopup(config);
+            });
+        }, 2600);
+    }
 
     function addFormFeedback(form) {
         var feedback = form.querySelector('.form-feedback');
@@ -1690,7 +2377,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var phonePattern = /^[+0-9()\-\s]{7,20}$/;
         var isValid = phonePattern.test(value);
-        phoneInput.setCustomValidity(isValid ? '' : 'Please enter a valid phone or WhatsApp number.');
+        phoneInput.setCustomValidity(isValid ? '' : uiTranslate('Please enter a valid phone or WhatsApp number.'));
         return isValid;
     }
 
@@ -1708,12 +2395,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (files.length > maxFiles) {
-            documentsInput.setCustomValidity('Please upload up to 5 files only.');
+            documentsInput.setCustomValidity(uiTranslate('Please upload up to 5 files only.'));
             return false;
         }
 
         if (invalidExtension) {
-            documentsInput.setCustomValidity('Please upload PDF, PNG, JPG, or JPEG files only.');
+            documentsInput.setCustomValidity(uiTranslate('Please upload PDF, PNG, JPG, or JPEG files only.'));
             return false;
         }
 
@@ -1817,7 +2504,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!form.checkValidity() || !phoneValid || !documentsValid) {
                 event.preventDefault();
-                feedback.textContent = 'Please complete all required fields and correct any invalid email, phone, or file inputs before submitting.';
+                feedback.textContent = uiTranslate('Please complete all required fields and correct any invalid email, phone, or file inputs before submitting.');
                 feedback.classList.add('is-error');
                 feedback.classList.remove('is-success');
                 if (submitButton) {
@@ -1833,10 +2520,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     submitButton.dataset.originalLabel = submitButton.innerHTML;
                 }
                 submitButton.disabled = true;
-                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...';
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>' + uiTranslate('Sending...');
             }
 
-            feedback.textContent = 'Submitting your enquiry...';
+            feedback.textContent = uiTranslate('Submitting your enquiry...');
             feedback.classList.add('is-success');
             feedback.classList.remove('is-error');
 
@@ -1854,12 +2541,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Improve image loading defaults for better performance.
-    document.querySelectorAll('img').forEach(function (img, index) {
+    document.querySelectorAll('img').forEach(function (img) {
+        var isCriticalVisual = !!img.closest('.carousel-item.active, .navbar-brand, .hero-header');
         if (!img.hasAttribute('loading')) {
-            img.setAttribute('loading', index < 3 ? 'eager' : 'lazy');
+            img.setAttribute('loading', isCriticalVisual ? 'eager' : 'lazy');
         }
         if (!img.hasAttribute('decoding')) {
             img.setAttribute('decoding', 'async');
+        }
+        if (isCriticalVisual && !img.hasAttribute('fetchpriority')) {
+            img.setAttribute('fetchpriority', 'high');
         }
     });
 
@@ -1937,6 +2628,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Auto-scrolling content tracks with pause on hover.
     document.querySelectorAll('[data-auto-track], [data-logo-track]').forEach(function (track) {
         var paused = false;
+        var inViewport = true;
         var speed = parseFloat(track.getAttribute('data-track-speed') || track.getAttribute('data-logo-speed') || '0.55');
 
         track.addEventListener('mouseenter', function () {
@@ -1947,13 +2639,22 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         function animate() {
-            if (!paused) {
+            if (!paused && inViewport && !document.hidden) {
                 track.scrollLeft += speed;
                 if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) {
                     track.scrollLeft = 0;
                 }
             }
             window.requestAnimationFrame(animate);
+        }
+
+        if ('IntersectionObserver' in window) {
+            var trackObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    inViewport = entry.isIntersecting;
+                });
+            }, { threshold: 0.1 });
+            trackObserver.observe(track);
         }
 
         window.requestAnimationFrame(animate);
@@ -2050,16 +2751,51 @@ document.addEventListener('DOMContentLoaded', function () {
         prideSection.className = 'stw-uae-pride stw-uae-pride-reveal';
         prideSection.setAttribute('data-uae-pride', 'true');
         prideSection.setAttribute('aria-label', 'Proudly Serving the United Arab Emirates');
-        prideSection.innerHTML = '<div class="container px-lg-5"><div class="stw-uae-pride-shell"><div class="row g-4 align-items-center"><div class="col-lg-3 col-md-4"><div class="stw-uae-flag-stage" aria-hidden="true"><div class="stw-uae-flag-pole"></div><div class="stw-uae-flag"><span class="stw-uae-red"></span><span class="stw-uae-stripes"><span class="stw-uae-green"></span><span class="stw-uae-white"></span><span class="stw-uae-black"></span></span></div></div></div><div class="col-lg-9 col-md-8"><p class="stw-uae-kicker mb-2">🇦🇪 Proudly Serving the United Arab Emirates</p><div class="arabic-text stw-uae-kicker mb-2" dir="rtl">🇦🇪 نفخر بخدمة دولة الإمارات العربية المتحدة</div><h3 class="stw-uae-title mb-2">Trusted Support for Employers, Businesses, and Professionals Across the UAE</h3><p class="mb-3 stw-uae-copy english-text">Supporting businesses with trusted manpower, recruitment, visa, PRO, business setup, and digital solutions across the UAE.</p><p class="mb-3 stw-uae-copy arabic-text" dir="rtl">ندعم الشركات بحلول موثوقة في القوى العاملة والتوظيف والتأشيرات وخدمات PRO وتأسيس الأعمال والحلول الرقمية في جميع أنحاء الإمارات.</p><a class="btn btn-outline-primary stw-uae-btn" href="service.html">Learn More</a></div></div></div></div>';
+        prideSection.innerHTML = '<div class="container px-lg-5"><div class="stw-uae-pride-shell"><span class="stw-uae-gold-line" aria-hidden="true"></span><div class="row g-4 g-lg-5 align-items-center"><div class="col-lg-5"><div class="stw-uae-media"><div class="stw-uae-flag-stage" aria-hidden="true"><div class="stw-uae-flag-pole"></div><div class="stw-uae-flag-shadow"></div><div class="stw-uae-flag"><span class="stw-uae-flag-band stw-uae-flag-band--red"></span><span class="stw-uae-flag-bands"><span class="stw-uae-flag-band stw-uae-flag-band--green"></span><span class="stw-uae-flag-band stw-uae-flag-band--white"></span><span class="stw-uae-flag-band stw-uae-flag-band--black"></span></span><span class="stw-uae-flag-gloss"></span><span class="stw-uae-flag-fabric"></span></div></div></div></div><div class="col-lg-7"><div class="stw-uae-content"><p class="stw-uae-badge mb-3">🇦🇪 United Arab Emirates</p><h3 class="stw-uae-title mb-3">Proudly Serving the United Arab Emirates</h3><p class="stw-uae-copy mb-0 english-text">Driven by excellence and inspired by the UAE\'s vision, Silvora Talenza World LLC is committed to delivering trusted manpower, recruitment, visa, PRO, business setup, and digital solutions that help businesses grow and professionals succeed.</p><p class="stw-uae-copy mb-0 arabic-text" dir="rtl">انطلاقًا من التميز واستلهامًا لرؤية دولة الإمارات، تلتزم سيلفورا تالينزا وورلد ذ.م.م بتقديم حلول موثوقة في الموارد البشرية والتوظيف والتأشيرات وخدمات PRO وتأسيس الأعمال والحلول الرقمية لدعم نمو الأعمال ونجاح المهنيين.</p><a class="btn btn-outline-primary stw-uae-btn" href="service.html">Explore Our Services</a></div></div></div></div></div>';
         footer.parentNode.insertBefore(prideSection, footer);
     });
 
     var prideBlocks = document.querySelectorAll('.stw-uae-pride-reveal');
     if (prideBlocks.length > 0) {
         var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var activatePrideBlock = function (block) {
+            if (block.classList.contains('is-visible')) {
+                return;
+            }
+            block.classList.add('is-visible');
+        };
+
+        var fallbackBlocks = Array.prototype.slice.call(prideBlocks);
+        var fallbackTicking = false;
+        var runFallbackReveal = function () {
+            if (fallbackTicking) {
+                return;
+            }
+
+            fallbackTicking = true;
+            window.requestAnimationFrame(function () {
+                fallbackBlocks = fallbackBlocks.filter(function (block) {
+                    var rect = block.getBoundingClientRect();
+                    var inView = rect.top < window.innerHeight * 0.96 && rect.bottom > window.innerHeight * 0.04;
+                    if (inView) {
+                        activatePrideBlock(block);
+                        return false;
+                    }
+                    return true;
+                });
+
+                if (fallbackBlocks.length === 0) {
+                    window.removeEventListener('scroll', runFallbackReveal);
+                    window.removeEventListener('resize', runFallbackReveal);
+                }
+
+                fallbackTicking = false;
+            });
+        };
+
         if (prefersReducedMotion || !('IntersectionObserver' in window)) {
             prideBlocks.forEach(function (block) {
-                block.classList.add('is-visible');
+                activatePrideBlock(block);
             });
         } else {
             var prideObserver = new IntersectionObserver(function (entries, observer) {
@@ -2067,25 +2803,36 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (!entry.isIntersecting) {
                         return;
                     }
-                    entry.target.classList.add('is-visible');
+
+                    activatePrideBlock(entry.target);
                     observer.unobserve(entry.target);
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
 
             prideBlocks.forEach(function (block) {
                 prideObserver.observe(block);
             });
+
+            window.addEventListener('scroll', runFallbackReveal, { passive: true });
+            window.addEventListener('resize', runFallbackReveal);
+            runFallbackReveal();
         }
     }
 
     // Clients page trust layer without fabricated reviews/certifications.
     if (/clients\.html$/i.test(pageName)) {
         var clientsRoot = document.querySelector('.inner-page-content');
+        var clientLogosGrid = clientsRoot ? clientsRoot.querySelector('.row.g-4.justify-content-center') : null;
         if (clientsRoot && !clientsRoot.querySelector('[data-client-success-grid]') && !clientsRoot.querySelector('.client-success-grid')) {
             var trustSection = document.createElement('section');
-            trustSection.className = 'mt-5';
-            trustSection.innerHTML = '<div class="section-title text-center mb-4"><h2>Client Success & Trust Signals</h2><p class="mb-0">Verified indicators of consistency, service scope, and delivery quality.</p></div><div class="client-success-grid" data-client-success-grid="true"><article class="client-success-card"><h3><i class="fa fa-check-circle text-primary me-2"></i>Transparent Delivery</h3><p class="mb-0">Structured communication, clear timelines, and accountable handover practices across projects.</p></article><article class="client-success-card"><h3><i class="fa fa-globe text-primary me-2"></i>Global Service Reach</h3><p class="mb-0">Operational support for clients and candidates across multiple countries and industries.</p></article><article class="client-success-card"><h3><i class="fa fa-shield-alt text-primary me-2"></i>Compliance Focused</h3><p class="mb-0">Service workflows designed around local regulation alignment and documented process controls.</p></article></div>';
-            clientsRoot.appendChild(trustSection);
+            trustSection.className = 'client-success-section mt-5';
+            trustSection.setAttribute('data-client-success-section', 'true');
+            trustSection.innerHTML = '<div class="client-success-shell"><div class="client-success-header"><div class="section-title client-success-title mb-0 text-start text-lg-start"><h2>Client Success & Trust Signals</h2><p class="mb-0">Verified indicators of consistency, service scope, and delivery quality.</p></div><span class="client-success-kicker"><i class="fa fa-badge-check"></i> Operational assurance</span></div><div class="client-success-grid" data-client-success-grid="true"><article class="client-success-card"><div class="client-success-icon"><i class="fa fa-check"></i></div><h3>Transparent Delivery</h3><p>Structured communication, clear timelines, and accountable handover practices across projects.</p><ul><li>Defined milestones</li><li>Clear ownership</li></ul></article><article class="client-success-card"><div class="client-success-icon"><i class="fa fa-globe"></i></div><h3>Global Service Reach</h3><p>Operational support for clients and candidates across multiple countries and industries.</p><ul><li>Multi-market support</li><li>Cross-sector experience</li></ul></article><article class="client-success-card"><div class="client-success-icon"><i class="fa fa-shield-halved"></i></div><h3>Compliance Focused</h3><p>Service workflows designed around local regulation alignment and documented process controls.</p><ul><li>Process controls</li><li>Local alignment</li></ul></article></div><div class="client-success-strip"><div><strong>Service confidence</strong><span>Built around reliable execution and transparent communication.</span></div><div><strong>Scope breadth</strong><span>Covering manpower, PRO, visa, business setup, and digital services.</span></div><div><strong>Delivery discipline</strong><span>Clear handovers, documented steps, and consistent response quality.</span></div></div></div>';
+            if (clientLogosGrid) {
+                clientsRoot.insertBefore(trustSection, clientLogosGrid);
+            } else {
+                clientsRoot.appendChild(trustSection);
+            }
         }
     }
 
