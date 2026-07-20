@@ -2232,6 +2232,141 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        function bindAwardsReveal(root) {
+            if (!root) {
+                return;
+            }
+
+            var revealItems = root.querySelectorAll('.stw-reveal-up');
+            if (!revealItems.length) {
+                return;
+            }
+
+            if (!('IntersectionObserver' in window)) {
+                revealItems.forEach(function (item) {
+                    item.classList.add('is-visible');
+                });
+                return;
+            }
+
+            var revealObserver = new IntersectionObserver(function (entries, observerInstance) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add('is-visible');
+                    observerInstance.unobserve(entry.target);
+                });
+            }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+            revealItems.forEach(function (item) {
+                if (item.dataset.stwRevealBound === 'true') {
+                    return;
+                }
+
+                item.dataset.stwRevealBound = 'true';
+                revealObserver.observe(item);
+            });
+        }
+
+        function ensureAwardsLightbox() {
+            var existingHost = document.querySelector('.stw-awards-lightbox');
+            if (!existingHost) {
+                var host = document.createElement('section');
+                host.className = 'stw-awards-lightbox';
+                host.setAttribute('aria-hidden', 'true');
+                host.innerHTML = '<div class="stw-awards-lightbox__overlay"></div><div class="stw-awards-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="stwAwardsLightboxTitle"><button type="button" class="stw-awards-lightbox__close" aria-label="Close awards lightbox"><i class="fa fa-xmark" aria-hidden="true"></i></button><figure class="stw-awards-lightbox__figure"><div class="stw-awards-lightbox__media"><img class="stw-awards-lightbox__image" src="" alt=""></div><figcaption class="stw-awards-lightbox__meta"><h3 id="stwAwardsLightboxTitle">Awards & Recognition</h3><p class="stw-awards-lightbox__hint">Tap image to zoom</p></figcaption></figure></div>';
+                document.body.appendChild(host);
+                existingHost = host;
+            }
+
+            if (document.body.dataset.stwAwardsBound === 'true') {
+                return;
+            }
+
+            var lightbox = existingHost;
+            var lightboxImage = lightbox.querySelector('.stw-awards-lightbox__image');
+            var lightboxTitle = lightbox.querySelector('#stwAwardsLightboxTitle');
+            var closeButton = lightbox.querySelector('.stw-awards-lightbox__close');
+            var lightboxDialog = lightbox.querySelector('.stw-awards-lightbox__dialog');
+
+            function closeAwardsLightbox() {
+                lightbox.classList.remove('is-visible', 'is-zoomed');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.documentElement.classList.remove('stw-awards-lock');
+                document.body.classList.remove('stw-awards-lock');
+                lightboxImage.removeAttribute('src');
+                lightboxImage.removeAttribute('alt');
+            }
+
+            document.addEventListener('click', function (event) {
+                var trigger = event.target.closest('[data-award-trigger]');
+                if (trigger) {
+                    var previewImage = trigger.querySelector('img');
+                    lightboxImage.setAttribute('src', trigger.getAttribute('data-award-src') || '');
+                    lightboxImage.setAttribute('alt', previewImage ? (previewImage.getAttribute('alt') || '') : '');
+                    lightboxTitle.textContent = trigger.getAttribute('data-award-title') || 'Awards & Recognition';
+                    lightbox.classList.add('is-visible');
+                    lightbox.classList.remove('is-zoomed');
+                    lightbox.setAttribute('aria-hidden', 'false');
+                    document.documentElement.classList.add('stw-awards-lock');
+                    document.body.classList.add('stw-awards-lock');
+                    closeButton.focus();
+                    return;
+                }
+
+                if (event.target.closest('.stw-awards-lightbox__close') || event.target.closest('.stw-awards-lightbox__overlay')) {
+                    closeAwardsLightbox();
+                }
+            });
+
+            lightboxImage.addEventListener('click', function () {
+                lightbox.classList.toggle('is-zoomed');
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (lightbox.getAttribute('aria-hidden') === 'true') {
+                    return;
+                }
+
+                if (event.key === 'Escape') {
+                    closeAwardsLightbox();
+                }
+            });
+
+            lightboxDialog.addEventListener('click', function (event) {
+                if (event.target === lightboxDialog) {
+                    closeAwardsLightbox();
+                }
+            });
+
+            document.body.dataset.stwAwardsBound = 'true';
+        }
+
+        function buildAwardsSectionMarkup() {
+            var awards = [
+                {
+                    title: 'Outstanding Achievement Award',
+                    src: 'img/awards/WhatsApp Image 2026-07-20 at 5.16.07 PM (1).jpeg'
+                },
+                {
+                    title: 'Excellence Award',
+                    src: 'img/awards/WhatsApp Image 2026-07-20 at 5.16.07 PM (2).jpeg'
+                },
+                {
+                    title: 'Certificate of Appreciation',
+                    src: 'img/awards/WhatsApp Image 2026-07-20 at 5.16.07 PM (3).jpeg'
+                }
+            ];
+
+            var awardCards = awards.map(function (award, index) {
+                return '<button type="button" class="stw-award-card stw-reveal-up" data-award-trigger data-award-src="' + award.src + '" data-award-title="' + award.title + '" style="--stw-award-delay:' + ((index + 1) * 110) + 'ms"><span class="stw-award-card__badge">' + award.title + '</span><span class="stw-award-card__media"><img src="' + award.src + '" alt="' + award.title + '" loading="lazy" decoding="async"></span><span class="stw-award-card__meta"><span class="stw-award-card__title">' + award.title + '</span><span class="stw-award-card__cta">Click to open fullscreen view</span></span></button>';
+            }).join('');
+
+            return '<div class="container"><div class="stw-awards-shell"><div class="stw-awards-copy stw-reveal-up"><span class="stw-awards-kicker"><i class="fa fa-trophy" aria-hidden="true"></i>Awards & Recognition</span><h2 class="stw-awards-title"><i class="fa fa-trophy" aria-hidden="true"></i><span>Awards & Recognition</span></h2><p class="stw-awards-subtitle">Recognized for Excellence, Trusted Worldwide</p><p class="stw-awards-description">Silvora Talenza World LLC is proud to be recognized for excellence, professionalism, and outstanding service. These awards reflect our commitment to delivering trusted manpower recruitment, visa consultancy, business solutions, and exceptional customer service.</p></div><div class="stw-awards-grid">' + awardCards + '</div><div class="stw-awards-stats"><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:120ms"><span class="stw-award-stat__icon"><i class="fa fa-star" aria-hidden="true"></i></span><strong>1000+</strong><span>Candidates Assisted</span><small>Award-winning delivery</small></article><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:200ms"><span class="stw-award-stat__icon"><i class="fa fa-building" aria-hidden="true"></i></span><strong>50+</strong><span>Corporate Clients</span><small>Client confidence</small></article><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:280ms"><span class="stw-award-stat__icon"><i class="fa fa-globe" aria-hidden="true"></i></span><strong>15+</strong><span>Countries Served</span><small>Global reach</small></article><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:360ms"><span class="stw-award-stat__icon"><i class="fa fa-handshake" aria-hidden="true"></i></span><strong>Trusted UAE Consultancy</strong><span>Trusted UAE Consultancy</span><small>Relationship-first service</small></article></div></div></div>';
+        }
+
         var slider = document.getElementById('headerCarousel');
         if (slider && !slider.dataset.premiumHero) {
             slider.dataset.premiumHero = 'true';
@@ -2265,6 +2400,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 heroHeader.insertAdjacentElement('afterend', block);
             }
         }
+
+        if (!document.querySelector('.home-awards-section')) {
+            var awardsAnchor = document.querySelector('.stw-home-enhancements') || document.querySelector('.hero-header');
+            if (awardsAnchor) {
+                var awardsSection = document.createElement('section');
+                awardsSection.className = 'container-fluid py-5 home-awards-section';
+                awardsSection.innerHTML = buildAwardsSectionMarkup();
+                awardsAnchor.insertAdjacentElement('afterend', awardsSection);
+                bindAwardsReveal(awardsSection);
+            }
+        }
+
+        ensureAwardsLightbox();
     }
 
     function loadRecruitmentDemandConfig() {

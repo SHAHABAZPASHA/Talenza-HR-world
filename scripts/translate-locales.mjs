@@ -105,7 +105,7 @@ async function translateChunk(values, targetLanguage) {
 async function translateLocale(fileName, targetLanguage, sourceEntries) {
   const filePath = path.join(localesDir, fileName);
   const currentLocale = JSON.parse(await fs.readFile(filePath, 'utf8'));
-  const keys = Object.keys(sourceEntries).filter((key) => currentLocale[key] === sourceEntries[key]);
+  const keys = Object.keys(sourceEntries).filter((key) => !(key in currentLocale) || currentLocale[key] === sourceEntries[key]);
 
   for (let index = 0; index < keys.length; index += batchSize) {
     const chunkKeys = keys.slice(index, index + batchSize);
