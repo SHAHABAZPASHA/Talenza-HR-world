@@ -716,6 +716,7 @@ var SilvoraI18n = (function () {
         if (existingSwitcher) {
             existingSwitcher.querySelectorAll('a[lang], button[lang]').forEach(function (control) {
                 control.setAttribute('data-language', sanitizeLanguage(control.getAttribute('data-language') || control.getAttribute('lang')));
+                control.setAttribute('type', 'button');
             });
             return;
         }
@@ -724,6 +725,12 @@ var SilvoraI18n = (function () {
         floatingSwitcher.className = 'lang-switcher-floating';
         floatingSwitcher.innerHTML = '<div class="language-switcher" aria-label="Language switcher"><button type="button" data-language="en">EN</button><span aria-hidden="true">/</span><button type="button" data-language="ar" dir="rtl">العربية</button></div>';
         document.body.appendChild(floatingSwitcher);
+        if (floatingSwitcher.querySelector('[data-language="en"]')) {
+            floatingSwitcher.querySelector('[data-language="en"]').setAttribute('type', 'button');
+        }
+        if (floatingSwitcher.querySelector('[data-language="ar"]')) {
+            floatingSwitcher.querySelector('[data-language="ar"]').setAttribute('type', 'button');
+        }
     }
 
     function removeDuplicateNodes(selector) {
