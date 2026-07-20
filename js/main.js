@@ -313,92 +313,38 @@ var SilvoraI18n = (function () {
                 title: 'خدمات التأشيرات | سيلفورا تالينزا وورلد',
                 description: 'حلول تأشيرات تشمل التأشيرة الذهبية والبطاقة الخضراء وتأشيرات العائلة والسياحة والأعمال في دبي.'
             }
+        },
+        'service-web-development.html': {
+            en: {
+                title: 'Website & Software Development - Silvora Talenza World',
+                description: 'Premium website and software development services including portals, CRM/ERP, apps, cloud solutions, and secure maintenance.'
+            },
+            ar: {
+                title: 'تطوير المواقع والبرمجيات | سيلفورا تالينزا وورلد',
+                description: 'خدمات احترافية لتطوير المواقع والبرمجيات تشمل البوابات وCRM وERP وتطبيقات الجوال والحلول السحابية والصيانة الآمنة.'
+            }
+        },
+        'service-digital-marketing.html': {
+            en: {
+                title: 'Digital Marketing - Silvora Talenza World',
+                description: 'Lead generation focused digital marketing services across SEO, paid media, social platforms, and brand growth execution.'
+            },
+            ar: {
+                title: 'التسويق الرقمي | سيلفورا تالينزا وورلد',
+                description: 'خدمات تسويق رقمي تركز على توليد العملاء المحتملين عبر السيو والإعلانات المدفوعة ومنصات التواصل ونمو العلامة التجارية.'
+            }
         }
     };
 
     var enterpriseServiceColumns = [
-        {
-            icon: 'fa-user-tie',
-            en: 'Recruitment Services',
-            ar: 'خدمات التوظيف',
-            items: [
-                { href: 'recruitment-overseas.html', en: 'Overseas Recruitment', ar: 'التوظيف الخارجي', enDesc: 'Cross-border talent sourcing and deployment support.', arDesc: 'استقطاب المواهب عبر الحدود ودعم التعيين الدولي.' },
-                { href: 'recruitment-uae.html', en: 'UAE Recruitment', ar: 'التوظيف داخل الإمارات', enDesc: 'Local UAE hiring for fast role fulfillment.', arDesc: 'توظيف محلي سريع داخل الإمارات لتغطية الوظائف.' },
-                { href: 'recruitment-executive-search.html', en: 'Executive Search', ar: 'البحث التنفيذي', enDesc: 'Leadership hiring for critical business roles.', arDesc: 'تعيين القيادات للأدوار المؤسسية الحساسة.' },
-                { href: 'recruitment-blue-collar.html', en: 'Blue Collar Recruitment', ar: 'توظيف العمالة الفنية', enDesc: 'Operational workforce recruitment at scale.', arDesc: 'توظيف العمالة التشغيلية على نطاق واسع.' },
-                { href: 'recruitment-white-collar.html', en: 'White Collar Recruitment', ar: 'توظيف الكوادر المتخصصة', enDesc: 'Specialist and office talent acquisition.', arDesc: 'استقطاب الكوادر المكتبية والمتخصصة.' },
-                { href: 'recruitment-temporary-staffing.html', en: 'Temporary Staffing', ar: 'التوظيف المؤقت', enDesc: 'Flexible staffing for short-term demand peaks.', arDesc: 'توظيف مرن لتغطية الاحتياجات المؤقتة.' },
-                { href: 'recruitment-permanent-staffing.html', en: 'Permanent Staffing', ar: 'التوظيف الدائم', enDesc: 'Long-term workforce planning and placement.', arDesc: 'تخطيط وتوظيف الكوادر الدائمة للنمو المستمر.' },
-                { href: 'recruitment-hr-consultancy.html', en: 'HR Consultancy', ar: 'استشارات الموارد البشرية', enDesc: 'Policy, compliance, and HR operating frameworks.', arDesc: 'سياسات وامتثال وأطر تشغيل الموارد البشرية.' }
-            ]
-        },
-        {
-            icon: 'fa-passport',
-            en: 'Visa Services',
-            ar: 'خدمات التأشيرات',
-            items: [
-                { href: 'visa-uae-golden.html', en: 'UAE Golden Visa', ar: 'تأشيرة الإمارات الذهبية', enDesc: 'Long-term residency pathways for eligible profiles.', arDesc: 'مسارات إقامة طويلة الأمد للفئات المؤهلة.' },
-                { href: 'visa-uae-visit.html', en: 'UAE Visit Visa', ar: 'تأشيرة الزيارة في الإمارات', enDesc: 'Short-stay visa coordination for UAE visitors.', arDesc: 'تنسيق تأشيرات الزيارة القصيرة للإمارات.' },
-                { href: 'visa-uae-employment.html', en: 'UAE Employment Visa', ar: 'تأشيرة العمل في الإمارات', enDesc: 'Employer-sponsored visa processing support.', arDesc: 'دعم معالجة التأشيرات بكفالة جهة العمل.' },
-                { href: 'visa-uae-family.html', en: 'UAE Family Visa', ar: 'تأشيرة الأسرة في الإمارات', enDesc: 'Dependent and family sponsorship services.', arDesc: 'خدمات كفالة الأسرة والمعالين.' },
-                { href: 'visa-schengen.html', en: 'Schengen Visa', ar: 'تأشيرة شنغن', enDesc: 'Structured filing for Europe short-stay travel.', arDesc: 'تقديم منظم لتأشيرات السفر القصير إلى أوروبا.' },
-                { href: 'visa-europe-work-permit.html', en: 'Europe Work Permit', ar: 'تصريح العمل في أوروبا', enDesc: 'Work permit routes for selected EU destinations.', arDesc: 'مسارات تصاريح العمل لوجهات أوروبية مختارة.' },
-                { href: 'visa-student.html', en: 'Student Visa', ar: 'تأشيرة الطالب', enDesc: 'Study-route visa preparation and support.', arDesc: 'تجهيز ودعم تأشيرات المسار الدراسي.' },
-                { href: 'visa-business.html', en: 'Business Visa', ar: 'التأشيرة التجارية', enDesc: 'Business travel visa filings for professionals.', arDesc: 'معاملات تأشيرات السفر التجاري للمهنيين.' },
-                { href: 'visa-tourist.html', en: 'Tourist Visa', ar: 'التأشيرة السياحية', enDesc: 'Tourism-focused visa guidance and paperwork.', arDesc: 'إرشاد سياحي وتجهيز كامل لمعاملات التأشيرة.' },
-                { href: 'visa-usa.html', en: 'USA Visa', ar: 'تأشيرة الولايات المتحدة', enDesc: 'US travel visa support and interview readiness.', arDesc: 'دعم تأشيرة أمريكا والاستعداد للمقابلة.' },
-                { href: 'visa-canada.html', en: 'Canada Visa', ar: 'تأشيرة كندا', enDesc: 'Canadian visa pathways for travel and study.', arDesc: 'مسارات التأشيرة الكندية للسفر والدراسة.' },
-                { href: 'visa-uk.html', en: 'UK Visa', ar: 'تأشيرة المملكة المتحدة', enDesc: 'UK visa processing with complete documentation.', arDesc: 'معالجة تأشيرة المملكة المتحدة بملف مكتمل.' },
-                { href: 'visa-australia.html', en: 'Australia Visa', ar: 'تأشيرة أستراليا', enDesc: 'Australian travel and study visa support.', arDesc: 'دعم تأشيرات السفر والدراسة إلى أستراليا.' }
-            ]
-        },
-        {
-            icon: 'fa-briefcase',
-            en: 'Business Services',
-            ar: 'خدمات الأعمال',
-            items: [
-                { href: 'pro-business-setup.html', en: 'Business Setup', ar: 'تأسيس الأعمال', enDesc: 'End-to-end setup for new ventures in UAE.', arDesc: 'تأسيس متكامل للمشاريع الجديدة في الإمارات.' },
-                { href: 'service-company.html', en: 'Company Formation', ar: 'تأسيس الشركات', enDesc: 'Mainland and free-zone company formation.', arDesc: 'تأسيس شركات في البر الرئيسي والمناطق الحرة.' },
-                { href: 'pro-trade-license.html', en: 'Trade License', ar: 'الرخصة التجارية', enDesc: 'Issuance, renewal, and amendment services.', arDesc: 'إصدار وتجديد وتعديل الرخص التجارية.' },
-                { href: 'service-pro.html', en: 'PRO Services', ar: 'خدمات PRO', enDesc: 'Government liaison and filing management.', arDesc: 'تنسيق حكومي وإدارة تقديم المعاملات.' },
-                { href: 'pro-vat.html', en: 'VAT Registration', ar: 'تسجيل ضريبة القيمة المضافة', enDesc: 'VAT setup and compliance documentation.', arDesc: 'إعداد ضريبة القيمة المضافة ومستندات الامتثال.' },
-                { href: 'pro-corporate-tax.html', en: 'Corporate Tax', ar: 'الضريبة على الشركات', enDesc: 'Corporate tax registration and advisory.', arDesc: 'تسجيل ضريبة الشركات والإرشاد الضريبي.' },
-                { href: 'pro-document-clearing.html', en: 'Document Clearing', ar: 'تخليص المعاملات', enDesc: 'Document processing across authorities.', arDesc: 'تخليص المعاملات عبر الجهات المختصة.' },
-                { href: 'pro-attestation.html', en: 'Attestation', ar: 'التصديق', enDesc: 'Local and international document attestation.', arDesc: 'تصديق المستندات محلياً ودولياً.' }
-            ]
-        },
-        {
-            icon: 'fa-laptop-code',
-            en: 'Digital Services',
-            ar: 'الخدمات الرقمية',
-            items: [
-                { href: 'website-development.html', en: 'Website Development', ar: 'تطوير المواقع', enDesc: 'Corporate websites built for performance.', arDesc: 'مواقع مؤسسية مبنية للأداء والتحويل.' },
-                { href: 'website-crm-development.html', en: 'CRM Development', ar: 'تطوير أنظمة CRM', enDesc: 'Custom CRM workflows for operations teams.', arDesc: 'تطوير CRM مخصص للفرق التشغيلية.' },
-                { href: 'website-mobile-app-development.html', en: 'Mobile App Development', ar: 'تطوير تطبيقات الجوال', enDesc: 'Business apps for customer and internal use.', arDesc: 'تطبيقات أعمال للعملاء والفرق الداخلية.' },
-                { href: 'website-digital-marketing.html', en: 'Digital Marketing', ar: 'التسويق الرقمي', enDesc: 'Integrated campaign strategy and delivery.', arDesc: 'استراتيجية حملات رقمية متكاملة.' },
-                { href: 'website-seo.html', en: 'SEO', ar: 'تحسين محركات البحث', enDesc: 'Search visibility optimization and growth.', arDesc: 'تحسين الظهور في محركات البحث والنمو.' },
-                { href: 'website-google-ads.html', en: 'Google Ads', ar: 'إعلانات جوجل', enDesc: 'Performance ads for qualified lead flow.', arDesc: 'إعلانات أداء لاستقطاب عملاء محتملين.' },
-                { href: 'website-meta-ads.html', en: 'Meta Ads', ar: 'إعلانات ميتا', enDesc: 'Paid social campaigns for acquisition.', arDesc: 'حملات مدفوعة لاكتساب العملاء عبر السوشيال.' },
-                { href: 'website-branding.html', en: 'Branding', ar: 'الهوية التجارية', enDesc: 'Brand identity systems and messaging.', arDesc: 'أنظمة هوية العلامة والرسائل التسويقية.' },
-                { href: 'website-logo-design.html', en: 'Logo Design', ar: 'تصميم الشعارات', enDesc: 'Professional logo direction and execution.', arDesc: 'تصميم شعارات احترافي متسق مع الهوية.' }
-            ]
-        }
+        { href: 'service-jobs.html', en: 'Manpower Services', ar: 'خدمات القوى العاملة', icon: 'fa-user-tie' },
+        { href: 'service-education.html', en: 'Abroad Education', ar: 'التعليم بالخارج', icon: 'fa-graduation-cap' },
+        { href: 'service-visa.html', en: 'Visa Services', ar: 'خدمات التأشيرات', icon: 'fa-passport' },
+        { href: 'service-pro.html', en: 'PRO Services', ar: 'خدمات PRO', icon: 'fa-file-signature' },
+        { href: 'service-company.html', en: 'Business Setup', ar: 'تأسيس الأعمال', icon: 'fa-briefcase' },
+        { href: 'service-web-development.html', en: 'Website & Software Development', ar: 'تطوير المواقع والبرمجيات', icon: 'fa-code' },
+        { href: 'service-digital-marketing.html', en: 'Digital Marketing', ar: 'التسويق الرقمي', icon: 'fa-bullhorn' }
     ];
-
-    var enterpriseWhyChoose = {
-        enTitle: 'Why Choose Silvora',
-        arTitle: 'لماذا سيلفورا',
-        points: [
-            { en: '20+ Years Experience', ar: 'خبرة تتجاوز 20 عاماً' },
-            { en: 'Licensed Recruitment', ar: 'توظيف مرخص ومعتمد' },
-            { en: 'Global Network', ar: 'شبكة علاقات عالمية' },
-            { en: 'Fast Processing', ar: 'إنجاز سريع للمعاملات' },
-            { en: 'Dedicated Support', ar: 'دعم مخصص ومستمر' }
-        ],
-        ctaHref: 'contact.html',
-        ctaEn: 'Speak to an Expert',
-        ctaAr: 'تحدث مع خبير'
-    };
 
     var corporateBaseLinks = [
         { href: 'index.html', en: 'Home', ar: 'الرئيسية', key: 'home' },
@@ -447,11 +393,11 @@ var SilvoraI18n = (function () {
         var isHome = activeKey === 'home';
         return '<div class="container-fluid position-relative p-0 stw-nav-shell">' +
             '<nav class="navbar navbar-expand-lg navbar-light stw-header ' + (isHome ? 'stw-header-home' : 'stw-header-inner') + ' px-3 px-xl-4 py-2" aria-label="Primary navigation">' +
-                '<a href="index.html" class="navbar-brand p-0" aria-label="Silvora Talenza World Home">' +
+                '<a href="index.html" class="navbar-brand p-0 stw-brand-link" aria-label="Silvora Talenza World LLC Home">' +
                     '<span class="m-0 d-flex align-items-center stw-brand">' +
                         '<img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World Logo" class="logo-white">' +
                         '<img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World Logo" class="logo-blue">' +
-                        '<span class="brand-text"><span class="english-text stw-brand-name">Silvora Talenza World</span><span class="brand-text-ar arabic-text stw-brand-name" dir="rtl">سيلفورا تالينزا وورلد</span></span>' +
+                        '<span class="brand-text"><span class="english-text stw-brand-name">Silvora Talenza World LLC</span><span class="brand-text-ar arabic-text stw-brand-name" dir="rtl">سيلفورا تالينزا وورلد ذ.م.م</span><span class="english-text stw-brand-tagline">Global HR &amp; Business Solutions</span><span class="arabic-text stw-brand-tagline stw-brand-tagline-ar" dir="rtl">حلول عالمية للموارد البشرية والأعمال</span></span>' +
                     '</span>' +
                 '</a>' +
                 '<div class="stw-header-actions d-none d-lg-inline-flex">' +
@@ -459,7 +405,7 @@ var SilvoraI18n = (function () {
                         '<button type="button" data-language="en">EN</button><span aria-hidden="true">/</span><button type="button" data-language="ar" dir="rtl">العربية</button>' +
                     '</div>' +
                     '<a href="https://wa.me/971585895827" class="btn btn-outline-light stw-header-btn stw-wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i><span class="english-text">WhatsApp</span><span class="arabic-text" dir="rtl">واتساب</span></a>' +
-                    '<a href="tel:+971585895827" class="btn btn-warning stw-header-btn stw-call-btn" aria-label="Call"><i class="fa fa-phone"></i><span class="english-text stw-call-full">Call Now</span><span class="english-text stw-call-short">Call</span><span class="arabic-text stw-call-ar" dir="rtl">اتصل الآن</span></a>' +
+                    '<a href="tel:+971585895827" class="btn btn-warning stw-header-btn stw-call-btn" aria-label="Call us"><i class="fa fa-phone"></i><span class="english-text stw-call-full">Call Us</span><span class="english-text stw-call-short">Call</span><span class="arabic-text stw-call-ar" dir="rtl">اتصل بنا</span></a>' +
                 '</div>' +
                 '<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>' +
                 '<div class="collapse navbar-collapse" id="navbarCollapse">' +
@@ -504,12 +450,12 @@ var SilvoraI18n = (function () {
                 '<div class="col-md-6 col-lg-3">' +
                     '<h5 class="english-text">Our Services</h5><h5 class="arabic-text" dir="rtl">خدماتنا</h5>' +
                     '<div class="footer-menu d-grid gap-1">' +
-                        '<a href="recruitment-overseas.html"><span class="english-text">Manpower Recruitment</span><span class="arabic-text" dir="rtl">توظيف الكوادر</span></a>' +
+                        '<a href="service-jobs.html"><span class="english-text">Manpower Services</span><span class="arabic-text" dir="rtl">خدمات القوى العاملة</span></a>' +
                         '<a href="service-visa.html"><span class="english-text">Visa Services</span><span class="arabic-text" dir="rtl">خدمات التأشيرات</span></a>' +
                         '<a href="service-pro.html"><span class="english-text">PRO Services</span><span class="arabic-text" dir="rtl">خدمات PRO</span></a>' +
                         '<a href="service-company.html"><span class="english-text">Business Setup</span><span class="arabic-text" dir="rtl">تأسيس الأعمال</span></a>' +
-                        '<a href="website-development.html"><span class="english-text">Website Development</span><span class="arabic-text" dir="rtl">تطوير المواقع</span></a>' +
-                        '<a href="website-digital-marketing.html"><span class="english-text">Digital Marketing</span><span class="arabic-text" dir="rtl">التسويق الرقمي</span></a>' +
+                        '<a href="service-web-development.html"><span class="english-text">Website & Software Development</span><span class="arabic-text" dir="rtl">تطوير المواقع والبرمجيات</span></a>' +
+                        '<a href="service-digital-marketing.html"><span class="english-text">Digital Marketing</span><span class="arabic-text" dir="rtl">التسويق الرقمي</span></a>' +
                     '</div>' +
                 '</div>' +
                 '<div class="col-md-6 col-lg-3">' +
@@ -1012,59 +958,16 @@ var SilvoraI18n = (function () {
 
             var wrapper = document.createElement('div');
             wrapper.className = 'nav-item dropdown enterprise-mega';
-            wrapper.innerHTML = '<button type="button" class="nav-link enterprise-mega-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="enterprise-services-panel"><span class="english-text">Services</span><span class="arabic-text" dir="rtl">خدماتنا</span><i class="fa fa-chevron-down ms-2"></i></button><div id="enterprise-services-panel" class="enterprise-mega-panel" role="region" aria-label="Services mega menu"><div class="enterprise-mega-shell"><div class="enterprise-mega-grid"></div><div class="enterprise-mega-foot"><a class="enterprise-mega-view-all" href="service.html"><span class="english-text">View All Services</span><span class="arabic-text" dir="rtl">عرض جميع الخدمات</span></a></div></div></div>';
+            wrapper.innerHTML = '<button type="button" class="nav-link enterprise-mega-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="enterprise-services-panel"><span class="english-text">Services</span><span class="arabic-text" dir="rtl">خدماتنا</span><i class="fa fa-chevron-down ms-2"></i></button><div id="enterprise-services-panel" class="enterprise-mega-panel" role="region" aria-label="Services mega menu"><div class="enterprise-mega-shell"><div class="enterprise-mega-links"></div></div></div>';
 
-            var panel = wrapper.querySelector('.enterprise-mega-grid');
-            enterpriseServiceColumns.forEach(function (group, groupIndex) {
-                var details = document.createElement('details');
-                details.className = 'enterprise-mega-column';
-                details.open = window.matchMedia('(min-width: 992px)').matches || groupIndex === 0;
-                var summary = document.createElement('summary');
-                summary.innerHTML = '<span class="enterprise-mega-title"><i class="fa ' + group.icon + '"></i><span class="english-text">' + group.en + '</span><span class="arabic-text" dir="rtl">' + group.ar + '</span></span>';
-                details.appendChild(summary);
-
-                summary.addEventListener('click', function () {
-                    if (window.matchMedia('(min-width: 992px)').matches) {
-                        return;
-                    }
-
-                    setTimeout(function () {
-                        if (!details.open) {
-                            return;
-                        }
-
-                        panel.querySelectorAll('.enterprise-mega-column').forEach(function (column) {
-                            if (column !== details && !column.classList.contains('enterprise-mega-aside')) {
-                                column.open = false;
-                            }
-                        });
-                    }, 0);
-                });
-
-                var links = document.createElement('div');
-                links.className = 'enterprise-mega-links';
-                group.items.forEach(function (item) {
-                    var anchor = document.createElement('a');
-                    anchor.href = item.href;
-                    anchor.className = 'enterprise-mega-item';
-                    anchor.innerHTML = '<span class="enterprise-mega-item-icon"><i class="fa fa-angle-right"></i></span><span class="enterprise-mega-item-copy"><span class="enterprise-mega-item-title english-text">' + item.en + '</span><span class="enterprise-mega-item-title arabic-text" dir="rtl">' + item.ar + '</span><span class="enterprise-mega-item-desc english-text">' + item.enDesc + '</span><span class="enterprise-mega-item-desc arabic-text" dir="rtl">' + item.arDesc + '</span></span>';
-                    links.appendChild(anchor);
-                });
-
-                details.appendChild(links);
-                panel.appendChild(details);
+            var panel = wrapper.querySelector('.enterprise-mega-links');
+            enterpriseServiceColumns.forEach(function (item) {
+                var anchor = document.createElement('a');
+                anchor.href = item.href;
+                anchor.className = 'enterprise-mega-item';
+                anchor.innerHTML = '<span class="enterprise-mega-item-icon"><i class="fa ' + item.icon + '"></i></span><span class="enterprise-mega-item-copy"><span class="enterprise-mega-item-title english-text">' + item.en + '</span><span class="enterprise-mega-item-title arabic-text" dir="rtl">' + item.ar + '</span></span>';
+                panel.appendChild(anchor);
             });
-
-            var aside = document.createElement('aside');
-            aside.className = 'enterprise-mega-column enterprise-mega-aside';
-            aside.innerHTML = '<div class="enterprise-mega-aside-title"><i class="fa fa-shield-alt"></i><span class="english-text">' + enterpriseWhyChoose.enTitle + '</span><span class="arabic-text" dir="rtl">' + enterpriseWhyChoose.arTitle + '</span></div><ul class="enterprise-mega-aside-points"></ul><a class="enterprise-mega-aside-cta" href="' + enterpriseWhyChoose.ctaHref + '"><span class="english-text">' + enterpriseWhyChoose.ctaEn + '</span><span class="arabic-text" dir="rtl">' + enterpriseWhyChoose.ctaAr + '</span></a>';
-            var asideList = aside.querySelector('.enterprise-mega-aside-points');
-            enterpriseWhyChoose.points.forEach(function (point) {
-                var li = document.createElement('li');
-                li.innerHTML = '<i class="fa fa-check-circle"></i><span class="english-text">' + point.en + '</span><span class="arabic-text" dir="rtl">' + point.ar + '</span>';
-                asideList.appendChild(li);
-            });
-            panel.appendChild(aside);
 
             serviceLink.replaceWith(wrapper);
 
@@ -1221,20 +1124,9 @@ var SilvoraI18n = (function () {
             });
 
             window.addEventListener('resize', function () {
-                if (window.matchMedia('(min-width: 992px)').matches) {
-                    document.querySelectorAll('.enterprise-mega-column').forEach(function (column) {
-                        if (!column.classList.contains('enterprise-mega-aside')) {
-                            column.open = true;
-                        }
-                    });
-                    return;
+                if (!window.matchMedia('(min-width: 992px)').matches) {
+                    closeMenu();
                 }
-
-                document.querySelectorAll('.enterprise-mega-column').forEach(function (column, index) {
-                    if (!column.classList.contains('enterprise-mega-aside')) {
-                        column.open = index === 0;
-                    }
-                });
             });
 
             document.body.dataset.enterpriseMegaBound = 'true';
@@ -1869,7 +1761,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.querySelectorAll('form[action="contact.php"], form[data-contact-form]').forEach(function (form) {
+    document.querySelectorAll('form[action="contact.php"], form[action="manpower-request.php"], form[action="lib/PHPMailer/smtp-contact.php"], form[data-contact-form]').forEach(function (form) {
+        if (!form.querySelector('input[name="_website"]')) {
+            var hp = document.createElement('input');
+            hp.type = 'text';
+            hp.name = '_website';
+            hp.tabIndex = -1;
+            hp.autocomplete = 'off';
+            hp.setAttribute('aria-hidden', 'true');
+            hp.style.position = 'absolute';
+            hp.style.left = '-9999px';
+            form.appendChild(hp);
+        }
+
+        if (!form.querySelector('input[name="_ts"]')) {
+            var ts = document.createElement('input');
+            ts.type = 'hidden';
+            ts.name = '_ts';
+            ts.value = Math.floor(Date.now() / 1000).toString();
+            form.appendChild(ts);
+        }
+
         var phoneInput = form.querySelector('input[name="phone"]');
         var documentsInput = form.querySelector('input[name="documents[]"]');
         var feedback = addFormFeedback(form);
@@ -1890,20 +1802,50 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         form.addEventListener('submit', function (event) {
+            if (form.dataset.submitting === 'true') {
+                event.preventDefault();
+                return;
+            }
+
             var phoneValid = validatePhoneField(phoneInput);
             var documentsValid = validateDocumentsField(documentsInput);
+            var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
 
             if (!form.checkValidity() || !phoneValid || !documentsValid) {
                 event.preventDefault();
                 feedback.textContent = 'Please complete all required fields and correct any invalid email, phone, or file inputs before submitting.';
                 feedback.classList.add('is-error');
                 feedback.classList.remove('is-success');
+                if (submitButton) {
+                    submitButton.disabled = false;
+                }
+                form.dataset.submitting = 'false';
                 return;
+            }
+
+            form.dataset.submitting = 'true';
+            if (submitButton) {
+                if (!submitButton.dataset.originalLabel) {
+                    submitButton.dataset.originalLabel = submitButton.innerHTML;
+                }
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...';
             }
 
             feedback.textContent = 'Submitting your enquiry...';
             feedback.classList.add('is-success');
             feedback.classList.remove('is-error');
+
+            window.setTimeout(function () {
+                if (form.dataset.submitting !== 'true') {
+                    return;
+                }
+                form.dataset.submitting = 'false';
+                if (submitButton && submitButton.dataset.originalLabel) {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = submitButton.dataset.originalLabel;
+                }
+            }, 15000);
         });
     });
 
@@ -2089,7 +2031,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var footerGroups = document.createElement('div');
             footerGroups.className = 'footer-link-groups';
             footerGroups.setAttribute('data-footer-link-groups', 'true');
-            footerGroups.innerHTML = '<h6>Recruitment Services</h6><div class="link-row"><a href="service-jobs.html">Recruitment Services</a><a href="service-visa.html">Visa Services</a><a href="service-pro.html">PRO Services</a><a href="service-company.html">Business Setup</a><a href="service-digital.html">Digital Solutions</a></div><h6>Policies</h6><div class="link-row"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-and-conditions.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="sitemap.xml">Sitemap</a></div>';
+            footerGroups.innerHTML = '<h6>Core Services</h6><div class="link-row"><a href="service-jobs.html">Manpower Services</a><a href="service-visa.html">Visa Services</a><a href="service-pro.html">PRO Services</a><a href="service-company.html">Business Setup</a><a href="service-web-development.html">Website &amp; Software Development</a><a href="service-digital-marketing.html">Digital Marketing</a></div><h6>Policies</h6><div class="link-row"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-and-conditions.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="sitemap.xml">Sitemap</a></div>';
             popularLinkCol.appendChild(footerGroups);
         }
     });

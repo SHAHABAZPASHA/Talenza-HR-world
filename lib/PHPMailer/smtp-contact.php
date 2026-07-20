@@ -1,11 +1,15 @@
 <?php
-// PHPMailer SMTP contact form handler for Silvora Talenza World
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
+ini_set('display_errors', '0');
+error_reporting(E_ALL);
 
 require 'lib/PHPMailer/src/Exception.php';
 require 'lib/PHPMailer/src/PHPMailer.php';
 require 'lib/PHPMailer/src/SMTP.php';
+require __DIR__ . '/../../mailer.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -13,65 +17,82 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-function field($key) {
-    return isset($_POST[$key]) ? trim($_POST[$key]) : '';
-}
+$config = SilvoraMailer::config();
 
-$name    = field('name');
-$email   = field('email');
-$phone   = field('phone');
-$service = field('service');
-$subject = field('subject');
-$message = field('message');
-
-if ($name === '' || $email === '' || $subject === '' || $message === '' || $service === '') {
-    echo 'Please fill in all required fields.';
+if (!SilvoraMailer::isSameOriginRequest()) {
+    http_response_code(403);
+    echo 'Request blocked.';
     exit;
 }
 
+function f(string $key): string
+{
+    return SilvoraMailer::sanitizeText((string) ($_POST[$key] ?? ''));
+}
+
+$name = f('name');
+$email = SilvoraMailer::sanitizeEmail((string) ($_POST['email'] ?? ''));
+$phone = f('phone');
+$service = f('service');
+$subject = f('subject');
+$message = trim((string) ($_POST['message'] ?? ''));
+
+if ($name === '' || $email === '' || $subject === '' || $service === '' || $message === '') {
+    echo 'Please fill in all required fields.';
+    exit;
+}
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo 'Please provide a valid email address.';
     exit;
 }
 
-$email_safe   = str_replace(["\r", "\n"], '', $email);
-$subject_safe = str_replace(["\r", "\n"], '', $subject);
-$email_subject = 'New enquiry from Silvora Talenza World website: ' . $subject_safe;
+$reference = SilvoraMailer::referenceId();
+$fields = [
+    'Name' => $name,
+    'Email' => $email,
+    'Phone / WhatsApp' => $phone,
+    'Service' => $service,
+    'Message' => SilvoraMailer::sanitizeText($message),
+];
 
-$lines = [];
-$lines[] = 'You have received a new enquiry from the Silvora Talenza World website.';
-$lines[] = '';
-$lines[] = 'Name: ' . $name;
-$lines[] = 'Email: ' . $email_safe;
-if ($phone !== '') {
-    $lines[] = 'Phone / WhatsApp: ' . $phone;
-}
-$lines[] = 'Service interested in: ' . $service;
-$lines[] = '';
-$lines[] = 'Message:';
-$lines[] = $message;
-$body = implode("\r\n", $lines);
+$payload = [
+    'reference' => $reference,
+    'form_name' => $service . ' Form',
+    'subject' => $subject,
+    'sender_name' => $name,
+    'sender_email' => $email,
+    'ip' => SilvoraMailer::clientIp(),
+    'user_agent' => SilvoraMailer::userAgent(),
+    'fields' => $fields,
+];
 
 $mail = new PHPMailer(true);
+$sent = false;
 
 try {
-    // SMTP settings
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.zoho.in';
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'info@silvoratalenzaworld.com';
-    $mail->Password   = 'Info@talentra2025';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port       = 465;
-
-    $mail->setFrom('info@silvoratalenzaworld.com', 'Silvora Talenza World Website');
-    $mail->addAddress('info@silvoratalenzaworld.com');
-    $mail->addReplyTo($email_safe, $name);
-    $mail->Subject = $email_subject;
-    $mail->Body    = $body;
-
+    SilvoraMailer::configureMailer($mail, $config);
+    foreach (SilvoraMailer::recipients($config) as $recipient) {
+        $mail->addAddress($recipient);
+    }
+    foreach (SilvoraMailer::bccRecipients($config) as $bcc) {
+        $mail->addBCC($bcc);
+    }
+    $mail->addReplyTo($email, $name);
+    $mail->isHTML(true);
+    $mail->Subject = '[' . $reference . '] ' . $subject;
+    $mail->Body = SilvoraMailer::buildAdminEmailHtml($payload, $config);
     $mail->send();
     $sent = true;
+
+    if (!empty($config['auto_reply_enabled'])) {
+        $reply = new PHPMailer(true);
+        SilvoraMailer::configureMailer($reply, $config);
+        $reply->addAddress($email, $name);
+        $reply->isHTML(true);
+        $reply->Subject = 'Thank You for Contacting Silvora Talenza World LLC';
+        $reply->Body = SilvoraMailer::buildAutoReplyHtml($payload, $config);
+        $reply->send();
+    }
 } catch (Exception $e) {
     $sent = false;
 }
@@ -93,10 +114,10 @@ try {
                     <div class="card-body p-4 text-center">
                         <?php if ($sent): ?>
                             <h3 class="mb-3 text-success">Thank you, <?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?>!</h3>
-                            <p class="mb-4">Your message has been sent to Silvora Talenza World. Our team will contact you shortly.</p>
+                            <p class="mb-4">Your message has been sent successfully. Reference: <strong><?= htmlspecialchars($reference, ENT_QUOTES, 'UTF-8') ?></strong></p>
                         <?php else: ?>
                             <h3 class="mb-3 text-danger">Oops, something went wrong.</h3>
-                            <p class="mb-4">We could not send your message right now. Please try again later or email us directly at <a href="mailto:info@silvoratalenzaworld.com">info@silvoratalenzaworld.com</a>.</p>
+                            <p class="mb-4">We could not send your message right now. Please try again later or email us directly at <a href="mailto:<?= htmlspecialchars($config['from_email'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($config['from_email'], ENT_QUOTES, 'UTF-8') ?></a>.</p>
                         <?php endif; ?>
                         <a href="index.html" class="btn btn-primary rounded-pill px-4">Back to Home</a>
                     </div>
