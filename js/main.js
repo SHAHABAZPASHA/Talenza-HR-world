@@ -1743,6 +1743,38 @@ document.addEventListener('DOMContentLoaded', function () {
     var pageName = pathName.split('/').pop() || 'index.html';
     document.body.classList.add('page-' + pageName.replace('.html', '').replace(/[^a-z0-9-]/g, '-'));
 
+    function ensureGlobalFavicons() {
+        var faviconBase = 'img/favicon2/';
+        var faviconMap = [
+            { selector: 'link[rel="apple-touch-icon"]', rel: 'apple-touch-icon', href: faviconBase + 'apple-touch-icon.png', sizes: '180x180' },
+            { selector: 'link[rel="icon"][sizes="32x32"]', rel: 'icon', href: faviconBase + 'favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+            { selector: 'link[rel="icon"][sizes="16x16"]', rel: 'icon', href: faviconBase + 'favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+            { selector: 'link[rel="manifest"]', rel: 'manifest', href: faviconBase + 'site.webmanifest' },
+            { selector: 'link[rel="shortcut icon"], link[rel="icon"][href$="favicon.ico"]', rel: 'shortcut icon', href: faviconBase + 'favicon.ico', type: 'image/x-icon' }
+        ];
+
+        faviconMap.forEach(function (item) {
+            var link = document.head.querySelector(item.selector);
+            if (!link) {
+                link = document.createElement('link');
+                document.head.appendChild(link);
+            }
+
+            link.setAttribute('rel', item.rel);
+            link.setAttribute('href', item.href);
+
+            if (item.sizes) {
+                link.setAttribute('sizes', item.sizes);
+            }
+
+            if (item.type) {
+                link.setAttribute('type', item.type);
+            }
+        });
+    }
+
+    ensureGlobalFavicons();
+
     function uiTranslate(key, options) {
         if (window.SilvoraI18n && typeof window.SilvoraI18n.translate === 'function') {
             var translated = window.SilvoraI18n.translate(key, options || {});
@@ -2232,6 +2264,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        function buildEnhancedHomeOverviewMarkup() {
+            return '<div class="container"><div class="row g-4 align-items-stretch"><div class="col-lg-8"><div class="stw-card stw-coverage-card"><div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-3"><div><h2 class="h4 mb-2 english-text">Industries We Serve</h2><p class="mb-0 stw-coverage-copy">Sector-aligned recruitment, visa, and corporate support built for fast-moving employers and candidates.</p></div><span class="stw-coverage-badge"><i class="fa fa-globe"></i>Global Hiring Coverage</span></div><div class="stw-logo-track" data-logo-track data-logo-speed="0.65"><div class="stw-logo-track-row"><span><i class="fa fa-hard-hat"></i>Construction</span><span><i class="fa fa-hotel"></i>Hospitality</span><span><i class="fa fa-heartbeat"></i>Healthcare</span><span><i class="fa fa-truck"></i>Logistics</span><span><i class="fa fa-store"></i>Retail</span><span><i class="fa fa-industry"></i>Manufacturing</span><span><i class="fa fa-plane"></i>Aviation</span><span><i class="fa fa-building"></i>Facility Management</span><span><i class="fa fa-shield-alt"></i>Security</span><span><i class="fa fa-warehouse"></i>Warehousing</span></div></div><div class="row g-3 mt-2"><div class="col-md-6"><div class="stw-mini-card"><h3>Countries We Recruit From</h3><p>UAE, India, Pakistan, Nepal, Bangladesh, Sri Lanka, Philippines, Kenya</p></div></div><div class="col-md-6"><div class="stw-mini-card"><h3>Countries We Recruit To</h3><p>UAE, Saudi Arabia, Qatar, Oman, Bahrain, Romania, Poland, Croatia, Serbia, Portugal, Germany, Italy</p></div></div></div><div class="stw-coverage-panel mt-3" aria-label="Recruitment coverage highlights"><div class="stw-coverage-panel__route"><span class="stw-coverage-panel__label">Source Markets</span><div class="stw-coverage-panel__chips"><span>South Asia</span><span>East Africa</span><span>UAE Talent Pool</span></div></div><div class="stw-coverage-panel__route"><span class="stw-coverage-panel__label">Destination Markets</span><div class="stw-coverage-panel__chips"><span>UAE</span><span>GCC</span><span>Europe</span></div></div><div class="stw-coverage-panel__route stw-coverage-panel__route--accent"><span class="stw-coverage-panel__label">Delivery Strength</span><p class="mb-0">Recruitment, visa processing, onboarding coordination, and corporate advisory under one service framework.</p></div></div></div></div><div class="col-lg-4"><div class="stw-card stw-strength-card"><h2 class="h5 mb-3 english-text">Operational Highlights</h2><div class="stw-counter-grid stw-counter-grid--premium"><div><strong data-counter-target="20" data-counter-suffix="+">0</strong><span>Years Experience</span></div><div><strong data-counter-target="1000" data-counter-suffix="+">0</strong><span>Candidates Assisted</span></div><div><strong data-counter-target="50" data-counter-suffix="+">0</strong><span>Corporate Clients</span></div><div><strong data-counter-target="15" data-counter-suffix="+">0</strong><span>Countries Served</span></div></div><div class="stw-strength-list mt-3"><div><i class="fa fa-shield-alt"></i><span>Trusted UAE Consultancy</span></div><div><i class="fa fa-file-alt"></i><span>Compliance-first processing</span></div><div><i class="fa fa-headset"></i><span>Dedicated bilingual support</span></div></div></div></div></div><div class="row g-4 mt-1"><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Recruitment Process</h3><ol class="stw-timeline"><li>Demand Planning</li><li>Sourcing & Screening</li><li>Client Interviews</li><li>Offer Management</li><li>Deployment</li></ol></div></div><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Visa Process</h3><ol class="stw-timeline"><li>Eligibility Review</li><li>Document Verification</li><li>Submission</li><li>Status Follow-up</li><li>Issuance Support</li></ol></div></div><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Business Setup Process</h3><ol class="stw-timeline"><li>Advisory</li><li>License Path</li><li>Approvals</li><li>Registration</li><li>Operational Launch</li></ol></div></div></div><div class="row g-4 mt-1"><div class="col-lg-6"><div class="stw-card"><h3 class="h6">Featured Jobs</h3><p>Explore active openings with fast-track recruiter coordination.</p><a class="btn btn-outline-primary btn-sm" href="jobs.html">Browse Jobs</a></div></div><div class="col-lg-6"><div class="stw-card"><h3 class="h6">Latest Blogs</h3><p>Market updates, hiring trends, and practical migration insights.</p><a class="btn btn-outline-primary btn-sm" href="blogs.html">Read Blog</a></div></div></div><div class="row g-4 mt-1"><div class="col-lg-8"><div class="stw-card"><h3 class="h6">Frequently Asked Questions</h3><div class="accordion" id="homeFaq"><div class="accordion-item"><h4 class="accordion-header" id="homeFaqH1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeFaqB1">Do you support end-to-end recruitment and visa coordination?</button></h4><div id="homeFaqB1" class="accordion-collapse collapse show" data-bs-parent="#homeFaq"><div class="accordion-body">Yes. Our teams coordinate sourcing, documentation, visa support, and onboarding workflows under one service framework.</div></div></div><div class="accordion-item"><h4 class="accordion-header" id="homeFaqH2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#homeFaqB2">Can you support multilingual stakeholder communication?</button></h4><div id="homeFaqB2" class="accordion-collapse collapse" data-bs-parent="#homeFaq"><div class="accordion-body">Yes. English and Arabic communication models are available for candidate and corporate engagement.</div></div></div></div></div></div><div class="col-lg-4"><div class="stw-card stw-final-cta"><h3 class="h6">Start Your Corporate Consultation</h3><p>Connect with Silvora specialists for recruitment, visa, PRO, business setup, and digital execution.</p><a class="btn btn-primary btn-sm" href="contact.html">Book Consultation</a></div></div></div></div>';
+        }
+
         function bindAwardsReveal(root) {
             if (!root) {
                 return;
@@ -2397,12 +2433,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 var block = document.createElement('section');
                 block.className = 'container-fluid py-5 stw-home-enhancements';
                 block.innerHTML = '<div class="container"><div class="row g-4"><div class="col-lg-8"><div class="stw-card"><h2 class="h4 mb-3 english-text">Industries We Serve</h2><div class="stw-logo-track" data-logo-track data-logo-speed="0.65"><div class="stw-logo-track-row"><span><i class="fa fa-hard-hat"></i>Construction</span><span><i class="fa fa-hotel"></i>Hospitality</span><span><i class="fa fa-heartbeat"></i>Healthcare</span><span><i class="fa fa-truck"></i>Logistics</span><span><i class="fa fa-store"></i>Retail</span><span><i class="fa fa-industry"></i>Manufacturing</span><span><i class="fa fa-plane"></i>Aviation</span><span><i class="fa fa-building"></i>Facility Management</span><span><i class="fa fa-shield-alt"></i>Security</span><span><i class="fa fa-warehouse"></i>Warehousing</span></div></div><div class="row g-3 mt-2"><div class="col-md-6"><div class="stw-mini-card"><h3>Countries We Recruit From</h3><p>UAE, India, Pakistan, Nepal, Bangladesh, Sri Lanka, Philippines, Kenya</p></div></div><div class="col-md-6"><div class="stw-mini-card"><h3>Countries We Recruit To</h3><p>UAE, Saudi Arabia, Qatar, Oman, Bahrain, Romania, Poland, Croatia, Serbia, Portugal, Germany, Italy</p></div></div></div><div class="stw-world-map mt-3" aria-label="Recruitment coverage map"><span class="pin pin-uae"></span><span class="pin pin-europe"></span><span class="pin pin-asia"></span></div></div></div><div class="col-lg-4"><div class="stw-card"><h2 class="h5 mb-3 english-text">Achievements</h2><div class="stw-counter-grid"><div><strong data-counter-target="20" data-counter-suffix="+">0</strong><span>Years Experience</span></div><div><strong data-counter-target="0" data-counter-suffix="+">0</strong><span>Candidates Placed (Update)</span></div><div><strong data-counter-target="0" data-counter-suffix="+">0</strong><span>Corporate Clients (Update)</span></div><div><strong data-counter-target="25" data-counter-suffix="+">0</strong><span>Countries Served</span></div></div></div></div></div><div class="row g-4 mt-1"><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Recruitment Process</h3><ol class="stw-timeline"><li>Demand Planning</li><li>Sourcing & Screening</li><li>Client Interviews</li><li>Offer Management</li><li>Deployment</li></ol></div></div><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Visa Process</h3><ol class="stw-timeline"><li>Eligibility Review</li><li>Document Verification</li><li>Submission</li><li>Status Follow-up</li><li>Issuance Support</li></ol></div></div><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Business Setup Process</h3><ol class="stw-timeline"><li>Advisory</li><li>License Path</li><li>Approvals</li><li>Registration</li><li>Operational Launch</li></ol></div></div></div><div class="row g-4 mt-1"><div class="col-lg-6"><div class="stw-card"><h3 class="h6">Featured Jobs</h3><p>Explore active openings with fast-track recruiter coordination.</p><a class="btn btn-outline-primary btn-sm" href="jobs.html">Browse Jobs</a></div></div><div class="col-lg-6"><div class="stw-card"><h3 class="h6">Latest Blogs</h3><p>Market updates, hiring trends, and practical migration insights.</p><a class="btn btn-outline-primary btn-sm" href="blogs.html">Read Blog</a></div></div></div><div class="row g-4 mt-1"><div class="col-lg-8"><div class="stw-card"><h3 class="h6">Frequently Asked Questions</h3><div class="accordion" id="homeFaq"><div class="accordion-item"><h4 class="accordion-header" id="homeFaqH1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeFaqB1">Do you support end-to-end recruitment and visa coordination?</button></h4><div id="homeFaqB1" class="accordion-collapse collapse show" data-bs-parent="#homeFaq"><div class="accordion-body">Yes. Our teams coordinate sourcing, documentation, visa support, and onboarding workflows under one service framework.</div></div></div><div class="accordion-item"><h4 class="accordion-header" id="homeFaqH2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#homeFaqB2">Can you support multilingual stakeholder communication?</button></h4><div id="homeFaqB2" class="accordion-collapse collapse" data-bs-parent="#homeFaq"><div class="accordion-body">Yes. English and Arabic communication models are available for candidate and corporate engagement.</div></div></div></div></div></div><div class="col-lg-4"><div class="stw-card stw-final-cta"><h3 class="h6">Start Your Corporate Consultation</h3><p>Connect with Silvora specialists for recruitment, visa, PRO, business setup, and digital execution.</p><a class="btn btn-primary btn-sm" href="contact.html">Book Consultation</a></div></div></div></div>';
+                block.innerHTML = buildEnhancedHomeOverviewMarkup();
                 heroHeader.insertAdjacentElement('afterend', block);
             }
         }
 
         if (!document.querySelector('.home-awards-section')) {
-            var awardsAnchor = document.querySelector('.stw-home-enhancements') || document.querySelector('.hero-header');
+            var awardsAnchor = document.querySelector('.hero-header');
             if (awardsAnchor) {
                 var awardsSection = document.createElement('section');
                 awardsSection.className = 'container-fluid py-5 home-awards-section';
@@ -2870,6 +2907,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var orderedSections = [
             document.querySelector('.process-home-section'),
             document.querySelector('.stats-section'),
+            document.querySelector('.home-awards-section'),
             sectionByHeading('Industries We Serve'),
             sectionByHeading('Countries We Recruit From'),
             sectionByHeading('Countries We Recruit For'),
