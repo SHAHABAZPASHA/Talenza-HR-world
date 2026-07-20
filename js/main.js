@@ -2165,6 +2165,24 @@ document.addEventListener('DOMContentLoaded', function () {
             { title: 'Restaurant Service Supervisor', country: 'UAE', location: 'Abu Dhabi', industry: 'Hospitality', department: 'Food & Beverage', type: 'Full Time', salary: 'AED 3,000 - 4,200', salaryValue: 4200, experience: '2+ years', posted: '2026-07-15', featured: false, urgent: true },
             { title: 'Warehouse Shift Coordinator', country: 'Saudi Arabia', location: 'Riyadh', industry: 'Logistics', department: 'Warehousing', type: 'Contract', salary: 'SAR 4,500 - 5,800', salaryValue: 5800, experience: '4+ years', posted: '2026-07-14', featured: true, urgent: false },
             { title: 'Industrial Electrician', country: 'Romania', location: 'Cluj', industry: 'Manufacturing', department: 'Maintenance', type: 'Full Time', salary: 'EUR 1,100 - 1,500', salaryValue: 1500, experience: '3+ years', posted: '2026-07-13', featured: false, urgent: false },
+            { title: 'General Laborer (Unskilled)', country: 'Romania', location: 'Bucharest', industry: 'Construction', department: 'Site Labor', type: 'Contract', salary: 'EUR 800 - 1,100', salaryValue: 1100, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: true },
+            { title: 'Construction Helper', country: 'Romania', location: 'Cluj', industry: 'Construction', department: 'Site Support', type: 'Contract', salary: 'EUR 800 - 1,100', salaryValue: 1100, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Site Cleaner', country: 'Romania', location: 'Timisoara', industry: 'Construction', department: 'Site Support', type: 'Contract', salary: 'EUR 800 - 1,050', salaryValue: 1050, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Material Handler', country: 'Romania', location: 'Brasov', industry: 'Logistics', department: 'Warehouse Operations', type: 'Contract', salary: 'EUR 850 - 1,100', salaryValue: 1100, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Loading & Unloading Worker', country: 'Romania', location: 'Ploiesti', industry: 'Logistics', department: 'Warehouse Operations', type: 'Contract', salary: 'EUR 800 - 1,050', salaryValue: 1050, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Excavation Helper', country: 'Romania', location: 'Iasi', industry: 'Construction', department: 'Ground Works', type: 'Contract', salary: 'EUR 850 - 1,100', salaryValue: 1100, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Demolition Worker', country: 'Romania', location: 'Constanta', industry: 'Construction', department: 'Site Labor', type: 'Contract', salary: 'EUR 850 - 1,100', salaryValue: 1100, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Concrete Helper', country: 'Romania', location: 'Bucharest', industry: 'Construction', department: 'Civil Works', type: 'Contract', salary: 'EUR 850 - 1,100', salaryValue: 1100, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Mason Helper', country: 'Romania', location: 'Cluj', industry: 'Construction', department: 'Civil Works', type: 'Contract', salary: 'EUR 850 - 1,150', salaryValue: 1150, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Carpenter Helper', country: 'Romania', location: 'Timisoara', industry: 'Construction', department: 'Finishing Works', type: 'Contract', salary: 'EUR 850 - 1,150', salaryValue: 1150, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Plumbing Helper', country: 'Romania', location: 'Brasov', industry: 'Construction', department: 'MEP Support', type: 'Contract', salary: 'EUR 850 - 1,150', salaryValue: 1150, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Electrical Helper', country: 'Romania', location: 'Ploiesti', industry: 'Construction', department: 'MEP Support', type: 'Contract', salary: 'EUR 850 - 1,150', salaryValue: 1150, experience: '1+ year', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Road Work Laborer', country: 'Romania', location: 'Iasi', industry: 'Construction', department: 'Infrastructure', type: 'Contract', salary: 'EUR 850 - 1,100', salaryValue: 1100, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Flagman / Traffic Helper', country: 'Romania', location: 'Constanta', industry: 'Construction', department: 'Infrastructure', type: 'Contract', salary: 'EUR 800 - 1,050', salaryValue: 1050, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Ground Worker', country: 'Romania', location: 'Bucharest', industry: 'Construction', department: 'Site Labor', type: 'Contract', salary: 'EUR 800 - 1,100', salaryValue: 1100, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Landscaping Laborer', country: 'Romania', location: 'Cluj', industry: 'Facility Management', department: 'Grounds Maintenance', type: 'Contract', salary: 'EUR 800 - 1,050', salaryValue: 1050, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Drainage Cleaning Worker', country: 'Romania', location: 'Timisoara', industry: 'Facility Management', department: 'Grounds Maintenance', type: 'Contract', salary: 'EUR 800 - 1,050', salaryValue: 1050, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
+            { title: 'Watchman / Site Attendant', country: 'Romania', location: 'Brasov', industry: 'Security', department: 'Site Services', type: 'Contract', salary: 'EUR 800 - 1,050', salaryValue: 1050, experience: 'No experience', posted: '2026-07-12', featured: false, urgent: false },
             { title: 'Hotel Housekeeping Team Leader', country: 'Croatia', location: 'Split', industry: 'Hospitality', department: 'Operations', type: 'Seasonal', salary: 'EUR 900 - 1,200', salaryValue: 1200, experience: '2+ years', posted: '2026-07-11', featured: false, urgent: false },
             { title: 'Retail Store Operations Executive', country: 'UAE', location: 'Sharjah', industry: 'Retail', department: 'Store Operations', type: 'Full Time', salary: 'AED 4,000 - 5,500', salaryValue: 5500, experience: '3+ years', posted: '2026-07-10', featured: true, urgent: true },
             { title: 'Security Control Room Operator', country: 'Qatar', location: 'Doha', industry: 'Security', department: 'Security Operations', type: 'Full Time', salary: 'QAR 2,800 - 3,700', salaryValue: 3700, experience: '2+ years', posted: '2026-07-09', featured: false, urgent: false },
@@ -2191,7 +2209,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var resultCount = document.getElementById('jobResultCount');
         var cardsHost = document.getElementById('jobCards');
         var loadMoreBtn = document.getElementById('loadMoreJobs');
-        var visibleCount = 6;
+        var visibleCount = 99;
         var viewMode = 'grid';
 
         function uniqueValues(key) {
@@ -2223,6 +2241,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     (!departmentSelect.value || job.department === departmentSelect.value) &&
                     (!typeSelect.value || job.type === typeSelect.value) &&
                     (!salarySelect.value || job.salaryValue >= parseInt(salarySelect.value, 10));
+            }).sort(function (left, right) {
+                var leftPriority = left.country === 'Romania' ? 0 : 1;
+                var rightPriority = right.country === 'Romania' ? 0 : 1;
+                if (leftPriority !== rightPriority) {
+                    return leftPriority - rightPriority;
+                }
+                return new Date(right.posted).getTime() - new Date(left.posted).getTime();
             });
         }
 
@@ -2234,7 +2259,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function renderJobs(reset) {
             if (reset) {
-                visibleCount = 6;
+                visibleCount = 99;
             }
             cardsHost.classList.toggle('stw-list-view', viewMode === 'list');
             cardsHost.innerHTML = skeleton(3);
