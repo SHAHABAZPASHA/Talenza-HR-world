@@ -1714,6 +1714,85 @@ html[dir="rtl"] .navbar-nav .nav-item .arabic-text {
     line-height: 1.15;
 }
 
+body.service-page .hero-header,
+body.service-page .stw-theme-hero {
+    background: #ffffff !important;
+}
+
+body.service-page .hero-header::before,
+body.service-page .hero-header::after,
+body.service-page .stw-theme-hero::before,
+body.service-page .stw-theme-hero::after {
+    display: none !important;
+}
+
+body.service-page .hero-header,
+body.service-page .hero-header h1,
+body.service-page .hero-header p,
+body.service-page .hero-header .lead,
+body.service-page .hero-header .hero-kicker,
+body.service-page .stw-theme-hero,
+body.service-page .stw-theme-hero h1,
+body.service-page .stw-theme-hero p,
+body.service-page .stw-theme-hero .lead,
+body.service-page .stw-theme-hero .badge {
+    color: var(--dark) !important;
+}
+
+body.service-page .hero-header .text-white,
+body.service-page .stw-theme-hero .text-white {
+    color: var(--dark) !important;
+}
+
+body.service-page .hero-header .badge,
+body.service-page .stw-theme-hero .badge {
+    background: rgba(23, 63, 138, 0.08) !important;
+    border: 1px solid rgba(23, 63, 138, 0.12) !important;
+    color: var(--primary) !important;
+}
+
+body.service-page .hero-header .btn-light,
+body.service-page .stw-theme-hero .btn-light {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #ffffff !important;
+}
+
+body.service-page .hero-header .btn-outline-light,
+body.service-page .stw-theme-hero .btn-outline-light {
+    color: var(--primary) !important;
+    border-color: rgba(23, 63, 138, 0.22) !important;
+    background: rgba(255, 255, 255, 0.82) !important;
+}
+
+body.service-page .hero-header .btn-outline-light:hover,
+body.service-page .hero-header .btn-light:hover,
+body.service-page .stw-theme-hero .btn-outline-light:hover,
+body.service-page .stw-theme-hero .btn-light:hover {
+    box-shadow: 0 14px 30px rgba(23, 63, 138, 0.14);
+}
+
+body.service-page .hero-header .card,
+body.service-page .stw-theme-hero .card,
+body.service-page .card[style*="linear-gradient"] {
+    background: #ffffff !important;
+    color: var(--dark) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 18px 44px rgba(23, 32, 51, 0.08) !important;
+}
+
+body.service-page .card[style*="linear-gradient"] {
+    background-image: none !important;
+}
+
+body.service-page .card[style*="linear-gradient"] h1,
+body.service-page .card[style*="linear-gradient"] h2,
+body.service-page .card[style*="linear-gradient"] h3,
+body.service-page .card[style*="linear-gradient"] p,
+body.service-page .card[style*="linear-gradient"] .lead {
+    color: var(--dark) !important;
+}
+
 .hero-metric span {
     display: block;
     margin-top: 0.25rem;
