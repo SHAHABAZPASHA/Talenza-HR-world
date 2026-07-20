@@ -71,6 +71,26 @@ if (window.jQuery) {
 })(window.jQuery);
 }
 
+// Fallback: always hide the spinner even if jQuery/CDN scripts fail to load.
+(function () {
+    function hideSpinner() {
+        var spinner = document.getElementById('spinner');
+        if (!spinner) {
+            return;
+        }
+
+        spinner.classList.remove('show');
+    }
+
+    if (document.readyState === 'complete') {
+        hideSpinner();
+    } else {
+        document.addEventListener('DOMContentLoaded', hideSpinner, { once: true });
+        window.addEventListener('load', hideSpinner, { once: true });
+        window.setTimeout(hideSpinner, 3000);
+    }
+}());
+
 var SilvoraI18n = (function () {
     var storageKey = 'language';
     var languageSuggestionKey = 'languageSuggestionDismissed';
@@ -106,6 +126,7 @@ var SilvoraI18n = (function () {
     var currentLanguage = 'en';
     var resources = {};
     var observer = null;
+    var isProcessingMutations = false;
     var initializationPromise = null;
     var cdnSource = 'https://cdn.jsdelivr.net/npm/i18next@23.12.2/dist/umd/i18next.min.js';
 
@@ -975,14 +996,18 @@ var SilvoraI18n = (function () {
             var trigger = switcher.querySelector('.stw-lang-trigger');
             var triggerFlag = switcher.querySelector('.stw-lang-trigger-flag');
             var triggerLabel = switcher.querySelector('.stw-lang-trigger-label');
-            if (triggerFlag) {
-                triggerFlag.textContent = toFlagEmoji(langCfg.flag);
+            var flagEmoji = toFlagEmoji(langCfg.flag);
+            if (triggerFlag && triggerFlag.textContent !== flagEmoji) {
+                triggerFlag.textContent = flagEmoji;
             }
-            if (triggerLabel) {
+            if (triggerLabel && triggerLabel.textContent !== langCfg.label) {
                 triggerLabel.textContent = langCfg.label;
             }
             if (trigger) {
-                trigger.setAttribute('aria-label', translate('Current language {{language}}', { language: langCfg.label }));
+                var ariaLabel = translate('Current language {{language}}', { language: langCfg.label });
+                if (trigger.getAttribute('aria-label') !== ariaLabel) {
+                    trigger.setAttribute('aria-label', ariaLabel);
+                }
             }
 
             switcher.querySelectorAll('[data-language], a[lang], button[lang]').forEach(function (control) {
@@ -1528,17 +1553,45 @@ var SilvoraI18n = (function () {
         }
 
         observer = new MutationObserver(function (mutations) {
+            if (isProcessingMutations) {
+                return;
+            }
+
+            var addedElements = [];
+
             mutations.forEach(function (mutation) {
                 Array.prototype.forEach.call(mutation.addedNodes, function (node) {
-                    if (node.nodeType === 1) {
-                        registerBilingualPairs(node);
-                        localizeTree(node);
+                    if (node.nodeType !== 1) {
+                        return;
                     }
+
+                    if (node.closest && node.closest('[data-i18n-skip="true"]')) {
+                        return;
+                    }
+
+                    addedElements.push(node);
                 });
             });
 
-            updateBilingualVisibility();
-            updateLanguageSwitcher();
+            if (!addedElements.length) {
+                return;
+            }
+
+            isProcessingMutations = true;
+            observer.disconnect();
+
+            try {
+                addedElements.forEach(function (node) {
+                    registerBilingualPairs(node);
+                    localizeTree(node);
+                });
+
+                updateBilingualVisibility();
+                updateLanguageSwitcher();
+            } finally {
+                observer.observe(document.body, { childList: true, subtree: true });
+                isProcessingMutations = false;
+            }
         });
 
         observer.observe(document.body, { childList: true, subtree: true });
