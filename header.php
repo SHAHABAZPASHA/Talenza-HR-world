@@ -41,7 +41,7 @@
 <div class="container-fluid bg-primary text-light px-4 px-lg-5 py-2 topbar">
     <div class="row gx-0 align-items-center">
         <div class="col-lg-8 text-start">
-            <small class="me-3"><i class="fa fa-map-marker-alt me-2"></i>Office No. 307, Al Dana Center, Maktoum Road, Deira, Dubai, UAE</small>
+            <small class="me-3"><i class="fa fa-map-marker-alt me-2"></i>Office No. 307, Al Dhannah City Center, Maktoum Road, Deira, Dubai, UAE</small>
             <small class="me-3"><i class="fa fa-phone-alt me-2"></i>+971 58 589 5827</small>
             <small><i class="fa fa-envelope me-2"></i><a href="mailto:info@silvoratalenzaworld.com" class="text-light">info@silvoratalenzaworld.com</a></small>
         </div>
@@ -57,4 +57,3 @@
 </div>
 <!-- Topbar End -->
 <!-- ...navbar and hero section continues... -->
-
