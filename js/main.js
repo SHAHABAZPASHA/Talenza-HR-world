@@ -316,6 +316,262 @@ var SilvoraI18n = (function () {
         }
     };
 
+    var enterpriseServiceColumns = [
+        {
+            icon: 'fa-user-tie',
+            en: 'Recruitment Services',
+            ar: 'خدمات التوظيف',
+            items: [
+                { href: 'recruitment-overseas.html', en: 'Overseas Recruitment', ar: 'التوظيف الخارجي', enDesc: 'Cross-border talent sourcing and deployment support.', arDesc: 'استقطاب المواهب عبر الحدود ودعم التعيين الدولي.' },
+                { href: 'recruitment-uae.html', en: 'UAE Recruitment', ar: 'التوظيف داخل الإمارات', enDesc: 'Local UAE hiring for fast role fulfillment.', arDesc: 'توظيف محلي سريع داخل الإمارات لتغطية الوظائف.' },
+                { href: 'recruitment-executive-search.html', en: 'Executive Search', ar: 'البحث التنفيذي', enDesc: 'Leadership hiring for critical business roles.', arDesc: 'تعيين القيادات للأدوار المؤسسية الحساسة.' },
+                { href: 'recruitment-blue-collar.html', en: 'Blue Collar Recruitment', ar: 'توظيف العمالة الفنية', enDesc: 'Operational workforce recruitment at scale.', arDesc: 'توظيف العمالة التشغيلية على نطاق واسع.' },
+                { href: 'recruitment-white-collar.html', en: 'White Collar Recruitment', ar: 'توظيف الكوادر المتخصصة', enDesc: 'Specialist and office talent acquisition.', arDesc: 'استقطاب الكوادر المكتبية والمتخصصة.' },
+                { href: 'recruitment-temporary-staffing.html', en: 'Temporary Staffing', ar: 'التوظيف المؤقت', enDesc: 'Flexible staffing for short-term demand peaks.', arDesc: 'توظيف مرن لتغطية الاحتياجات المؤقتة.' },
+                { href: 'recruitment-permanent-staffing.html', en: 'Permanent Staffing', ar: 'التوظيف الدائم', enDesc: 'Long-term workforce planning and placement.', arDesc: 'تخطيط وتوظيف الكوادر الدائمة للنمو المستمر.' },
+                { href: 'recruitment-hr-consultancy.html', en: 'HR Consultancy', ar: 'استشارات الموارد البشرية', enDesc: 'Policy, compliance, and HR operating frameworks.', arDesc: 'سياسات وامتثال وأطر تشغيل الموارد البشرية.' }
+            ]
+        },
+        {
+            icon: 'fa-passport',
+            en: 'Visa Services',
+            ar: 'خدمات التأشيرات',
+            items: [
+                { href: 'visa-uae-golden.html', en: 'UAE Golden Visa', ar: 'تأشيرة الإمارات الذهبية', enDesc: 'Long-term residency pathways for eligible profiles.', arDesc: 'مسارات إقامة طويلة الأمد للفئات المؤهلة.' },
+                { href: 'visa-uae-visit.html', en: 'UAE Visit Visa', ar: 'تأشيرة الزيارة في الإمارات', enDesc: 'Short-stay visa coordination for UAE visitors.', arDesc: 'تنسيق تأشيرات الزيارة القصيرة للإمارات.' },
+                { href: 'visa-uae-employment.html', en: 'UAE Employment Visa', ar: 'تأشيرة العمل في الإمارات', enDesc: 'Employer-sponsored visa processing support.', arDesc: 'دعم معالجة التأشيرات بكفالة جهة العمل.' },
+                { href: 'visa-uae-family.html', en: 'UAE Family Visa', ar: 'تأشيرة الأسرة في الإمارات', enDesc: 'Dependent and family sponsorship services.', arDesc: 'خدمات كفالة الأسرة والمعالين.' },
+                { href: 'visa-schengen.html', en: 'Schengen Visa', ar: 'تأشيرة شنغن', enDesc: 'Structured filing for Europe short-stay travel.', arDesc: 'تقديم منظم لتأشيرات السفر القصير إلى أوروبا.' },
+                { href: 'visa-europe-work-permit.html', en: 'Europe Work Permit', ar: 'تصريح العمل في أوروبا', enDesc: 'Work permit routes for selected EU destinations.', arDesc: 'مسارات تصاريح العمل لوجهات أوروبية مختارة.' },
+                { href: 'visa-student.html', en: 'Student Visa', ar: 'تأشيرة الطالب', enDesc: 'Study-route visa preparation and support.', arDesc: 'تجهيز ودعم تأشيرات المسار الدراسي.' },
+                { href: 'visa-business.html', en: 'Business Visa', ar: 'التأشيرة التجارية', enDesc: 'Business travel visa filings for professionals.', arDesc: 'معاملات تأشيرات السفر التجاري للمهنيين.' },
+                { href: 'visa-tourist.html', en: 'Tourist Visa', ar: 'التأشيرة السياحية', enDesc: 'Tourism-focused visa guidance and paperwork.', arDesc: 'إرشاد سياحي وتجهيز كامل لمعاملات التأشيرة.' },
+                { href: 'visa-usa.html', en: 'USA Visa', ar: 'تأشيرة الولايات المتحدة', enDesc: 'US travel visa support and interview readiness.', arDesc: 'دعم تأشيرة أمريكا والاستعداد للمقابلة.' },
+                { href: 'visa-canada.html', en: 'Canada Visa', ar: 'تأشيرة كندا', enDesc: 'Canadian visa pathways for travel and study.', arDesc: 'مسارات التأشيرة الكندية للسفر والدراسة.' },
+                { href: 'visa-uk.html', en: 'UK Visa', ar: 'تأشيرة المملكة المتحدة', enDesc: 'UK visa processing with complete documentation.', arDesc: 'معالجة تأشيرة المملكة المتحدة بملف مكتمل.' },
+                { href: 'visa-australia.html', en: 'Australia Visa', ar: 'تأشيرة أستراليا', enDesc: 'Australian travel and study visa support.', arDesc: 'دعم تأشيرات السفر والدراسة إلى أستراليا.' }
+            ]
+        },
+        {
+            icon: 'fa-briefcase',
+            en: 'Business Services',
+            ar: 'خدمات الأعمال',
+            items: [
+                { href: 'pro-business-setup.html', en: 'Business Setup', ar: 'تأسيس الأعمال', enDesc: 'End-to-end setup for new ventures in UAE.', arDesc: 'تأسيس متكامل للمشاريع الجديدة في الإمارات.' },
+                { href: 'service-company.html', en: 'Company Formation', ar: 'تأسيس الشركات', enDesc: 'Mainland and free-zone company formation.', arDesc: 'تأسيس شركات في البر الرئيسي والمناطق الحرة.' },
+                { href: 'pro-trade-license.html', en: 'Trade License', ar: 'الرخصة التجارية', enDesc: 'Issuance, renewal, and amendment services.', arDesc: 'إصدار وتجديد وتعديل الرخص التجارية.' },
+                { href: 'service-pro.html', en: 'PRO Services', ar: 'خدمات PRO', enDesc: 'Government liaison and filing management.', arDesc: 'تنسيق حكومي وإدارة تقديم المعاملات.' },
+                { href: 'pro-vat.html', en: 'VAT Registration', ar: 'تسجيل ضريبة القيمة المضافة', enDesc: 'VAT setup and compliance documentation.', arDesc: 'إعداد ضريبة القيمة المضافة ومستندات الامتثال.' },
+                { href: 'pro-corporate-tax.html', en: 'Corporate Tax', ar: 'الضريبة على الشركات', enDesc: 'Corporate tax registration and advisory.', arDesc: 'تسجيل ضريبة الشركات والإرشاد الضريبي.' },
+                { href: 'pro-document-clearing.html', en: 'Document Clearing', ar: 'تخليص المعاملات', enDesc: 'Document processing across authorities.', arDesc: 'تخليص المعاملات عبر الجهات المختصة.' },
+                { href: 'pro-attestation.html', en: 'Attestation', ar: 'التصديق', enDesc: 'Local and international document attestation.', arDesc: 'تصديق المستندات محلياً ودولياً.' }
+            ]
+        },
+        {
+            icon: 'fa-laptop-code',
+            en: 'Digital Services',
+            ar: 'الخدمات الرقمية',
+            items: [
+                { href: 'website-development.html', en: 'Website Development', ar: 'تطوير المواقع', enDesc: 'Corporate websites built for performance.', arDesc: 'مواقع مؤسسية مبنية للأداء والتحويل.' },
+                { href: 'website-crm-development.html', en: 'CRM Development', ar: 'تطوير أنظمة CRM', enDesc: 'Custom CRM workflows for operations teams.', arDesc: 'تطوير CRM مخصص للفرق التشغيلية.' },
+                { href: 'website-mobile-app-development.html', en: 'Mobile App Development', ar: 'تطوير تطبيقات الجوال', enDesc: 'Business apps for customer and internal use.', arDesc: 'تطبيقات أعمال للعملاء والفرق الداخلية.' },
+                { href: 'website-digital-marketing.html', en: 'Digital Marketing', ar: 'التسويق الرقمي', enDesc: 'Integrated campaign strategy and delivery.', arDesc: 'استراتيجية حملات رقمية متكاملة.' },
+                { href: 'website-seo.html', en: 'SEO', ar: 'تحسين محركات البحث', enDesc: 'Search visibility optimization and growth.', arDesc: 'تحسين الظهور في محركات البحث والنمو.' },
+                { href: 'website-google-ads.html', en: 'Google Ads', ar: 'إعلانات جوجل', enDesc: 'Performance ads for qualified lead flow.', arDesc: 'إعلانات أداء لاستقطاب عملاء محتملين.' },
+                { href: 'website-meta-ads.html', en: 'Meta Ads', ar: 'إعلانات ميتا', enDesc: 'Paid social campaigns for acquisition.', arDesc: 'حملات مدفوعة لاكتساب العملاء عبر السوشيال.' },
+                { href: 'website-branding.html', en: 'Branding', ar: 'الهوية التجارية', enDesc: 'Brand identity systems and messaging.', arDesc: 'أنظمة هوية العلامة والرسائل التسويقية.' },
+                { href: 'website-logo-design.html', en: 'Logo Design', ar: 'تصميم الشعارات', enDesc: 'Professional logo direction and execution.', arDesc: 'تصميم شعارات احترافي متسق مع الهوية.' }
+            ]
+        }
+    ];
+
+    var enterpriseWhyChoose = {
+        enTitle: 'Why Choose Silvora',
+        arTitle: 'لماذا سيلفورا',
+        points: [
+            { en: '20+ Years Experience', ar: 'خبرة تتجاوز 20 عاماً' },
+            { en: 'Licensed Recruitment', ar: 'توظيف مرخص ومعتمد' },
+            { en: 'Global Network', ar: 'شبكة علاقات عالمية' },
+            { en: 'Fast Processing', ar: 'إنجاز سريع للمعاملات' },
+            { en: 'Dedicated Support', ar: 'دعم مخصص ومستمر' }
+        ],
+        ctaHref: 'contact.html',
+        ctaEn: 'Speak to an Expert',
+        ctaAr: 'تحدث مع خبير'
+    };
+
+    var corporateBaseLinks = [
+        { href: 'index.html', en: 'Home', ar: 'الرئيسية', key: 'home' },
+        { href: 'about.html', en: 'About', ar: 'من نحن', key: 'about' },
+        { href: 'service.html', en: 'Services', ar: 'خدماتنا', key: 'services' },
+        { href: 'jobs.html', en: 'Jobs', ar: 'الوظائف', key: 'jobs' },
+        { href: 'blogs.html', en: 'Blogs', ar: 'المدونة', key: 'blogs' },
+        { href: 'clients.html', en: 'Clients', ar: 'عملاؤنا', key: 'clients' },
+        { href: 'contact.html', en: 'Contact', ar: 'اتصل بنا', key: 'contact' }
+    ];
+
+    function getPageKey(pageName) {
+        if (/^index\.html$/i.test(pageName)) {
+            return 'home';
+        }
+        if (/^about\.html$|^our-team\.html$/i.test(pageName)) {
+            return 'about';
+        }
+        if (/^(service|visa|work-permit|pro|recruitment|website)-/i.test(pageName) || /^service\.html$/i.test(pageName)) {
+            return 'services';
+        }
+        if (/^jobs\.html$/i.test(pageName)) {
+            return 'jobs';
+        }
+        if (/^blogs\.html$/i.test(pageName)) {
+            return 'blogs';
+        }
+        if (/^clients\.html$/i.test(pageName)) {
+            return 'clients';
+        }
+        if (/^contact\.html$/i.test(pageName)) {
+            return 'contact';
+        }
+
+        return '';
+    }
+
+    function buildUnifiedNavbar(pageName) {
+        var activeKey = getPageKey(pageName);
+        var links = corporateBaseLinks.map(function (link) {
+            var isActive = link.key === activeKey;
+            return '<a href="' + link.href + '" class="nav-item nav-link' + (isActive ? ' active' : '') + '"><span class="english-text">' +
+                link.en + '</span><span class="arabic-text" dir="rtl">' + link.ar + '</span></a>';
+        }).join('');
+
+        var isHome = activeKey === 'home';
+        return '<div class="container-fluid position-relative p-0 stw-nav-shell">' +
+            '<nav class="navbar navbar-expand-lg navbar-light stw-header ' + (isHome ? 'stw-header-home' : 'stw-header-inner') + ' px-3 px-xl-4 py-2" aria-label="Primary navigation">' +
+                '<a href="index.html" class="navbar-brand p-0" aria-label="Silvora Talenza World Home">' +
+                    '<span class="m-0 d-flex align-items-center stw-brand">' +
+                        '<img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World Logo" class="logo-white">' +
+                        '<img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World Logo" class="logo-blue">' +
+                        '<span class="brand-text"><span class="english-text stw-brand-name">Silvora Talenza World</span><span class="brand-text-ar arabic-text stw-brand-name" dir="rtl">سيلفورا تالينزا وورلد</span></span>' +
+                    '</span>' +
+                '</a>' +
+                '<div class="stw-header-actions d-none d-lg-inline-flex">' +
+                    '<div class="language-switcher" aria-label="Language switcher">' +
+                        '<button type="button" data-language="en">EN</button><span aria-hidden="true">/</span><button type="button" data-language="ar" dir="rtl">العربية</button>' +
+                    '</div>' +
+                    '<a href="https://wa.me/971585895827" class="btn btn-outline-light stw-header-btn stw-wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i><span class="english-text">WhatsApp</span><span class="arabic-text" dir="rtl">واتساب</span></a>' +
+                    '<a href="tel:+971585895827" class="btn btn-warning stw-header-btn stw-call-btn" aria-label="Call"><i class="fa fa-phone"></i><span class="english-text stw-call-full">Call Now</span><span class="english-text stw-call-short">Call</span><span class="arabic-text stw-call-ar" dir="rtl">اتصل الآن</span></a>' +
+                '</div>' +
+                '<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>' +
+                '<div class="collapse navbar-collapse" id="navbarCollapse">' +
+                    '<div class="navbar-nav ms-auto py-0">' + links + '</div>' +
+                    '<div class="stw-mobile-actions d-lg-none">' +
+                        '<div class="language-switcher stw-mobile-lang" aria-label="Language switcher">' +
+                            '<button type="button" data-language="en">EN</button><span aria-hidden="true">/</span><button type="button" data-language="ar" dir="rtl">العربية</button>' +
+                        '</div>' +
+                        '<a href="tel:+971585895827" class="btn btn-primary stw-mobile-btn"><i class="fa fa-phone"></i><span class="english-text">Call</span><span class="arabic-text" dir="rtl">اتصال</span></a>' +
+                        '<a href="https://wa.me/971585895827" target="_blank" rel="noopener" class="btn btn-outline-primary stw-mobile-btn"><i class="fab fa-whatsapp"></i><span class="english-text">WhatsApp</span><span class="arabic-text" dir="rtl">واتساب</span></a>' +
+                    '</div>' +
+                '</div>' +
+            '</nav>' +
+        '</div>';
+    }
+
+    function buildUnifiedFooter() {
+        return '<footer class="container-fluid footer stw-footer mt-5"><div class="container py-4">' +
+            '<div class="row g-3 align-items-start">' +
+                '<div class="col-md-6 col-lg-3">' +
+                    '<img src="img/TALENZA_logo_v2.png" alt="Silvora Talenza World" class="stw-footer-logo" loading="lazy" decoding="async">' +
+                    '<p class="mt-2 mb-2 english-text">Silvora Talenza World LLC delivers recruitment, visa, PRO, business setup, and digital services with accountable delivery standards.</p>' +
+                    '<p class="mt-2 mb-2 arabic-text" dir="rtl">تقدم سيلفورا تالينزا وورلد ذ.م.م خدمات التوظيف والتأشيرات وPRO وتأسيس الأعمال والخدمات الرقمية بمعايير تنفيذ مسؤولة.</p>' +
+                    '<div class="stw-trust-badges">' +
+                        '<span><i class="fa fa-shield-alt"></i>UAE Registered</span>' +
+                        '<span><i class="fa fa-briefcase"></i>Corporate Advisory</span>' +
+                        '<span><i class="fa fa-language"></i>Bilingual Support</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="col-md-6 col-lg-3">' +
+                    '<h5 class="english-text">Quick Links</h5><h5 class="arabic-text" dir="rtl">روابط سريعة</h5>' +
+                    '<div class="footer-menu d-grid gap-1">' +
+                        '<a href="index.html"><span class="english-text">Home</span><span class="arabic-text" dir="rtl">الرئيسية</span></a>' +
+                        '<a href="about.html"><span class="english-text">About</span><span class="arabic-text" dir="rtl">من نحن</span></a>' +
+                        '<a href="service.html"><span class="english-text">Services</span><span class="arabic-text" dir="rtl">الخدمات</span></a>' +
+                        '<a href="jobs.html"><span class="english-text">Jobs</span><span class="arabic-text" dir="rtl">الوظائف</span></a>' +
+                        '<a href="clients.html"><span class="english-text">Clients</span><span class="arabic-text" dir="rtl">عملاؤنا</span></a>' +
+                        '<a href="blogs.html"><span class="english-text">Blogs</span><span class="arabic-text" dir="rtl">المدونة</span></a>' +
+                        '<a href="contact.html"><span class="english-text">Contact</span><span class="arabic-text" dir="rtl">اتصل بنا</span></a>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="col-md-6 col-lg-3">' +
+                    '<h5 class="english-text">Our Services</h5><h5 class="arabic-text" dir="rtl">خدماتنا</h5>' +
+                    '<div class="footer-menu d-grid gap-1">' +
+                        '<a href="recruitment-overseas.html"><span class="english-text">Manpower Recruitment</span><span class="arabic-text" dir="rtl">توظيف الكوادر</span></a>' +
+                        '<a href="service-visa.html"><span class="english-text">Visa Services</span><span class="arabic-text" dir="rtl">خدمات التأشيرات</span></a>' +
+                        '<a href="service-pro.html"><span class="english-text">PRO Services</span><span class="arabic-text" dir="rtl">خدمات PRO</span></a>' +
+                        '<a href="service-company.html"><span class="english-text">Business Setup</span><span class="arabic-text" dir="rtl">تأسيس الأعمال</span></a>' +
+                        '<a href="website-development.html"><span class="english-text">Website Development</span><span class="arabic-text" dir="rtl">تطوير المواقع</span></a>' +
+                        '<a href="website-digital-marketing.html"><span class="english-text">Digital Marketing</span><span class="arabic-text" dir="rtl">التسويق الرقمي</span></a>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="col-md-6 col-lg-3">' +
+                    '<h5 class="english-text">Contact</h5><h5 class="arabic-text" dir="rtl">التواصل</h5>' +
+                    '<p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i><span class="english-text">Office No. 307, Al Dana Center, Maktoum Road, Deira, Dubai, UAE</span><span class="arabic-text" dir="rtl">مكتب رقم 307، مركز الدانة، شارع مكتوم، ديرة، دبي، الإمارات</span></p>' +
+                    '<p class="mb-1"><i class="fa fa-phone-alt me-2"></i><a href="tel:+971585895827">+971 58 589 5827</a></p>' +
+                    '<p class="mb-1"><i class="fa fa-envelope me-2"></i><a href="mailto:info@silvoratalenzaworld.com">info@silvoratalenzaworld.com</a></p>' +
+                    '<p class="mb-1"><i class="fa fa-clock me-2"></i><span class="english-text">Mon-Sat: 10:00 AM-8:00 PM</span><span class="arabic-text" dir="rtl">الاثنين-السبت: 10:00 ص - 8:00 م</span></p>' +
+                    '<a class="btn btn-sm btn-outline-primary mt-1" target="_blank" rel="noopener" href="https://maps.google.com/?q=Office+No.+307,+Al+Dana+Center,+Maktoum+Road,+Deira,+Dubai"><span class="english-text">Open in Google Maps</span><span class="arabic-text" dir="rtl">الموقع على خرائط جوجل</span></a>' +
+                    '<form class="stw-newsletter mt-3" action="contact.php" method="post">' +
+                        '<label class="form-label mb-1 english-text" for="newsletterEmail">Newsletter</label>' +
+                        '<label class="form-label mb-1 arabic-text" dir="rtl" for="newsletterEmail">النشرة البريدية</label>' +
+                        '<div class="input-group input-group-sm"><input id="newsletterEmail" name="email" type="email" class="form-control" required aria-label="Newsletter email"><button class="btn btn-primary" type="submit">Join</button></div>' +
+                    '</form>' +
+                '</div>' +
+            '</div>' +
+            '<div class="copyright d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between gap-2 mt-3 pt-2">' +
+                '<span><span class="english-text">© 2026 Silvora Talenza World LLC. All Rights Reserved.</span><span class="arabic-text" dir="rtl">© 2026 سيلفورا تالينزا وورلد ذ.م.م. جميع الحقوق محفوظة.</span></span>' +
+                '<div class="footer-menu d-flex flex-wrap gap-2">' +
+                    '<a href="privacy-policy.html"><span class="english-text">Privacy Policy</span><span class="arabic-text" dir="rtl">سياسة الخصوصية</span></a>' +
+                    '<a href="terms-and-conditions.html"><span class="english-text">Terms</span><span class="arabic-text" dir="rtl">الشروط</span></a>' +
+                    '<a href="sitemap.xml"><span class="english-text">Sitemap</span><span class="arabic-text" dir="rtl">خريطة الموقع</span></a>' +
+                '</div>' +
+                '<div class="d-flex gap-2">' +
+                    '<a class="btn btn-sm btn-social" href="https://www.facebook.com/profile.php?id=61588411206914" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>' +
+                    '<a class="btn btn-sm btn-social" href="https://x.com/TALENZA216728" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>' +
+                    '<a class="btn btn-sm btn-social" href="https://www.instagram.com/talenza.uae/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>' +
+                    '<a class="btn btn-sm btn-social" href="https://www.youtube.com/channel/UCnORIK_eKlP-lgx-j89RoZg" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>' +
+                '</div>' +
+            '</div>' +
+        '</div></footer>';
+    }
+
+    function applyUnifiedLayout() {
+        var pageName = getCurrentPageName();
+        var navShell = document.querySelector('.stw-nav-shell') || document.querySelector('.container-fluid.position-relative.p-0');
+
+        if (navShell) {
+            navShell.outerHTML = buildUnifiedNavbar(pageName);
+        } else if (document.body) {
+            document.body.insertAdjacentHTML('afterbegin', buildUnifiedNavbar(pageName));
+        }
+
+        var footer = document.querySelector('footer.footer') || document.querySelector('.container-fluid.footer') || document.querySelector('div.footer');
+        if (footer) {
+            footer.outerHTML = buildUnifiedFooter();
+        }
+
+        document.querySelectorAll('button[data-bs-target="#manpowerRequestModal"]').forEach(function (button) {
+            if (button.closest('.navbar')) {
+                return;
+            }
+            button.remove();
+        });
+
+        document.querySelectorAll('.topbar').forEach(function (topbar) {
+            topbar.remove();
+        });
+
+        document.body.classList.add('stw-layout-ready');
+    }
+
     function sanitizeLanguage(language) {
         return language === 'ar' ? 'ar' : 'en';
     }
@@ -654,7 +910,8 @@ var SilvoraI18n = (function () {
     function updateSeo(language) {
         var pageName = getCurrentPageName();
         var pageMeta = seoByPage[pageName] || seoByPage['index.html'];
-        var meta = pageMeta[language] || pageMeta.en;
+        var pageSeo = window.SilvoraPageSeo || null;
+        var meta = (pageSeo && pageSeo[language]) || pageMeta[language] || pageMeta.en;
         var baseUrl = window.location.origin + window.location.pathname;
 
         document.title = meta.title;
@@ -733,6 +990,278 @@ var SilvoraI18n = (function () {
         }
     }
 
+    function ensureEnterpriseMegaMenu() {
+        document.querySelectorAll('.navbar-nav').forEach(function (nav) {
+            if (nav.querySelector('.enterprise-mega')) {
+                return;
+            }
+
+            var serviceLink = Array.prototype.slice.call(nav.querySelectorAll('a.nav-link')).find(function (link) {
+                var href = (link.getAttribute('href') || '').toLowerCase();
+                return href === 'service.html' || href === '/service.html' || /services?/i.test(link.textContent || '');
+            });
+
+            if (!serviceLink) {
+                return;
+            }
+
+            var serviceArabicSibling = serviceLink.nextElementSibling;
+            if (serviceArabicSibling && serviceArabicSibling.classList && serviceArabicSibling.classList.contains('arabic-text')) {
+                serviceArabicSibling.remove();
+            }
+
+            var wrapper = document.createElement('div');
+            wrapper.className = 'nav-item dropdown enterprise-mega';
+            wrapper.innerHTML = '<button type="button" class="nav-link enterprise-mega-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="enterprise-services-panel"><span class="english-text">Services</span><span class="arabic-text" dir="rtl">خدماتنا</span><i class="fa fa-chevron-down ms-2"></i></button><div id="enterprise-services-panel" class="enterprise-mega-panel" role="region" aria-label="Services mega menu"><div class="enterprise-mega-shell"><div class="enterprise-mega-grid"></div><div class="enterprise-mega-foot"><a class="enterprise-mega-view-all" href="service.html"><span class="english-text">View All Services</span><span class="arabic-text" dir="rtl">عرض جميع الخدمات</span></a></div></div></div>';
+
+            var panel = wrapper.querySelector('.enterprise-mega-grid');
+            enterpriseServiceColumns.forEach(function (group, groupIndex) {
+                var details = document.createElement('details');
+                details.className = 'enterprise-mega-column';
+                details.open = window.matchMedia('(min-width: 992px)').matches || groupIndex === 0;
+                var summary = document.createElement('summary');
+                summary.innerHTML = '<span class="enterprise-mega-title"><i class="fa ' + group.icon + '"></i><span class="english-text">' + group.en + '</span><span class="arabic-text" dir="rtl">' + group.ar + '</span></span>';
+                details.appendChild(summary);
+
+                summary.addEventListener('click', function () {
+                    if (window.matchMedia('(min-width: 992px)').matches) {
+                        return;
+                    }
+
+                    setTimeout(function () {
+                        if (!details.open) {
+                            return;
+                        }
+
+                        panel.querySelectorAll('.enterprise-mega-column').forEach(function (column) {
+                            if (column !== details && !column.classList.contains('enterprise-mega-aside')) {
+                                column.open = false;
+                            }
+                        });
+                    }, 0);
+                });
+
+                var links = document.createElement('div');
+                links.className = 'enterprise-mega-links';
+                group.items.forEach(function (item) {
+                    var anchor = document.createElement('a');
+                    anchor.href = item.href;
+                    anchor.className = 'enterprise-mega-item';
+                    anchor.innerHTML = '<span class="enterprise-mega-item-icon"><i class="fa fa-angle-right"></i></span><span class="enterprise-mega-item-copy"><span class="enterprise-mega-item-title english-text">' + item.en + '</span><span class="enterprise-mega-item-title arabic-text" dir="rtl">' + item.ar + '</span><span class="enterprise-mega-item-desc english-text">' + item.enDesc + '</span><span class="enterprise-mega-item-desc arabic-text" dir="rtl">' + item.arDesc + '</span></span>';
+                    links.appendChild(anchor);
+                });
+
+                details.appendChild(links);
+                panel.appendChild(details);
+            });
+
+            var aside = document.createElement('aside');
+            aside.className = 'enterprise-mega-column enterprise-mega-aside';
+            aside.innerHTML = '<div class="enterprise-mega-aside-title"><i class="fa fa-shield-alt"></i><span class="english-text">' + enterpriseWhyChoose.enTitle + '</span><span class="arabic-text" dir="rtl">' + enterpriseWhyChoose.arTitle + '</span></div><ul class="enterprise-mega-aside-points"></ul><a class="enterprise-mega-aside-cta" href="' + enterpriseWhyChoose.ctaHref + '"><span class="english-text">' + enterpriseWhyChoose.ctaEn + '</span><span class="arabic-text" dir="rtl">' + enterpriseWhyChoose.ctaAr + '</span></a>';
+            var asideList = aside.querySelector('.enterprise-mega-aside-points');
+            enterpriseWhyChoose.points.forEach(function (point) {
+                var li = document.createElement('li');
+                li.innerHTML = '<i class="fa fa-check-circle"></i><span class="english-text">' + point.en + '</span><span class="arabic-text" dir="rtl">' + point.ar + '</span>';
+                asideList.appendChild(li);
+            });
+            panel.appendChild(aside);
+
+            serviceLink.replaceWith(wrapper);
+
+            var toggle = wrapper.querySelector('.enterprise-mega-toggle');
+            var megaPanel = wrapper.querySelector('.enterprise-mega-panel');
+            var navContainer = wrapper.closest('.navbar');
+            var closeDelayMs = 250;
+            var closeTimer = null;
+            var closeMenu = function () {
+                wrapper.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            };
+
+            var openMenu = function () {
+                wrapper.classList.add('is-open');
+                toggle.setAttribute('aria-expanded', 'true');
+            };
+
+            var cancelClose = function () {
+                if (closeTimer) {
+                    window.clearTimeout(closeTimer);
+                    closeTimer = null;
+                }
+            };
+
+            var scheduleClose = function () {
+                cancelClose();
+                closeTimer = window.setTimeout(function () {
+                    closeMenu();
+                }, closeDelayMs);
+            };
+
+            toggle.addEventListener('click', function (event) {
+                event.preventDefault();
+                var isOpen = wrapper.classList.toggle('is-open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            toggle.addEventListener('keydown', function (event) {
+                if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openMenu();
+                    var firstLink = wrapper.querySelector('.enterprise-mega-panel a');
+                    if (firstLink) {
+                        firstLink.focus();
+                    }
+                }
+            });
+
+            megaPanel.addEventListener('keydown', function (event) {
+                var focusables = Array.prototype.slice.call(megaPanel.querySelectorAll('a, button, summary')).filter(function (node) {
+                    return node.offsetParent !== null;
+                });
+                if (!focusables.length) {
+                    return;
+                }
+
+                var currentIndex = focusables.indexOf(document.activeElement);
+                if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    focusables[(currentIndex + 1 + focusables.length) % focusables.length].focus();
+                }
+
+                if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    focusables[(currentIndex - 1 + focusables.length) % focusables.length].focus();
+                }
+
+                if (event.key === 'Home') {
+                    event.preventDefault();
+                    focusables[0].focus();
+                }
+
+                if (event.key === 'End') {
+                    event.preventDefault();
+                    focusables[focusables.length - 1].focus();
+                }
+
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    closeMenu();
+                    toggle.focus();
+                }
+            });
+
+            wrapper.addEventListener('mouseenter', function () {
+                if (window.matchMedia('(min-width: 992px)').matches) {
+                    cancelClose();
+                    openMenu();
+                }
+            });
+
+            wrapper.addEventListener('mouseleave', function () {
+                if (window.matchMedia('(min-width: 992px)').matches) {
+                    scheduleClose();
+                }
+            });
+
+            toggle.addEventListener('focus', cancelClose);
+            megaPanel.addEventListener('mouseenter', cancelClose);
+            megaPanel.addEventListener('mouseleave', function () {
+                if (window.matchMedia('(min-width: 992px)').matches) {
+                    scheduleClose();
+                }
+            });
+
+            if (navContainer) {
+                navContainer.addEventListener('mouseleave', function () {
+                    if (window.matchMedia('(min-width: 992px)').matches) {
+                        scheduleClose();
+                    }
+                });
+
+                navContainer.addEventListener('mouseenter', function () {
+                    if (window.matchMedia('(min-width: 992px)').matches) {
+                        cancelClose();
+                    }
+                });
+            }
+
+            wrapper.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    closeMenu();
+                    toggle.focus();
+                }
+            });
+        });
+
+        if (!document.body.dataset.enterpriseMegaBound) {
+            document.addEventListener('click', function (event) {
+                document.querySelectorAll('.enterprise-mega.is-open').forEach(function (menu) {
+                    if (!menu.contains(event.target)) {
+                        menu.classList.remove('is-open');
+                        var toggle = menu.querySelector('.enterprise-mega-toggle');
+                        if (toggle) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key !== 'Escape') {
+                    return;
+                }
+
+                document.querySelectorAll('.enterprise-mega.is-open').forEach(function (menu) {
+                    menu.classList.remove('is-open');
+                    var toggle = menu.querySelector('.enterprise-mega-toggle');
+                    if (toggle) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.matchMedia('(min-width: 992px)').matches) {
+                    document.querySelectorAll('.enterprise-mega-column').forEach(function (column) {
+                        if (!column.classList.contains('enterprise-mega-aside')) {
+                            column.open = true;
+                        }
+                    });
+                    return;
+                }
+
+                document.querySelectorAll('.enterprise-mega-column').forEach(function (column, index) {
+                    if (!column.classList.contains('enterprise-mega-aside')) {
+                        column.open = index === 0;
+                    }
+                });
+            });
+
+            document.body.dataset.enterpriseMegaBound = 'true';
+        }
+    }
+
+    function removeLegacyServiceMenuNodes() {
+        document.querySelectorAll('.service-mega, .service-mega-panel, .service-mega-toggle, .service-mega-group, .service-mega-links').forEach(function (node) {
+            node.remove();
+        });
+
+        document.querySelectorAll('.navbar-nav').forEach(function (nav) {
+            var links = Array.prototype.slice.call(nav.querySelectorAll('a.nav-link'));
+            links.forEach(function (link) {
+                var href = (link.getAttribute('href') || '').toLowerCase();
+                if (href !== 'service.html' && href !== '/service.html') {
+                    return;
+                }
+
+                var next = link.nextElementSibling;
+                if (next && next.classList && next.classList.contains('arabic-text')) {
+                    next.remove();
+                }
+            });
+        });
+    }
+
     function removeDuplicateNodes(selector) {
         var nodes = document.querySelectorAll(selector);
         var seen = false;
@@ -763,6 +1292,12 @@ var SilvoraI18n = (function () {
         localizeTree(document.body);
         localizeSharedControls();
         updateLanguageSwitcher();
+
+        if (typeof window.SilvoraRefreshHeaderOffset === 'function') {
+            window.setTimeout(function () {
+                window.SilvoraRefreshHeaderOffset();
+            }, 0);
+        }
     }
 
     function observeMutations() {
@@ -792,6 +1327,8 @@ var SilvoraI18n = (function () {
             return initializationPromise;
         }
 
+        applyUnifiedLayout();
+
         document.querySelectorAll('.topbar').forEach(function (topbar) {
             topbar.remove();
         });
@@ -800,6 +1337,8 @@ var SilvoraI18n = (function () {
 
         currentLanguage = getStoredLanguage();
         ensureLanguageSwitcher();
+        removeLegacyServiceMenuNodes();
+        ensureEnterpriseMegaMenu();
         attachLanguageControls();
         syncDocumentLanguage(currentLanguage);
 
@@ -881,6 +1420,355 @@ document.addEventListener('DOMContentLoaded', function () {
     var pathName = window.location.pathname.toLowerCase();
     var pageName = pathName.split('/').pop() || 'index.html';
     document.body.classList.add('page-' + pageName.replace('.html', '').replace(/[^a-z0-9-]/g, '-'));
+
+    function applyHeaderOffsetSpacing() {
+        var header = document.querySelector('.stw-header');
+        if (!header) {
+            return;
+        }
+
+        var height = Math.ceil(header.getBoundingClientRect().height);
+        if (!height || !isFinite(height)) {
+            return;
+        }
+
+        document.documentElement.style.setProperty('--stw-header-offset', height + 'px');
+    }
+
+    window.SilvoraRefreshHeaderOffset = applyHeaderOffsetSpacing;
+
+    function bindHeaderOffsetObservers() {
+        applyHeaderOffsetSpacing();
+        window.addEventListener('resize', applyHeaderOffsetSpacing);
+        window.addEventListener('load', applyHeaderOffsetSpacing);
+
+        var header = document.querySelector('.stw-header');
+        var collapse = document.getElementById('navbarCollapse');
+
+        if (header) {
+            header.addEventListener('transitionend', function (event) {
+                if (!event || !event.propertyName) {
+                    return;
+                }
+                applyHeaderOffsetSpacing();
+            });
+        }
+
+        if (collapse) {
+            collapse.addEventListener('shown.bs.collapse', applyHeaderOffsetSpacing);
+            collapse.addEventListener('hidden.bs.collapse', applyHeaderOffsetSpacing);
+        }
+
+        var resizeObserverSupported = typeof ResizeObserver !== 'undefined';
+        if (resizeObserverSupported && header) {
+            var ro = new ResizeObserver(function () {
+                applyHeaderOffsetSpacing();
+            });
+            ro.observe(header);
+        }
+    }
+
+    function applyEnterpriseMicroInteractions() {
+        var onScroll = function () {
+            var scrolled = window.scrollY > 18;
+            document.body.classList.toggle('stw-scrolled', scrolled);
+        };
+
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+            anchor.addEventListener('click', function (event) {
+                var href = anchor.getAttribute('href') || '';
+                if (href.length <= 1) {
+                    return;
+                }
+
+                var target = document.querySelector(href);
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        document.querySelectorAll('.btn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                var ripple = document.createElement('span');
+                ripple.className = 'stw-ripple';
+                var rect = button.getBoundingClientRect();
+                var size = Math.max(rect.width, rect.height);
+                ripple.style.width = size + 'px';
+                ripple.style.height = size + 'px';
+                ripple.style.left = (event.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (event.clientY - rect.top - size / 2) + 'px';
+                button.appendChild(ripple);
+                window.setTimeout(function () {
+                    ripple.remove();
+                }, 520);
+            });
+        });
+
+        document.querySelectorAll('input, textarea, select').forEach(function (field) {
+            field.addEventListener('focus', function () {
+                field.closest('.mb-3, .col-12, .col-lg-2, .col-lg-3, .col-lg-4')?.classList.add('stw-field-focus');
+            });
+            field.addEventListener('blur', function () {
+                field.closest('.mb-3, .col-12, .col-lg-2, .col-lg-3, .col-lg-4')?.classList.remove('stw-field-focus');
+            });
+        });
+
+        if (!document.querySelector('.stw-reading-progress')) {
+            var progress = document.createElement('div');
+            progress.className = 'stw-reading-progress';
+            progress.innerHTML = '<span></span>';
+            document.body.appendChild(progress);
+
+            var updateProgress = function () {
+                var total = document.documentElement.scrollHeight - window.innerHeight;
+                var value = total > 0 ? (window.scrollY / total) * 100 : 0;
+                progress.firstElementChild.style.width = Math.min(100, Math.max(0, value)) + '%';
+            };
+
+            updateProgress();
+            window.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', updateProgress);
+        }
+
+        if (!document.querySelector('.stw-contact-widget')) {
+            var widget = document.createElement('div');
+            widget.className = 'stw-contact-widget';
+            widget.innerHTML = '<button type="button" class="stw-contact-toggle" aria-label="Open quick contact"><i class="fa fa-comments"></i></button><div class="stw-contact-panel"><a href="tel:+971585895827"><i class="fa fa-phone"></i><span>Call</span></a><a href="https://wa.me/971585895827" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a><a href="contact.html"><i class="fa fa-envelope"></i><span>Contact</span></a></div>';
+            document.body.appendChild(widget);
+
+            var toggle = widget.querySelector('.stw-contact-toggle');
+            toggle.addEventListener('click', function () {
+                widget.classList.toggle('is-open');
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!widget.contains(event.target)) {
+                    widget.classList.remove('is-open');
+                }
+            });
+        }
+    }
+
+    function enablePageTransitions() {
+        document.body.classList.add('page-transition-ready');
+        window.requestAnimationFrame(function () {
+            document.body.classList.add('page-transition-enter');
+        });
+
+        document.querySelectorAll('a[href$=".html"], a[href^="./"], a[href^="/"]').forEach(function (anchor) {
+            anchor.addEventListener('click', function (event) {
+                var href = anchor.getAttribute('href') || '';
+                if (!href || href.startsWith('#') || anchor.target === '_blank' || event.metaKey || event.ctrlKey) {
+                    return;
+                }
+
+                if (!/\.html(\?|$)|^\//i.test(href)) {
+                    return;
+                }
+
+                event.preventDefault();
+                document.body.classList.remove('page-transition-enter');
+                window.setTimeout(function () {
+                    window.location.href = href;
+                }, 180);
+            });
+        });
+    }
+
+    function mountPremiumJobsPage() {
+        if (!/^jobs\.html$/i.test(pageName)) {
+            return;
+        }
+
+        var host = document.querySelector('.inner-page-content') || document.querySelector('.container.py-5');
+        if (!host || host.dataset.jobsPremiumMounted === 'true') {
+            return;
+        }
+
+        var jobs = [
+            { title: 'Senior HVAC Technician', country: 'UAE', location: 'Dubai', industry: 'Facility Management', department: 'Technical Operations', type: 'Full Time', salary: 'AED 3,500 - 4,800', salaryValue: 4800, experience: '3+ years', posted: '2026-07-16', featured: true, urgent: false },
+            { title: 'Restaurant Service Supervisor', country: 'UAE', location: 'Abu Dhabi', industry: 'Hospitality', department: 'Food & Beverage', type: 'Full Time', salary: 'AED 3,000 - 4,200', salaryValue: 4200, experience: '2+ years', posted: '2026-07-15', featured: false, urgent: true },
+            { title: 'Warehouse Shift Coordinator', country: 'Saudi Arabia', location: 'Riyadh', industry: 'Logistics', department: 'Warehousing', type: 'Contract', salary: 'SAR 4,500 - 5,800', salaryValue: 5800, experience: '4+ years', posted: '2026-07-14', featured: true, urgent: false },
+            { title: 'Industrial Electrician', country: 'Romania', location: 'Cluj', industry: 'Manufacturing', department: 'Maintenance', type: 'Full Time', salary: 'EUR 1,100 - 1,500', salaryValue: 1500, experience: '3+ years', posted: '2026-07-13', featured: false, urgent: false },
+            { title: 'Hotel Housekeeping Team Leader', country: 'Croatia', location: 'Split', industry: 'Hospitality', department: 'Operations', type: 'Seasonal', salary: 'EUR 900 - 1,200', salaryValue: 1200, experience: '2+ years', posted: '2026-07-11', featured: false, urgent: false },
+            { title: 'Retail Store Operations Executive', country: 'UAE', location: 'Sharjah', industry: 'Retail', department: 'Store Operations', type: 'Full Time', salary: 'AED 4,000 - 5,500', salaryValue: 5500, experience: '3+ years', posted: '2026-07-10', featured: true, urgent: true },
+            { title: 'Security Control Room Operator', country: 'Qatar', location: 'Doha', industry: 'Security', department: 'Security Operations', type: 'Full Time', salary: 'QAR 2,800 - 3,700', salaryValue: 3700, experience: '2+ years', posted: '2026-07-09', featured: false, urgent: false },
+            { title: 'Civil Site Foreman', country: 'Serbia', location: 'Belgrade', industry: 'Construction', department: 'Site Management', type: 'Contract', salary: 'EUR 1,200 - 1,700', salaryValue: 1700, experience: '5+ years', posted: '2026-07-08', featured: false, urgent: true },
+            { title: 'Aviation Ground Handling Agent', country: 'UAE', location: 'Dubai', industry: 'Aviation', department: 'Ground Operations', type: 'Shift', salary: 'AED 3,200 - 4,100', salaryValue: 4100, experience: '2+ years', posted: '2026-07-07', featured: true, urgent: false }
+        ];
+
+        host.dataset.jobsPremiumMounted = 'true';
+        host.classList.add('stw-jobs-shell');
+        host.innerHTML = '<section class="stw-jobs-hero mb-4"><div><p class="stw-kicker english-text">Global Recruitment Desk</p><p class="stw-kicker arabic-text" dir="rtl">مكتب التوظيف العالمي</p><h1 class="english-text">Find Enterprise-Verified Career Opportunities</h1><h1 class="arabic-text" dir="rtl">اعثر على فرص عمل معتمدة للمؤسسات</h1><p class="english-text">Search active openings, filter by hiring priorities, and apply directly with recruitment support from Silvora Talenza World.</p><p class="arabic-text" dir="rtl">ابحث في الوظائف النشطة وقم بالتصفية حسب أولويات التوظيف وقدّم مباشرةً مع دعم التوظيف من سيلفورا تالينزا وورلد.</p></div><div class="stw-sticky-apply"><a class="btn btn-primary" href="contact.html"><span class="english-text">Apply with Recruiter Support</span><span class="arabic-text" dir="rtl">قدّم مع دعم فريق التوظيف</span></a></div></section>' +
+            '<section class="stw-job-filters mb-4"><div class="row g-3"><div class="col-lg-3"><label class="form-label english-text">Search</label><input class="form-control" id="jobQuery" type="text" aria-label="Search jobs"></div><div class="col-lg-2"><label class="form-label english-text">Country</label><select class="form-select" id="jobCountry"><option value="">All</option></select></div><div class="col-lg-2"><label class="form-label english-text">Industry</label><select class="form-select" id="jobIndustry"><option value="">All</option></select></div><div class="col-lg-2"><label class="form-label english-text">Department</label><select class="form-select" id="jobDepartment"><option value="">All</option></select></div><div class="col-lg-1"><label class="form-label english-text">Type</label><select class="form-select" id="jobType"><option value="">All</option></select></div><div class="col-lg-2"><label class="form-label english-text">Salary</label><select class="form-select" id="jobSalary"><option value="">Any</option><option value="1500">1500+</option><option value="3000">3000+</option><option value="4500">4500+</option></select></div></div><div class="d-flex justify-content-between align-items-center mt-3"><div class="d-flex gap-2"><button id="jobsGridView" class="btn btn-sm btn-primary" type="button" aria-label="Grid view">Grid</button><button id="jobsListView" class="btn btn-sm btn-outline-primary" type="button" aria-label="List view">List</button></div><div class="small text-muted" id="jobResultCount" aria-live="polite"></div></div></section>' +
+            '<section><div class="row g-4" id="jobCards"></div><div class="text-center mt-4"><button class="btn btn-outline-primary" id="loadMoreJobs" type="button">Load More Jobs</button></div></section>' +
+            '<section class="mt-5"><div class="row g-4"><div class="col-lg-6"><div class="stw-card"><h3 class="h5 english-text">Recruitment Process Timeline</h3><ol class="stw-timeline"><li>Profile Screening</li><li>Employer Shortlisting</li><li>Interview Coordination</li><li>Offer and Documentation</li><li>Pre-Departure/Onboarding</li></ol></div></div><div class="col-lg-6"><div class="stw-card"><h3 class="h5 english-text">Frequently Asked Questions</h3><div class="accordion" id="jobsFaq"><div class="accordion-item"><h4 class="accordion-header" id="jobsFaq1"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#jobsFaqBody1" type="button">How quickly can I receive interview updates?</button></h4><div id="jobsFaqBody1" class="accordion-collapse collapse show" data-bs-parent="#jobsFaq"><div class="accordion-body">Most interview updates are shared within one to three business days after employer feedback is released.</div></div></div><div class="accordion-item"><h4 class="accordion-header" id="jobsFaq2"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#jobsFaqBody2" type="button">Are salaries fixed?</button></h4><div id="jobsFaqBody2" class="accordion-collapse collapse" data-bs-parent="#jobsFaq"><div class="accordion-body">Salary ranges are indicative and depend on employer terms, role scope, and candidate profile.</div></div></div></div></div></div></div></section>' +
+            '<section class="mt-5"><div class="row g-4"><div class="col-lg-8"><div class="stw-card"><h3 class="h5 english-text">Related Services</h3><div class="d-flex flex-wrap gap-2"><a href="service-jobs.html" class="btn btn-outline-primary btn-sm">Job Placement Services</a><a href="recruitment-overseas.html" class="btn btn-outline-primary btn-sm">Overseas Recruitment</a><a href="service-visa.html" class="btn btn-outline-primary btn-sm">Visa Services</a></div></div></div><div class="col-lg-4"><div class="stw-card"><h3 class="h5 english-text">Contact Recruiter</h3><p class="mb-1">Phone: <a href="tel:+971585895827">+971 58 589 5827</a></p><p class="mb-0">Email: <a href="mailto:info@silvoratalenzaworld.com">info@silvoratalenzaworld.com</a></p></div></div></div></section>';
+
+        var queryInput = document.getElementById('jobQuery');
+        var countrySelect = document.getElementById('jobCountry');
+        var industrySelect = document.getElementById('jobIndustry');
+        var departmentSelect = document.getElementById('jobDepartment');
+        var typeSelect = document.getElementById('jobType');
+        var salarySelect = document.getElementById('jobSalary');
+        var gridViewBtn = document.getElementById('jobsGridView');
+        var listViewBtn = document.getElementById('jobsListView');
+        var resultCount = document.getElementById('jobResultCount');
+        var cardsHost = document.getElementById('jobCards');
+        var loadMoreBtn = document.getElementById('loadMoreJobs');
+        var visibleCount = 6;
+        var viewMode = 'grid';
+
+        function uniqueValues(key) {
+            return Array.from(new Set(jobs.map(function (job) { return job[key]; }))).sort();
+        }
+
+        function populateSelect(select, key) {
+            uniqueValues(key).forEach(function (value) {
+                var option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+            });
+        }
+
+        function matches(job, query) {
+            if (!query) {
+                return true;
+            }
+            var q = query.toLowerCase();
+            return [job.title, job.country, job.location, job.industry, job.department].join(' ').toLowerCase().indexOf(q) !== -1;
+        }
+
+        function filteredJobs() {
+            return jobs.filter(function (job) {
+                return matches(job, queryInput.value.trim()) &&
+                    (!countrySelect.value || job.country === countrySelect.value) &&
+                    (!industrySelect.value || job.industry === industrySelect.value) &&
+                    (!departmentSelect.value || job.department === departmentSelect.value) &&
+                    (!typeSelect.value || job.type === typeSelect.value) &&
+                    (!salarySelect.value || job.salaryValue >= parseInt(salarySelect.value, 10));
+            });
+        }
+
+        function skeleton(count) {
+            return Array.from({ length: count }).map(function () {
+                return '<div class="col-lg-4 col-md-6"><article class="stw-job-card stw-skeleton-card h-100"><div class="stw-skeleton-line w-50"></div><div class="stw-skeleton-line w-75"></div><div class="stw-skeleton-line w-100"></div><div class="stw-skeleton-line w-90"></div></article></div>';
+            }).join('');
+        }
+
+        function renderJobs(reset) {
+            if (reset) {
+                visibleCount = 6;
+            }
+            cardsHost.classList.toggle('stw-list-view', viewMode === 'list');
+            cardsHost.innerHTML = skeleton(3);
+            var items = filteredJobs();
+            window.setTimeout(function () {
+                cardsHost.innerHTML = items.slice(0, visibleCount).map(function (job) {
+                    var badge = job.urgent ? '<span class="stw-job-badge urgent">Urgent Hiring</span>' : (job.featured ? '<span class="stw-job-badge">Featured</span>' : '');
+                    return '<div class="col-lg-4 col-md-6"><article class="stw-job-card h-100"><div class="d-flex justify-content-between align-items-center"><div class="stw-job-meta"><span>' + job.country + '</span><span>' + job.industry + '</span></div>' + badge + '</div><h3>' + job.title + '</h3><ul><li><i class="fa fa-map-marker-alt"></i>' + job.location + '</li><li><i class="fa fa-briefcase"></i>' + job.type + ' | ' + job.experience + '</li><li><i class="fa fa-money-bill-wave"></i>' + job.salary + '</li><li><i class="fa fa-calendar-alt"></i>Posted: ' + job.posted + '</li></ul><div class="d-flex flex-wrap gap-2 mt-3"><a href="contact.html" class="btn btn-primary btn-sm">Apply</a><button class="btn btn-outline-primary btn-sm" type="button">Save</button><button class="btn btn-outline-secondary btn-sm stw-share-job" data-title="' + job.title + '" type="button">Share</button></div></article></div>';
+                }).join('');
+
+                cardsHost.querySelectorAll('.stw-share-job').forEach(function (shareBtn) {
+                    shareBtn.addEventListener('click', function () {
+                        var title = shareBtn.getAttribute('data-title') || 'Job opening';
+                        var shareText = title + ' - Silvora Talenza World';
+                        if (navigator.share) {
+                            navigator.share({ title: shareText, text: shareText, url: window.location.href });
+                            return;
+                        }
+
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(shareText + ' ' + window.location.href);
+                        }
+                    });
+                });
+
+                if (resultCount) {
+                    resultCount.textContent = items.length + ' positions found';
+                }
+
+                loadMoreBtn.style.display = items.length > visibleCount ? 'inline-flex' : 'none';
+            }, 120);
+        }
+
+        populateSelect(countrySelect, 'country');
+        populateSelect(industrySelect, 'industry');
+        populateSelect(departmentSelect, 'department');
+        populateSelect(typeSelect, 'type');
+
+        [queryInput, countrySelect, industrySelect, departmentSelect, typeSelect, salarySelect].forEach(function (control) {
+            control.addEventListener('input', function () { renderJobs(true); });
+            control.addEventListener('change', function () { renderJobs(true); });
+        });
+
+        gridViewBtn.addEventListener('click', function () {
+            viewMode = 'grid';
+            gridViewBtn.classList.add('btn-primary');
+            gridViewBtn.classList.remove('btn-outline-primary');
+            listViewBtn.classList.add('btn-outline-primary');
+            listViewBtn.classList.remove('btn-primary');
+            renderJobs(false);
+        });
+
+        listViewBtn.addEventListener('click', function () {
+            viewMode = 'list';
+            listViewBtn.classList.add('btn-primary');
+            listViewBtn.classList.remove('btn-outline-primary');
+            gridViewBtn.classList.add('btn-outline-primary');
+            gridViewBtn.classList.remove('btn-primary');
+            renderJobs(false);
+        });
+
+        loadMoreBtn.addEventListener('click', function () {
+            visibleCount += 6;
+            renderJobs(false);
+        });
+
+        renderJobs(true);
+    }
+
+    function upgradeHomepageExperience() {
+        if (!/^index\.html$/i.test(pageName)) {
+            return;
+        }
+
+        var slider = document.getElementById('headerCarousel');
+        if (slider && !slider.dataset.premiumHero) {
+            slider.dataset.premiumHero = 'true';
+            slider.classList.add('stw-video-carousel', 'carousel', 'slide', 'carousel-fade');
+            slider.setAttribute('data-bs-ride', 'carousel');
+            slider.setAttribute('data-bs-interval', '5200');
+            slider.innerHTML = '<div class="carousel-inner">' +
+                '<div class="carousel-item active"><div class="stw-slide"><video class="stw-hero-video" autoplay muted loop playsinline poster="img/index/architecture-ancient-monument-world-heritage-day-celebration.webp"><source src="https://cdn.coverr.co/videos/coverr-modern-office-building-1579/1080p.mp4" type="video/mp4"></video><img class="stw-hero-fallback" src="img/index/architecture-ancient-monument-world-heritage-day-celebration.webp" alt="Corporate Office" loading="eager"><div class="stw-slide-overlay"><h2>Corporate Office Operations</h2><p>Enterprise-ready advisory and execution from Dubai.</p></div></div></div>' +
+                '<div class="carousel-item"><div class="stw-slide"><video class="stw-hero-video" autoplay muted loop playsinline poster="img/index/construction-works-frankfurt-downtown-germany.webp"><source src="https://cdn.coverr.co/videos/coverr-walking-through-construction-site-5177/1080p.mp4" type="video/mp4"></video><img class="stw-hero-fallback" src="img/index/construction-works-frankfurt-downtown-germany.webp" alt="Recruitment Process" loading="lazy"><div class="stw-slide-overlay"><h2>Recruitment Process Excellence</h2><p>Role matching, interviews, and onboarding governance.</p></div></div></div>' +
+                '<div class="carousel-item"><div class="stw-slide"><video class="stw-hero-video" autoplay muted loop playsinline poster="img/index/photo-1731923508913-eba1fb7bd430.webp"><source src="https://cdn.coverr.co/videos/coverr-city-aerial-view-1576/1080p.mp4" type="video/mp4"></video><img class="stw-hero-fallback" src="img/index/photo-1731923508913-eba1fb7bd430.webp" alt="Business Setup" loading="lazy"><div class="stw-slide-overlay"><h2>Business Setup and PRO Execution</h2><p>Fast-track coordination with compliant documentation.</p></div></div></div>' +
+            '</div><button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button><button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>';
+        }
+
+        if (!document.querySelector('.stw-home-enhancements')) {
+            var heroHeader = document.querySelector('.hero-header');
+            if (heroHeader) {
+                var block = document.createElement('section');
+                block.className = 'container-fluid py-5 stw-home-enhancements';
+                block.innerHTML = '<div class="container"><div class="row g-4"><div class="col-lg-8"><div class="stw-card"><h2 class="h4 mb-3 english-text">Industries We Serve</h2><div class="stw-logo-track" data-logo-track data-logo-speed="0.65"><div class="stw-logo-track-row"><span><i class="fa fa-hard-hat"></i>Construction</span><span><i class="fa fa-hotel"></i>Hospitality</span><span><i class="fa fa-heartbeat"></i>Healthcare</span><span><i class="fa fa-truck"></i>Logistics</span><span><i class="fa fa-store"></i>Retail</span><span><i class="fa fa-industry"></i>Manufacturing</span><span><i class="fa fa-plane"></i>Aviation</span><span><i class="fa fa-building"></i>Facility Management</span><span><i class="fa fa-shield-alt"></i>Security</span><span><i class="fa fa-warehouse"></i>Warehousing</span></div></div><div class="row g-3 mt-2"><div class="col-md-6"><div class="stw-mini-card"><h3>Countries We Recruit From</h3><p>UAE, India, Pakistan, Nepal, Bangladesh, Sri Lanka, Philippines, Kenya</p></div></div><div class="col-md-6"><div class="stw-mini-card"><h3>Countries We Recruit To</h3><p>UAE, Saudi Arabia, Qatar, Oman, Bahrain, Romania, Poland, Croatia, Serbia, Portugal, Germany, Italy</p></div></div></div><div class="stw-world-map mt-3" aria-label="Recruitment coverage map"><span class="pin pin-uae"></span><span class="pin pin-europe"></span><span class="pin pin-asia"></span></div></div></div><div class="col-lg-4"><div class="stw-card"><h2 class="h5 mb-3 english-text">Achievements</h2><div class="stw-counter-grid"><div><strong data-counter-target="20" data-counter-suffix="+">0</strong><span>Years Experience</span></div><div><strong data-counter-target="0" data-counter-suffix="+">0</strong><span>Candidates Placed (Update)</span></div><div><strong data-counter-target="0" data-counter-suffix="+">0</strong><span>Corporate Clients (Update)</span></div><div><strong data-counter-target="25" data-counter-suffix="+">0</strong><span>Countries Served</span></div></div></div></div></div><div class="row g-4 mt-1"><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Recruitment Process</h3><ol class="stw-timeline"><li>Demand Planning</li><li>Sourcing & Screening</li><li>Client Interviews</li><li>Offer Management</li><li>Deployment</li></ol></div></div><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Visa Process</h3><ol class="stw-timeline"><li>Eligibility Review</li><li>Document Verification</li><li>Submission</li><li>Status Follow-up</li><li>Issuance Support</li></ol></div></div><div class="col-lg-4"><div class="stw-card"><h3 class="h6">Business Setup Process</h3><ol class="stw-timeline"><li>Advisory</li><li>License Path</li><li>Approvals</li><li>Registration</li><li>Operational Launch</li></ol></div></div></div><div class="row g-4 mt-1"><div class="col-lg-6"><div class="stw-card"><h3 class="h6">Featured Jobs</h3><p>Explore active openings with fast-track recruiter coordination.</p><a class="btn btn-outline-primary btn-sm" href="jobs.html">Browse Jobs</a></div></div><div class="col-lg-6"><div class="stw-card"><h3 class="h6">Latest Blogs</h3><p>Market updates, hiring trends, and practical migration insights.</p><a class="btn btn-outline-primary btn-sm" href="blogs.html">Read Blog</a></div></div></div><div class="row g-4 mt-1"><div class="col-lg-8"><div class="stw-card"><h3 class="h6">Frequently Asked Questions</h3><div class="accordion" id="homeFaq"><div class="accordion-item"><h4 class="accordion-header" id="homeFaqH1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeFaqB1">Do you support end-to-end recruitment and visa coordination?</button></h4><div id="homeFaqB1" class="accordion-collapse collapse show" data-bs-parent="#homeFaq"><div class="accordion-body">Yes. Our teams coordinate sourcing, documentation, visa support, and onboarding workflows under one service framework.</div></div></div><div class="accordion-item"><h4 class="accordion-header" id="homeFaqH2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#homeFaqB2">Can you support multilingual stakeholder communication?</button></h4><div id="homeFaqB2" class="accordion-collapse collapse" data-bs-parent="#homeFaq"><div class="accordion-body">Yes. English and Arabic communication models are available for candidate and corporate engagement.</div></div></div></div></div></div><div class="col-lg-4"><div class="stw-card stw-final-cta"><h3 class="h6">Start Your Corporate Consultation</h3><p>Connect with Silvora specialists for recruitment, visa, PRO, business setup, and digital execution.</p><a class="btn btn-primary btn-sm" href="contact.html">Book Consultation</a></div></div></div></div>';
+                heroHeader.insertAdjacentElement('afterend', block);
+            }
+        }
+    }
+
+    applyEnterpriseMicroInteractions();
+    enablePageTransitions();
+    mountPremiumJobsPage();
+    upgradeHomepageExperience();
 
     function addFormFeedback(form) {
         var feedback = form.querySelector('.form-feedback');
@@ -1027,6 +1915,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!img.hasAttribute('decoding')) {
             img.setAttribute('decoding', 'async');
         }
+    });
+
+    // Enforce production copy standard by avoiding placeholder strings in rendered forms.
+    document.querySelectorAll('[placeholder]').forEach(function (field) {
+        field.removeAttribute('placeholder');
     });
 
     // Mobile menu state, scroll lock, and auto-close after navigation.
@@ -1236,7 +2129,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     if (window.SilvoraI18n && typeof window.SilvoraI18n.init === 'function') {
-        window.SilvoraI18n.init();
+        window.SilvoraI18n.init().finally(function () {
+            bindHeaderOffsetObservers();
+            window.setTimeout(applyHeaderOffsetSpacing, 0);
+        });
+    } else {
+        bindHeaderOffsetObservers();
     }
 });
 
