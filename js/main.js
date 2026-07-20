@@ -349,6 +349,7 @@ var SilvoraI18n = (function () {
     var corporateBaseLinks = [
         { href: 'index.html', en: 'Home', ar: 'الرئيسية', key: 'home' },
         { href: 'about.html', en: 'About', ar: 'من نحن', key: 'about' },
+        { href: 'our-team.html', en: 'Our Team', ar: 'فريقنا', key: 'team' },
         { href: 'service.html', en: 'Services', ar: 'خدماتنا', key: 'services' },
         { href: 'jobs.html', en: 'Jobs', ar: 'الوظائف', key: 'jobs' },
         { href: 'blogs.html', en: 'Blogs', ar: 'المدونة', key: 'blogs' },
@@ -360,8 +361,11 @@ var SilvoraI18n = (function () {
         if (/^index\.html$/i.test(pageName)) {
             return 'home';
         }
-        if (/^about\.html$|^our-team\.html$/i.test(pageName)) {
+        if (/^about\.html$/i.test(pageName)) {
             return 'about';
+        }
+        if (/^our-team\.html$/i.test(pageName)) {
+            return 'team';
         }
         if (/^(service|visa|work-permit|pro|recruitment|website)-/i.test(pageName) || /^service\.html$/i.test(pageName)) {
             return 'services';
