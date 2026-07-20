@@ -2040,6 +2040,44 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Insert premium UAE Pride section above each footer across the website.
+    document.querySelectorAll('.footer').forEach(function (footer) {
+        if (!footer || footer.previousElementSibling && footer.previousElementSibling.matches('[data-uae-pride]')) {
+            return;
+        }
+
+        var prideSection = document.createElement('section');
+        prideSection.className = 'stw-uae-pride stw-uae-pride-reveal';
+        prideSection.setAttribute('data-uae-pride', 'true');
+        prideSection.setAttribute('aria-label', 'Proudly Serving the United Arab Emirates');
+        prideSection.innerHTML = '<div class="container px-lg-5"><div class="stw-uae-pride-shell"><div class="row g-4 align-items-center"><div class="col-lg-3 col-md-4"><div class="stw-uae-flag-stage" aria-hidden="true"><div class="stw-uae-flag-pole"></div><div class="stw-uae-flag"><span class="stw-uae-red"></span><span class="stw-uae-stripes"><span class="stw-uae-green"></span><span class="stw-uae-white"></span><span class="stw-uae-black"></span></span></div></div></div><div class="col-lg-9 col-md-8"><p class="stw-uae-kicker mb-2">🇦🇪 Proudly Serving the United Arab Emirates</p><div class="arabic-text stw-uae-kicker mb-2" dir="rtl">🇦🇪 نفخر بخدمة دولة الإمارات العربية المتحدة</div><h3 class="stw-uae-title mb-2">Trusted Support for Employers, Businesses, and Professionals Across the UAE</h3><p class="mb-3 stw-uae-copy english-text">Supporting businesses with trusted manpower, recruitment, visa, PRO, business setup, and digital solutions across the UAE.</p><p class="mb-3 stw-uae-copy arabic-text" dir="rtl">ندعم الشركات بحلول موثوقة في القوى العاملة والتوظيف والتأشيرات وخدمات PRO وتأسيس الأعمال والحلول الرقمية في جميع أنحاء الإمارات.</p><a class="btn btn-outline-primary stw-uae-btn" href="service.html">Learn More</a></div></div></div></div>';
+        footer.parentNode.insertBefore(prideSection, footer);
+    });
+
+    var prideBlocks = document.querySelectorAll('.stw-uae-pride-reveal');
+    if (prideBlocks.length > 0) {
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            prideBlocks.forEach(function (block) {
+                block.classList.add('is-visible');
+            });
+        } else {
+            var prideObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.2 });
+
+            prideBlocks.forEach(function (block) {
+                prideObserver.observe(block);
+            });
+        }
+    }
+
     // Clients page trust layer without fabricated reviews/certifications.
     if (/clients\.html$/i.test(pageName)) {
         var clientsRoot = document.querySelector('.inner-page-content');
