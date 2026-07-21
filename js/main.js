@@ -2685,12 +2685,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var delay = (index + 1) * 150;
                 var reflectDelay = (index * 2) + 's';
                 return (
-                    '<button type="button" class="stw-award-card stw-reveal-up"' +
-                    ' data-award-trigger' +
-                    ' data-award-index="' + index + '"' +
-                    ' data-award-src="' + award.src + '"' +
-                    ' data-award-title="' + award.title + '"' +
-                    ' aria-label="View ' + award.title + ' fullscreen"' +
+                    '<article class="stw-award-card stw-reveal-up"' +
                     ' style="--stw-award-delay:' + delay + 'ms;--stw-reflect-delay:' + reflectDelay + '">' +
                         '<span class="stw-award-card__badge"><i class="fa fa-trophy" aria-hidden="true"></i>' + award.title + '</span>' +
                         '<span class="stw-award-card__media">' +
@@ -2699,9 +2694,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         '</span>' +
                         '<span class="stw-award-card__meta">' +
                             '<span class="stw-award-card__title">' + award.title + '</span>' +
-                            '<span class="stw-award-card__cta" aria-hidden="true"><i class="fa fa-magnifying-glass" aria-hidden="true"></i>View Fullscreen</span>' +
                         '</span>' +
-                    '</button>'
+                    '</article>'
                 );
             }).join('');
 
@@ -2778,8 +2772,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 bindAwardsParallax(awardsSection);
             }
         }
-
-        ensureAwardsLightbox();
     }
 
     function loadRecruitmentDemandConfig() {
