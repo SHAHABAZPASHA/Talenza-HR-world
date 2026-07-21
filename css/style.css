@@ -4381,6 +4381,14 @@ textarea:focus-visible,
     gap: 1rem;
 }
 
+.stw-office-grid .stw-office-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    padding: 1.35rem;
+}
+
 .stw-office-card {
     --stw-card-radius: 22px;
     position: relative;
@@ -4437,6 +4445,14 @@ textarea:focus-visible,
     margin-bottom: 0.8rem;
 }
 
+.stw-office-grid .stw-office-head {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.8rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
 .stw-office-flag {
     font-size: 1.25rem;
     line-height: 1;
@@ -4462,6 +4478,32 @@ textarea:focus-visible,
 .stw-office-name {
     color: #153f89;
     font-size: 1.12rem;
+}
+
+.stw-office-grid .stw-office-name {
+    font-size: clamp(1.375rem, 1.9vw, 1.5rem);
+    font-weight: 700;
+    margin-bottom: 0.35rem !important;
+}
+
+.stw-branch-office-copy {
+    display: grid;
+    justify-items: center;
+    gap: 0.12rem;
+}
+
+.stw-branch-city {
+    color: #193f85;
+    font-size: clamp(1.125rem, 1.6vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.stw-branch-country {
+    color: rgba(22, 49, 97, 0.78);
+    font-size: clamp(0.95rem, 1.2vw, 1rem);
+    font-weight: 500;
+    line-height: 1.35;
 }
 
 .stw-office-type {
@@ -4647,6 +4689,10 @@ textarea:focus-visible,
 
     .stw-office-grid {
         grid-template-columns: 1fr;
+    }
+
+    .stw-office-grid .stw-office-card {
+        min-height: 210px;
     }
 
     .stw-office-card,
@@ -4874,6 +4920,47 @@ html[dir="rtl"] .stw-team-page .stw-team-title-block .stw-title-underline::after
     pointer-events: none;
 }
 
+.stw-team-page .stw-chairman-profile .team-photo img {
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: center 18%;
+    box-shadow: 0 16px 34px rgba(17, 41, 86, 0.22);
+}
+
+.stw-team-page .stw-chairman-profile h3 {
+    color: #173f8a;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.stw-team-page .stw-leadership-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.stw-team-page .stw-leadership-highlights span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(23, 63, 138, 0.18);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(238, 246, 255, 0.82));
+    color: #173f8a;
+    font-size: 0.84rem;
+    font-weight: 600;
+}
+
+.stw-team-page .stw-leadership-highlights i {
+    color: #c58a25;
+}
+
+.stw-team-page .stw-chairman-company-logo img {
+    max-height: 70px;
+    width: auto;
+}
+
 .stw-team-page .team-horizontal-card:hover .team-photo img,
 .stw-team-page .team-org-node:hover .team-org-photo img {
     transform: scale3d(1.05, 1.05, 1);
@@ -4948,6 +5035,18 @@ html[dir="rtl"] .stw-team-page .stw-team-title-block .stw-title-underline::after
 }
 
 @media (max-width: 767.98px) {
+    .stw-team-page .stw-leadership-team h2 {
+        text-align: center;
+    }
+
+    .stw-team-page .stw-chairman-profile .stw-leadership-highlights {
+        justify-content: center;
+    }
+
+    .stw-team-page .stw-chairman-company-logo {
+        justify-content: center !important;
+    }
+
     .stw-team-page .stw-team-stats {
         margin-top: 1.5rem;
     }
