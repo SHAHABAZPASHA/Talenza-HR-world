@@ -29,6 +29,12 @@ final class SilvoraMailer
         if (!isset($config['auto_reply_enabled'])) {
             $config['auto_reply_enabled'] = true;
         }
+        if (!isset($config['smtp_fallback_secure'])) {
+            $config['smtp_fallback_secure'] = 'tls';
+        }
+        if (!isset($config['smtp_fallback_port'])) {
+            $config['smtp_fallback_port'] = 587;
+        }
         if (!isset($config['website_url'])) {
             $config['website_url'] = 'https://www.silvoratalenzaworld.com';
         }
@@ -247,16 +253,66 @@ final class SilvoraMailer
     public static function configureMailer(PHPMailer $mail, array $config): void
     {
         $mail->isSMTP();
-        $mail->Host = (string) $config['smtp_host'];
+        $mail->Host = (string) ($config['smtp_host'] ?? '');
         $mail->SMTPAuth = (bool) $config['smtp_auth'];
         $mail->Username = (string) $config['smtp_username'];
         $mail->Password = (string) $config['smtp_password'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = (int) $config['smtp_port'];
+        self::applyTransportSettings($mail, (string) ($config['smtp_secure'] ?? ''), (int) ($config['smtp_port'] ?? 0));
         $mail->CharSet = 'UTF-8';
         $mail->Timeout = 20;
         $mail->SMTPKeepAlive = false;
+        $mail->SMTPAutoTLS = true;
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ];
         $mail->setFrom((string) $config['from_email'], (string) $config['from_name']);
+    }
+
+    private static function applyTransportSettings(PHPMailer $mail, string $secure, int $port): void
+    {
+        $secure = strtolower(trim($secure));
+        if ($secure === 'ssl' || $secure === 'smtps') {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = $port > 0 ? $port : 465;
+            return;
+        }
+        if ($secure === 'tls' || $secure === 'starttls') {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $port > 0 ? $port : 587;
+            return;
+        }
+
+        $mail->SMTPSecure = '';
+        $mail->Port = $port > 0 ? $port : 25;
+    }
+
+    public static function sendWithRetry(PHPMailer $mail, array $config): void
+    {
+        $primaryError = '';
+        try {
+            $mail->send();
+            return;
+        } catch (Throwable $error) {
+            $primaryError = $mail->ErrorInfo !== '' ? $mail->ErrorInfo : $error->getMessage();
+        }
+
+        self::applyTransportSettings(
+            $mail,
+            (string) ($config['smtp_fallback_secure'] ?? 'tls'),
+            (int) ($config['smtp_fallback_port'] ?? 587)
+        );
+
+        try {
+            $mail->send();
+            return;
+        } catch (Throwable $retryError) {
+            $retryText = $mail->ErrorInfo !== '' ? $mail->ErrorInfo : $retryError->getMessage();
+            throw new RuntimeException('Primary SMTP failed: ' . $primaryError . ' | Fallback SMTP failed: ' . $retryText);
+        }
     }
 
     public static function recipients(array $config): array

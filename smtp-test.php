@@ -11,6 +11,7 @@ require 'lib/PHPMailer/src/PHPMailer.php';
 require 'lib/PHPMailer/src/SMTP.php';
 
 $config = require __DIR__ . '/mail-config.php';
+$secure = strtolower(trim((string) ($config['smtp_secure'] ?? '')));
 
 $mail = new PHPMailer(true);
 try {
@@ -19,7 +20,11 @@ try {
     $mail->SMTPAuth   = (bool) $config['smtp_auth'];
     $mail->Username   = $config['smtp_username'];
     $mail->Password   = $config['smtp_password'];
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    if ($secure === 'ssl' || $secure === 'smtps') {
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    } elseif ($secure === 'tls' || $secure === 'starttls') {
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    }
     $mail->Port       = (int) $config['smtp_port'];
 
     $mail->setFrom($config['from_email'], 'Silvora Talenza World Test');

@@ -1,12 +1,14 @@
 <?php
 // Shared mail configuration for all website form handlers.
 return [
-    'smtp_host' => 'smtp.zoho.in',
+    'smtp_host' => 'smtp.hostinger.com',
     'smtp_auth' => true,
     'smtp_username' => 'info@silvoratalenzaworld.com',
-    'smtp_password' => 'Info@talentra2025',
+    'smtp_password' => 'Info@silvoratalenza1',
     'smtp_secure' => 'ssl',
     'smtp_port' => 465,
+    'smtp_fallback_secure' => 'tls',
+    'smtp_fallback_port' => 587,
 
     'from_email' => 'info@silvoratalenzaworld.com',
     'from_name' => 'Silvora Talenza World Website',

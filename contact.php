@@ -170,7 +170,7 @@ try {
         $adminMail->addAttachment($file['path'], $file['name']);
     }
 
-    $adminMail->send();
+    SilvoraMailer::sendWithRetry($adminMail, $config);
     $status = 'sent';
 
     if (!empty($config['auto_reply_enabled']) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -181,9 +181,9 @@ try {
         $replyMail->Subject = 'Thank You for Contacting Silvora Talenza World LLC';
         $replyMail->Body = SilvoraMailer::buildAutoReplyHtml($payload, $config);
         $replyMail->AltBody = "Thank you for contacting Silvora Talenza World LLC. Reference: {$reference}.";
-        $replyMail->send();
+        SilvoraMailer::sendWithRetry($replyMail, $config);
     }
-} catch (Exception $e) {
+} catch (Throwable $e) {
     $errorInfo = $adminMail->ErrorInfo ?: $e->getMessage();
 }
 

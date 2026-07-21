@@ -81,7 +81,7 @@ try {
     $mail->isHTML(true);
     $mail->Subject = '[' . $reference . '] ' . $subject;
     $mail->Body = SilvoraMailer::buildAdminEmailHtml($payload, $config);
-    $mail->send();
+    SilvoraMailer::sendWithRetry($mail, $config);
     $sent = true;
 
     if (!empty($config['auto_reply_enabled'])) {
@@ -91,9 +91,9 @@ try {
         $reply->isHTML(true);
         $reply->Subject = 'Thank You for Contacting Silvora Talenza World LLC';
         $reply->Body = SilvoraMailer::buildAutoReplyHtml($payload, $config);
-        $reply->send();
+        SilvoraMailer::sendWithRetry($reply, $config);
     }
-} catch (Exception $e) {
+} catch (Throwable $e) {
     $sent = false;
 }
 
