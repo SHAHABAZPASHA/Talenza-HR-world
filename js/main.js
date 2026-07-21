@@ -2903,32 +2903,49 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
 
-        overlay.addEventListener('click', function (e) {
-            closePopup();
-            // If the click was over an award card, trigger it after the overlay finishes closing
-            if (document.elementsFromPoint) {
-                var elements = document.elementsFromPoint(e.clientX, e.clientY);
-                var card = null;
-                for (var i = 0; i < elements.length; i++) {
-                    if (elements[i] !== overlay && elements[i].hasAttribute && elements[i].hasAttribute('data-award-trigger')) {
-                        card = elements[i];
-                        break;
-                    }
-                    // Also check ancestors of each element
-                    var ancestor = elements[i].closest ? elements[i].closest('[data-award-trigger]') : null;
-                    if (ancestor && ancestor !== overlay) {
-                        card = ancestor;
-                        break;
-                    }
+        function passThroughToAwardCard(clientX, clientY) {
+            if (!document.elementsFromPoint) {
+                return;
+            }
+            var elements = document.elementsFromPoint(clientX, clientY);
+            var card = null;
+            for (var i = 0; i < elements.length; i++) {
+                var el = elements[i];
+                if (el === overlay || el === popup) {
+                    continue;
                 }
-                if (card) {
-                    var capturedCard = card;
-                    window.setTimeout(function () {
-                        capturedCard.click();
-                    }, 320);
+                if (el.hasAttribute && el.hasAttribute('data-award-trigger')) {
+                    card = el;
+                    break;
+                }
+                var anc = el.closest ? el.closest('[data-award-trigger]') : null;
+                if (anc) {
+                    card = anc;
+                    break;
                 }
             }
+            if (card) {
+                var capturedCard = card;
+                window.setTimeout(function () {
+                    capturedCard.click();
+                }, 320);
+            }
+        }
+
+        overlay.addEventListener('click', function (e) {
+            var cx = e.clientX, cy = e.clientY;
+            closePopup();
+            passThroughToAwardCard(cx, cy);
         });
+
+        popup.addEventListener('click', function (e) {
+            if (!e.target.closest('.stw-demand-popup-shell')) {
+                var cx = e.clientX, cy = e.clientY;
+                closePopup();
+                passThroughToAwardCard(cx, cy);
+            }
+        });
+
         popup.querySelector('.stw-demand-close').addEventListener('click', closePopup);
         document.addEventListener('keydown', onKeyDown);
     }
