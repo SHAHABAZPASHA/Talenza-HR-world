@@ -2360,29 +2360,187 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (!entry.isIntersecting) {
                         return;
                     }
-
                     entry.target.classList.add('is-visible');
                     observerInstance.unobserve(entry.target);
                 });
-            }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+            }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
             revealItems.forEach(function (item) {
                 if (item.dataset.stwRevealBound === 'true') {
                     return;
                 }
-
                 item.dataset.stwRevealBound = 'true';
                 revealObserver.observe(item);
             });
         }
 
+        function bindAwardsImageLoading(root) {
+            if (!root) {
+                return;
+            }
+            var images = root.querySelectorAll('.stw-award-card__media img');
+            images.forEach(function (img) {
+                var skeleton = img.parentElement ? img.parentElement.querySelector('.stw-award-card__skeleton') : null;
+                function onLoad() {
+                    img.classList.add('is-loaded');
+                    if (skeleton) {
+                        skeleton.classList.add('is-hidden');
+                    }
+                }
+                if (img.complete && img.naturalWidth > 0) {
+                    onLoad();
+                } else {
+                    img.addEventListener('load', onLoad, { once: true });
+                    img.addEventListener('error', onLoad, { once: true });
+                }
+            });
+        }
+
+        function bindAwardsParallax(section) {
+            if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+            var cards = section.querySelectorAll('.stw-award-card');
+            var rafId = null;
+            var mouseX = 0;
+            var mouseY = 0;
+
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                if (rafId) {
+                    return;
+                }
+                rafId = requestAnimationFrame(function () {
+                    rafId = null;
+                    cards.forEach(function (card) {
+                        if (card.matches(':hover')) {
+                            return;
+                        }
+                        var rect = card.getBoundingClientRect();
+                        var cx = rect.left + rect.width / 2;
+                        var cy = rect.top + rect.height / 2;
+                        var dx = (mouseX - cx) / (window.innerWidth / 2);
+                        var dy = (mouseY - cy) / (window.innerHeight / 2);
+                        var maxMove = 6;
+                        var px = Math.max(-maxMove, Math.min(maxMove, dx * maxMove * 0.35));
+                        var py = Math.max(-maxMove, Math.min(maxMove, dy * maxMove * 0.35));
+                        card.style.transform = 'translate(' + px + 'px, ' + py + 'px)';
+                    });
+                });
+            });
+
+            cards.forEach(function (card) {
+                card.addEventListener('mouseenter', function () {
+                    card.style.transform = '';
+                });
+                card.addEventListener('mouseleave', function () {
+                    card.style.transform = '';
+                });
+            });
+        }
+
+        function initAwardsParticles(section) {
+            if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+            var canvas = document.createElement('canvas');
+            canvas.className = 'stw-awards-particles';
+            canvas.setAttribute('aria-hidden', 'true');
+            section.insertBefore(canvas, section.firstChild);
+
+            var ctx = canvas.getContext('2d');
+            var particles = [];
+            var PARTICLE_COUNT = 42;
+
+            function resize() {
+                canvas.width = section.offsetWidth;
+                canvas.height = section.offsetHeight;
+            }
+            resize();
+            var resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(resize, 200);
+            });
+
+            for (var i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push({
+                    x: Math.random() * section.offsetWidth,
+                    y: Math.random() * section.offsetHeight,
+                    r: Math.random() * 1.6 + 0.4,
+                    speed: Math.random() * 0.28 + 0.07,
+                    opacity: Math.random() * 0.045 + 0.015,
+                    drift: (Math.random() - 0.5) * 0.28,
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+
+            var frame = 0;
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                frame += 0.01;
+                particles.forEach(function (p) {
+                    p.y -= p.speed;
+                    p.x += Math.sin(frame + p.phase) * p.drift;
+                    if (p.y < -6) {
+                        p.y = canvas.height + 6;
+                        p.x = Math.random() * canvas.width;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(212,175,55,' + p.opacity + ')';
+                    ctx.fill();
+                });
+            }
+            animate();
+        }
+
         function ensureAwardsLightbox() {
+            var awardsData = [
+                {
+                    title: 'Outstanding Achievement Award',
+                    src: 'img/awards/WhatsApp Image 2026-07-20 at 5.16.07 PM (1).jpeg'
+                },
+                {
+                    title: 'Excellence Award',
+                    src: 'img/awards/WhatsApp Image 2026-07-20 at 5.16.07 PM (2).jpeg'
+                },
+                {
+                    title: 'Certificate of Appreciation',
+                    src: 'img/awards/WhatsApp Image 2026-07-20 at 5.16.07 PM (3).jpeg'
+                }
+            ];
+            var currentIndex = 0;
+            var zoomLevel = 1;
+            var baseZoom = 1.65;
+
             var existingHost = document.querySelector('.stw-awards-lightbox');
             if (!existingHost) {
-                var host = document.createElement('section');
+                var host = document.createElement('div');
                 host.className = 'stw-awards-lightbox';
+                host.setAttribute('role', 'dialog');
+                host.setAttribute('aria-modal', 'true');
                 host.setAttribute('aria-hidden', 'true');
-                host.innerHTML = '<div class="stw-awards-lightbox__overlay"></div><div class="stw-awards-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="stwAwardsLightboxTitle"><button type="button" class="stw-awards-lightbox__close" aria-label="Close awards lightbox"><i class="fa fa-xmark" aria-hidden="true"></i></button><figure class="stw-awards-lightbox__figure"><div class="stw-awards-lightbox__media"><img class="stw-awards-lightbox__image" src="" alt=""></div><figcaption class="stw-awards-lightbox__meta"><h3 id="stwAwardsLightboxTitle">Awards & Recognition</h3><p class="stw-awards-lightbox__hint">Tap image to zoom</p></figcaption></figure></div>';
+                host.setAttribute('aria-labelledby', 'stwAwardsLightboxTitle');
+                host.innerHTML =
+                    '<div class="stw-awards-lightbox__overlay" aria-hidden="true"></div>' +
+                    '<div class="stw-awards-lightbox__dialog">' +
+                        '<button type="button" class="stw-awards-lightbox__close" aria-label="Close lightbox"><i class="fa fa-xmark" aria-hidden="true"></i></button>' +
+                        '<button type="button" class="stw-awards-lightbox__nav stw-awards-lightbox__nav--prev" aria-label="Previous award"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>' +
+                        '<button type="button" class="stw-awards-lightbox__nav stw-awards-lightbox__nav--next" aria-label="Next award"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>' +
+                        '<span class="stw-awards-lightbox__counter" aria-live="polite">1 / ' + awardsData.length + '</span>' +
+                        '<figure class="stw-awards-lightbox__figure">' +
+                            '<div class="stw-awards-lightbox__media">' +
+                                '<img class="stw-awards-lightbox__image" src="" alt="" loading="lazy">' +
+                            '</div>' +
+                            '<figcaption class="stw-awards-lightbox__meta">' +
+                                '<h3 id="stwAwardsLightboxTitle"></h3>' +
+                                '<p class="stw-awards-lightbox__hint">Double-click or scroll to zoom &bull; ESC to close &bull; \u2190\u2192 to navigate</p>' +
+                            '</figcaption>' +
+                        '</figure>' +
+                    '</div>';
                 document.body.appendChild(host);
                 existingHost = host;
             }
@@ -2395,55 +2553,112 @@ document.addEventListener('DOMContentLoaded', function () {
             var lightboxImage = lightbox.querySelector('.stw-awards-lightbox__image');
             var lightboxTitle = lightbox.querySelector('#stwAwardsLightboxTitle');
             var closeButton = lightbox.querySelector('.stw-awards-lightbox__close');
-            var lightboxDialog = lightbox.querySelector('.stw-awards-lightbox__dialog');
+            var prevButton = lightbox.querySelector('.stw-awards-lightbox__nav--prev');
+            var nextButton = lightbox.querySelector('.stw-awards-lightbox__nav--next');
+            var counter = lightbox.querySelector('.stw-awards-lightbox__counter');
 
-            function closeAwardsLightbox() {
+            function setLightboxContent(index) {
+                currentIndex = ((index % awardsData.length) + awardsData.length) % awardsData.length;
+                var award = awardsData[currentIndex];
+                lightboxImage.setAttribute('alt', award.title);
+                lightboxImage.setAttribute('src', award.src);
+                if (lightboxTitle) {
+                    lightboxTitle.textContent = award.title;
+                }
+                if (counter) {
+                    counter.textContent = (currentIndex + 1) + ' / ' + awardsData.length;
+                }
+                zoomLevel = 1;
+                lightbox.classList.remove('is-zoomed');
+                lightbox.style.setProperty('--lightbox-zoom', '1');
+            }
+
+            function openLightbox(index) {
+                setLightboxContent(index);
+                lightbox.classList.add('is-visible');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.documentElement.classList.add('stw-awards-lock');
+                document.body.classList.add('stw-awards-lock');
+                if (closeButton) {
+                    closeButton.focus();
+                }
+            }
+
+            function closeLightbox() {
                 lightbox.classList.remove('is-visible', 'is-zoomed');
                 lightbox.setAttribute('aria-hidden', 'true');
                 document.documentElement.classList.remove('stw-awards-lock');
                 document.body.classList.remove('stw-awards-lock');
-                lightboxImage.removeAttribute('src');
-                lightboxImage.removeAttribute('alt');
+                setTimeout(function () {
+                    if (lightbox.getAttribute('aria-hidden') === 'true') {
+                        lightboxImage.removeAttribute('src');
+                    }
+                }, 400);
             }
 
             document.addEventListener('click', function (event) {
                 var trigger = event.target.closest('[data-award-trigger]');
                 if (trigger) {
-                    var previewImage = trigger.querySelector('img');
-                    lightboxImage.setAttribute('src', trigger.getAttribute('data-award-src') || '');
-                    lightboxImage.setAttribute('alt', previewImage ? (previewImage.getAttribute('alt') || '') : '');
-                    lightboxTitle.textContent = trigger.getAttribute('data-award-title') || 'Awards & Recognition';
-                    lightbox.classList.add('is-visible');
-                    lightbox.classList.remove('is-zoomed');
-                    lightbox.setAttribute('aria-hidden', 'false');
-                    document.documentElement.classList.add('stw-awards-lock');
-                    document.body.classList.add('stw-awards-lock');
-                    closeButton.focus();
+                    var idx = parseInt(trigger.getAttribute('data-award-index') || '0', 10);
+                    openLightbox(idx);
                     return;
                 }
-
-                if (event.target.closest('.stw-awards-lightbox__close') || event.target.closest('.stw-awards-lightbox__overlay')) {
-                    closeAwardsLightbox();
+                if (event.target.closest('.stw-awards-lightbox__close')) {
+                    closeLightbox();
+                    return;
+                }
+                if (event.target === lightbox.querySelector('.stw-awards-lightbox__overlay')) {
+                    closeLightbox();
+                    return;
+                }
+                if (event.target.closest('.stw-awards-lightbox__nav--prev')) {
+                    setLightboxContent(currentIndex - 1);
+                    return;
+                }
+                if (event.target.closest('.stw-awards-lightbox__nav--next')) {
+                    setLightboxContent(currentIndex + 1);
+                    return;
                 }
             });
 
-            lightboxImage.addEventListener('click', function () {
-                lightbox.classList.toggle('is-zoomed');
+            lightboxImage.addEventListener('dblclick', function () {
+                if (lightbox.classList.contains('is-zoomed')) {
+                    zoomLevel = 1;
+                    lightbox.classList.remove('is-zoomed');
+                    lightbox.style.setProperty('--lightbox-zoom', '1');
+                } else {
+                    zoomLevel = baseZoom;
+                    lightbox.classList.add('is-zoomed');
+                    lightbox.style.setProperty('--lightbox-zoom', String(zoomLevel));
+                }
             });
+
+            lightboxImage.addEventListener('wheel', function (e) {
+                if (lightbox.getAttribute('aria-hidden') === 'true') {
+                    return;
+                }
+                e.preventDefault();
+                var delta = e.deltaY < 0 ? 0.18 : -0.18;
+                zoomLevel = Math.max(1, Math.min(4, zoomLevel + delta));
+                if (zoomLevel <= 1.01) {
+                    zoomLevel = 1;
+                    lightbox.classList.remove('is-zoomed');
+                } else {
+                    lightbox.classList.add('is-zoomed');
+                }
+                lightbox.style.setProperty('--lightbox-zoom', String(zoomLevel.toFixed(2)));
+            }, { passive: false });
 
             document.addEventListener('keydown', function (event) {
                 if (lightbox.getAttribute('aria-hidden') === 'true') {
                     return;
                 }
-
                 if (event.key === 'Escape') {
-                    closeAwardsLightbox();
-                }
-            });
-
-            lightboxDialog.addEventListener('click', function (event) {
-                if (event.target === lightboxDialog) {
-                    closeAwardsLightbox();
+                    closeLightbox();
+                } else if (event.key === 'ArrowLeft') {
+                    setLightboxContent(currentIndex - 1);
+                } else if (event.key === 'ArrowRight') {
+                    setLightboxContent(currentIndex + 1);
                 }
             });
 
@@ -2467,10 +2682,52 @@ document.addEventListener('DOMContentLoaded', function () {
             ];
 
             var awardCards = awards.map(function (award, index) {
-                return '<button type="button" class="stw-award-card stw-reveal-up" data-award-trigger data-award-src="' + award.src + '" data-award-title="' + award.title + '" style="--stw-award-delay:' + ((index + 1) * 110) + 'ms"><span class="stw-award-card__badge">' + award.title + '</span><span class="stw-award-card__media"><img src="' + award.src + '" alt="' + award.title + '" loading="lazy" decoding="async"></span><span class="stw-award-card__meta"><span class="stw-award-card__title">' + award.title + '</span><span class="stw-award-card__cta">Click to open fullscreen view</span></span></button>';
+                var delay = (index + 1) * 150;
+                var reflectDelay = (index * 2) + 's';
+                return (
+                    '<button type="button" class="stw-award-card stw-reveal-up"' +
+                    ' data-award-trigger' +
+                    ' data-award-index="' + index + '"' +
+                    ' data-award-src="' + award.src + '"' +
+                    ' data-award-title="' + award.title + '"' +
+                    ' aria-label="View ' + award.title + ' fullscreen"' +
+                    ' style="--stw-award-delay:' + delay + 'ms;--stw-reflect-delay:' + reflectDelay + '">' +
+                        '<span class="stw-award-card__badge"><i class="fa fa-trophy" aria-hidden="true"></i>' + award.title + '</span>' +
+                        '<span class="stw-award-card__media">' +
+                            '<span class="stw-award-card__skeleton" aria-hidden="true"></span>' +
+                            '<img src="' + award.src + '" alt="' + award.title + '" loading="lazy" decoding="async">' +
+                        '</span>' +
+                        '<span class="stw-award-card__meta">' +
+                            '<span class="stw-award-card__title">' + award.title + '</span>' +
+                            '<span class="stw-award-card__cta" aria-hidden="true"><i class="fa fa-magnifying-glass" aria-hidden="true"></i>View Fullscreen</span>' +
+                        '</span>' +
+                    '</button>'
+                );
             }).join('');
 
-            return '<div class="container"><div class="stw-awards-shell"><div class="stw-awards-copy stw-reveal-up"><span class="stw-awards-kicker"><i class="fa fa-trophy" aria-hidden="true"></i>Awards & Recognition</span><h2 class="stw-awards-title"><i class="fa fa-trophy" aria-hidden="true"></i><span>Awards & Recognition</span></h2><p class="stw-awards-subtitle">Recognized for Excellence, Trusted Worldwide</p><p class="stw-awards-description">Silvora Talenza World LLC is proud to be recognized for excellence, professionalism, and outstanding service. These awards reflect our commitment to delivering trusted manpower recruitment, visa consultancy, business solutions, and exceptional customer service.</p></div><div class="stw-awards-grid">' + awardCards + '</div><div class="stw-awards-stats"><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:120ms"><span class="stw-award-stat__icon"><i class="fa fa-star" aria-hidden="true"></i></span><strong>1000+</strong><span>Candidates Assisted</span><small>Award-winning delivery</small></article><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:200ms"><span class="stw-award-stat__icon"><i class="fa fa-building" aria-hidden="true"></i></span><strong>50+</strong><span>Corporate Clients</span><small>Client confidence</small></article><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:280ms"><span class="stw-award-stat__icon"><i class="fa fa-globe" aria-hidden="true"></i></span><strong>15+</strong><span>Countries Served</span><small>Global reach</small></article><article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:360ms"><span class="stw-award-stat__icon"><i class="fa fa-handshake" aria-hidden="true"></i></span><strong>Trusted UAE Consultancy</strong><span>Trusted UAE Consultancy</span><small>Relationship-first service</small></article></div></div></div>';
+            return (
+                '<div class="stw-awards-shape stw-awards-shape--a" aria-hidden="true"></div>' +
+                '<div class="stw-awards-shape stw-awards-shape--b" aria-hidden="true"></div>' +
+                '<div class="stw-awards-shape stw-awards-shape--c" aria-hidden="true"></div>' +
+                '<div class="container">' +
+                    '<div class="stw-awards-shell">' +
+                        '<div class="stw-awards-copy stw-reveal-up" style="--stw-award-delay:0ms">' +
+                            '<span class="stw-awards-kicker"><i class="fa fa-trophy" aria-hidden="true"></i>Awards &amp; Recognition</span>' +
+                            '<h2 class="stw-awards-title"><i class="fa fa-trophy" aria-hidden="true"></i><span>Awards &amp; Recognition</span></h2>' +
+                            '<p class="stw-awards-subtitle stw-reveal-up" style="--stw-award-delay:180ms">Recognized for Excellence, Trusted Worldwide</p>' +
+                            '<div class="stw-awards-divider stw-reveal-up" style="--stw-award-delay:260ms" aria-hidden="true"><span class="stw-awards-divider__icon"><i class="fa fa-star" aria-hidden="true"></i></span></div>' +
+                            '<p class="stw-awards-description stw-reveal-up" style="--stw-award-delay:320ms">Silvora Talenza World LLC is proud to be recognized for excellence, professionalism, and outstanding service. These awards reflect our commitment to delivering trusted manpower recruitment, visa consultancy, business solutions, and exceptional customer service.</p>' +
+                        '</div>' +
+                        '<div class="stw-awards-grid">' + awardCards + '</div>' +
+                        '<div class="stw-awards-stats">' +
+                            '<article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:120ms"><span class="stw-award-stat__icon"><i class="fa fa-star" aria-hidden="true"></i></span><strong>1000+</strong><span>Candidates Assisted</span><small>Award-winning delivery</small></article>' +
+                            '<article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:200ms"><span class="stw-award-stat__icon"><i class="fa fa-building" aria-hidden="true"></i></span><strong>50+</strong><span>Corporate Clients</span><small>Client confidence</small></article>' +
+                            '<article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:280ms"><span class="stw-award-stat__icon"><i class="fa fa-globe" aria-hidden="true"></i></span><strong>15+</strong><span>Countries Served</span><small>Global reach</small></article>' +
+                            '<article class="stw-award-stat stw-reveal-up" style="--stw-award-delay:360ms"><span class="stw-award-stat__icon"><i class="fa fa-handshake" aria-hidden="true"></i></span><strong>Trusted</strong><span>UAE Consultancy</span><small>Relationship-first service</small></article>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>'
+            );
         }
 
         var slider = document.getElementById('headerCarousel');
@@ -2516,6 +2773,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 awardsSection.innerHTML = buildAwardsSectionMarkup();
                 awardsAnchor.insertAdjacentElement('afterend', awardsSection);
                 bindAwardsReveal(awardsSection);
+                bindAwardsImageLoading(awardsSection);
+                initAwardsParticles(awardsSection);
+                bindAwardsParallax(awardsSection);
             }
         }
 
