@@ -2908,27 +2908,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
             var elements = document.elementsFromPoint(clientX, clientY);
-            var card = null;
             for (var i = 0; i < elements.length; i++) {
                 var el = elements[i];
                 if (el === overlay || el === popup) {
                     continue;
                 }
-                if (el.hasAttribute && el.hasAttribute('data-award-trigger')) {
-                    card = el;
-                    break;
+                var card = (el.hasAttribute && el.hasAttribute('data-award-trigger')) ? el
+                         : (el.closest ? el.closest('[data-award-trigger]') : null);
+                if (card) {
+                    var captured = card;
+                    window.setTimeout(function () { captured.click(); }, 340);
+                    return;
                 }
-                var anc = el.closest ? el.closest('[data-award-trigger]') : null;
-                if (anc) {
-                    card = anc;
-                    break;
-                }
-            }
-            if (card) {
-                var capturedCard = card;
-                window.setTimeout(function () {
-                    capturedCard.click();
-                }, 320);
             }
         }
 
@@ -2939,10 +2930,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         popup.addEventListener('click', function (e) {
+            var cx = e.clientX, cy = e.clientY;
+            // Don't intercept actual interactive elements inside the popup
+            if (e.target.closest('a[href], button')) {
+                return;
+            }
+            // If there is an award card beneath the click position, close popup and trigger it
+            if (document.elementsFromPoint) {
+                var elems = document.elementsFromPoint(cx, cy);
+                for (var i = 0; i < elems.length; i++) {
+                    var el = elems[i];
+                    if (el === overlay || el === popup) { continue; }
+                    var card = (el.hasAttribute && el.hasAttribute('data-award-trigger')) ? el
+                             : (el.closest ? el.closest('[data-award-trigger]') : null);
+                    if (card) {
+                        closePopup();
+                        var captured = card;
+                        window.setTimeout(function () { captured.click(); }, 340);
+                        return;
+                    }
+                }
+            }
+            // No award card beneath — close popup if clicking outside the visual shell
             if (!e.target.closest('.stw-demand-popup-shell')) {
-                var cx = e.clientX, cy = e.clientY;
                 closePopup();
-                passThroughToAwardCard(cx, cy);
             }
         });
 
