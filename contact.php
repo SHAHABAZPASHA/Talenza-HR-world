@@ -51,16 +51,42 @@ function post_value(string $key): string
     return SilvoraMailer::sanitizeText((string) ($_POST[$key] ?? ''));
 }
 
-$name = post_value('name');
-$email = SilvoraMailer::sanitizeEmail((string) ($_POST['email'] ?? ''));
-$phone = post_value('phone');
+$email = '';
+foreach (['email', 'contact_email', 'contactEmail', 'work_email', 'business_email'] as $emailKey) {
+    $candidate = SilvoraMailer::sanitizeEmail((string) ($_POST[$emailKey] ?? ''));
+    if ($candidate !== '' && filter_var($candidate, FILTER_VALIDATE_EMAIL)) {
+        $email = $candidate;
+        break;
+    }
+}
+$hasVisitorEmail = $email !== '';
+
+$name = '';
+foreach (['name', 'contact_person', 'contactPerson', 'full_name', 'company_name', 'companyName'] as $nameKey) {
+    $candidate = post_value($nameKey);
+    if ($candidate !== '') {
+        $name = $candidate;
+        break;
+    }
+}
+
+$phone = '';
+foreach (['phone', 'mobile', 'whatsapp', 'contact_number', 'contactNumber'] as $phoneKey) {
+    $candidate = post_value($phoneKey);
+    if ($candidate !== '') {
+        $phone = $candidate;
+        break;
+    }
+}
 $service = post_value('service');
 $subject = post_value('subject');
+if ($subject === '') {
+    $subject = post_value('service_required');
+}
 $message = trim((string) ($_POST['message'] ?? ''));
 
-if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo 'Please provide a valid email address.';
-    exit;
+if (!$hasVisitorEmail) {
+    $email = SilvoraMailer::sanitizeEmail((string) ($config['from_email'] ?? ''));
 }
 
 if ($name === '') {
@@ -71,7 +97,7 @@ $formName = 'General Inquiry Form';
 if ($service !== '') {
     $formName = $service . ' Form';
 }
-if ($service === '' && $subject === '' && trim($message) === '' && $email !== '') {
+if ($service === '' && $subject === '' && trim($message) === '' && $hasVisitorEmail) {
     $formName = 'Newsletter Form';
     $subject = 'Newsletter Subscription Request';
     $message = 'Please subscribe this email to the newsletter list.';
@@ -105,7 +131,7 @@ if (!isset($normalized['Name'])) {
     $normalized['Name'] = $name;
 }
 if (!isset($normalized['Email'])) {
-    $normalized['Email'] = $email;
+    $normalized['Email'] = $hasVisitorEmail ? $email : 'Not provided';
 }
 if ($phone !== '' && !isset($normalized['Phone'])) {
     $normalized['Phone'] = $phone;
@@ -123,7 +149,8 @@ $attachments = SilvoraMailer::collectAttachments(
     $config
 );
 
-$fingerprint = hash('sha256', strtolower($email) . '|' . $formName . '|' . strtolower(substr(strip_tags($message), 0, 180)));
+$fingerprintSource = $hasVisitorEmail ? strtolower($email) : strtolower(SilvoraMailer::clientIp() . '|' . $name);
+$fingerprint = hash('sha256', $fingerprintSource . '|' . $formName . '|' . strtolower(substr(strip_tags($message), 0, 180)));
 if (SilvoraMailer::detectDuplicate($fingerprint, (int) $config['submission_cooldown_seconds'])) {
     $responseMessage = 'Your request is already being processed. Please wait a moment before submitting again.';
     if (SilvoraMailer::isAjaxRequest()) {
@@ -141,7 +168,7 @@ $payload = [
     'form_name' => $formName,
     'subject' => $subject,
     'sender_name' => $name,
-    'sender_email' => $email,
+    'sender_email' => $hasVisitorEmail ? $email : 'not-provided@silvoratalenzaworld.com',
     'ip' => SilvoraMailer::clientIp(),
     'user_agent' => SilvoraMailer::userAgent(),
     'fields' => $normalized,
@@ -160,7 +187,9 @@ try {
         $adminMail->addBCC($bcc);
     }
 
-    $adminMail->addReplyTo($email, $name);
+    if ($hasVisitorEmail) {
+        $adminMail->addReplyTo($email, $name);
+    }
     $adminMail->isHTML(true);
     $adminMail->Subject = '[' . $reference . '] ' . $subject;
     $adminMail->Body = SilvoraMailer::buildAdminEmailHtml($payload, $config);
@@ -173,7 +202,7 @@ try {
     SilvoraMailer::sendWithRetry($adminMail, $config);
     $status = 'sent';
 
-    if (!empty($config['auto_reply_enabled']) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!empty($config['auto_reply_enabled']) && $hasVisitorEmail && filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $replyMail = new PHPMailer(true);
         SilvoraMailer::configureMailer($replyMail, $config);
         $replyMail->addAddress($email, $name);
@@ -190,7 +219,7 @@ try {
 SilvoraMailer::writeLog([
     'datetime' => gmdate('c'),
     'form_name' => $formName,
-    'sender_email' => $email,
+    'sender_email' => $hasVisitorEmail ? $email : '',
     'recipient' => implode(',', SilvoraMailer::recipients($config)),
     'status' => $status,
     'reference' => $reference,
