@@ -2903,7 +2903,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
 
-        overlay.addEventListener('click', closePopup);
+        overlay.addEventListener('click', function (e) {
+            closePopup();
+            // If the click was over an award card, trigger it after the overlay finishes closing
+            if (document.elementsFromPoint) {
+                var elements = document.elementsFromPoint(e.clientX, e.clientY);
+                var card = null;
+                for (var i = 0; i < elements.length; i++) {
+                    if (elements[i] !== overlay && elements[i].hasAttribute && elements[i].hasAttribute('data-award-trigger')) {
+                        card = elements[i];
+                        break;
+                    }
+                    // Also check ancestors of each element
+                    var ancestor = elements[i].closest ? elements[i].closest('[data-award-trigger]') : null;
+                    if (ancestor && ancestor !== overlay) {
+                        card = ancestor;
+                        break;
+                    }
+                }
+                if (card) {
+                    var capturedCard = card;
+                    window.setTimeout(function () {
+                        capturedCard.click();
+                    }, 320);
+                }
+            }
+        });
         popup.querySelector('.stw-demand-close').addEventListener('click', closePopup);
         document.addEventListener('keydown', onKeyDown);
     }
